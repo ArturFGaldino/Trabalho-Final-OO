@@ -2,7 +2,9 @@
 UnB - Universidade de Brasilia<br>
 FGA - Faculdade do Gama<br>
 OO - Orientação por Objetos<br>
-Grupo - Artur Fernandes Galdino - 241010923,<br> Fabio ,<br> Perdro ,<br> João.
+Grupo - Artur Fernandes Galdino - 241010923,<br> Fábio Alessandro Santos Vieira 241011804 ,<br> Pedro Augusto Macedo Del Castilo
+241025354,<br> João Eduardo de Souza Leles 
+241025274.
 <h2>Objetivos</h2>
 <h3> Cenário: Sistema de reserva de espaços físicos em uma Universidade </h3>
 
