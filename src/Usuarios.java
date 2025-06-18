@@ -1,12 +1,11 @@
 import java.time.LocalDate;
 
 public class Usuarios {
-    private String nomeCompleto;
-    private String email;
-    private String telefone;
+    private final String nomeCompleto;
+    private final String email;
+    private final String telefone;
     private String senha;
-    private String matricula;
-    private int anoDeIngresso;
+    private final String matricula;
 
     public Usuarios(String nomeCompleto, String email, String telefone, String senha, String matricula) {
         this.nomeCompleto = nomeCompleto;
@@ -40,10 +39,6 @@ public class Usuarios {
         return matricula;
     }
 
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
-    }
-
     public int getAnoDeIngresso(){
         String ano = matricula.substring(0,2);
         int anoAtual = LocalDate.now().getYear() % 100;
@@ -52,8 +47,7 @@ public class Usuarios {
         }else{
             ano="20"+ano;
         }
-        anoDeIngresso= Integer.parseInt(ano);
-        return anoDeIngresso;
+        return Integer.parseInt(ano);
     }
     //SEMESTRE DE INGRESSO SO NA CLASSE DOS ALUNOS
 
