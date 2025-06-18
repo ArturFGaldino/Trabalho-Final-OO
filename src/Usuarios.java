@@ -1,10 +1,9 @@
-import java.time.LocalDate;
 
 public class Usuarios {
-    private final String nomeCompleto;
-    private final String email;
-    private final String telefone;
-    private String senha;
+    protected final String nomeCompleto;
+    protected final String email;
+    protected final String telefone;
+    protected String senha;
     protected final String matricula;
 
     public Usuarios(String nomeCompleto, String email, String telefone, String senha, String matricula) {
@@ -39,16 +38,6 @@ public class Usuarios {
         return matricula;
     }
 
-    public int getAnoDeIngresso() {
-        String ano = matricula.substring(0, 2);
-        int anoAtual = LocalDate.now().getYear() % 100;
-        if (Integer.parseInt(ano) > anoAtual) {
-            ano = "19" + ano;
-        } else {
-            ano = "20" + ano;
-        }
-        return Integer.parseInt(ano);
-    }
     // SEMESTRE DE INGRESSO SO NA CLASSE DOS ALUNOS
 
     @Override
@@ -58,7 +47,6 @@ public class Usuarios {
         informacoes += "MATRÍCULA: " + matricula + "\n";
         informacoes += "EMAIL: " + email + "\n";
         informacoes += "TELEFONE: " + telefone + "\n";
-        informacoes += "ANO DE INGRESSO: " + getAnoDeIngresso() + "\n";
         return informacoes;
     }
 }

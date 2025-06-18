@@ -1,29 +1,22 @@
 import java.time.LocalDate;
 
-public class Alunos extends Usuarios {
+public class Professores extends Usuarios {
+    private String cargoAcademico;
+    private String cargoMinistrado;
 
-    private String curso;
-    private String semestreMatriculado;
-
-    public Alunos(String nomeCompleto, String email, String telefone, String senha, String matricula, String curso) {
+    public Professores(String nomeCompleto, String email, String telefone, String senha, String matricula,
+            String cargoAcademico, String cargoMinistrado) {
         super(nomeCompleto, email, telefone, senha, matricula);
-        this.curso = curso;
+        this.cargoAcademico = cargoAcademico;
+        this.cargoMinistrado = cargoMinistrado;
     }
 
-    public String getCurso() {
-        return curso;
+    public String getCargoAcademico() {
+        return cargoAcademico;
     }
 
-    public String getSemestreMatriculado() {
-        semestreMatriculado = matricula.substring(2, 2);
-        if (Integer.parseInt(semestreMatriculado) == 1) {
-            semestreMatriculado = "1 semestre";
-        } else if (Integer.parseInt(semestreMatriculado) == 2) {
-            semestreMatriculado = "2 semestre";
-        } else {
-            semestreMatriculado = "matricula invalida";
-        }
-        return semestreMatriculado;
+    public String getCargoMinistrado() {
+        return cargoMinistrado;
     }
 
     public int getAnoDeIngresso() {
@@ -45,8 +38,8 @@ public class Alunos extends Usuarios {
         informacoes += "EMAIL: " + email + "\n";
         informacoes += "TELEFONE: " + telefone + "\n";
         informacoes += "ANO DE INGRESSO: " + getAnoDeIngresso() + "\n";
-        informacoes += "CURSO: " + curso + "\n";
+        informacoes += "CARGO ACADEMICO: " + cargoAcademico + "\n";
+        informacoes += "CARGO MINISTRADO: " + cargoMinistrado + "\n";
         return informacoes;
     }
-
 }
