@@ -5,7 +5,7 @@ public class Usuarios {
     private final String email;
     private final String telefone;
     private String senha;
-    private final String matricula;
+    protected final String matricula;
 
     public Usuarios(String nomeCompleto, String email, String telefone, String senha, String matricula) {
         this.nomeCompleto = nomeCompleto;
@@ -39,26 +39,26 @@ public class Usuarios {
         return matricula;
     }
 
-    public int getAnoDeIngresso(){
-        String ano = matricula.substring(0,2);
+    public int getAnoDeIngresso() {
+        String ano = matricula.substring(0, 2);
         int anoAtual = LocalDate.now().getYear() % 100;
-        if(Integer.parseInt(ano) > anoAtual){
-            ano = "19"+ano;
-        }else{
-            ano="20"+ano;
+        if (Integer.parseInt(ano) > anoAtual) {
+            ano = "19" + ano;
+        } else {
+            ano = "20" + ano;
         }
         return Integer.parseInt(ano);
     }
-    //SEMESTRE DE INGRESSO SO NA CLASSE DOS ALUNOS
+    // SEMESTRE DE INGRESSO SO NA CLASSE DOS ALUNOS
 
     @Override
     public String toString() {
         String informacoes = "";
-        informacoes+= "NOME: " + nomeCompleto + "\n";
-        informacoes+= "MATRÍCULA: " + matricula + "\n";
-        informacoes+= "EMAIL: " + email + "\n";
-        informacoes+= "TELEFONE: " + telefone + "\n";
-        informacoes+= "ANO DE INGRESSO: " + getAnoDeIngresso() + "\n";
+        informacoes += "NOME: " + nomeCompleto + "\n";
+        informacoes += "MATRÍCULA: " + matricula + "\n";
+        informacoes += "EMAIL: " + email + "\n";
+        informacoes += "TELEFONE: " + telefone + "\n";
+        informacoes += "ANO DE INGRESSO: " + getAnoDeIngresso() + "\n";
         return informacoes;
     }
 }
