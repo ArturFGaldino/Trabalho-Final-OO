@@ -39,6 +39,9 @@ public class Main {
         nome = JOptionPane.showInputDialog("NOME COMPLETO");
         email = JOptionPane.showInputDialog("EMAIL");
         telefone = JOptionPane.showInputDialog("TELEFONE");
+        while(!validartelefone()){
+            telefone = JOptionPane.showInputDialog("TELEFONE INVÁLIDO. DIGITE CORRETAMENTE: ");
+        }
         matricula = JOptionPane.showInputDialog("MATRÍCULA");
         while(!validaMatricula(matricula)){
             matricula = JOptionPane.showInputDialog("MATRÍCULA INVÁLIDA. DIGITE CORRETAMENTE: ");
@@ -66,7 +69,7 @@ public class Main {
                 case "3":
                     String cargoExercido = JOptionPane.showInputDialog("CARGO EXERCIDO: ");
                     String departamento = JOptionPane.showInputDialog("DEPARTAMENTO: ");
-                    listaUsuarios.add(new Professores(nome, email, telefone, senha, matricula, cargoExercido, departamento));
+                    listaUsuarios.add(new Servidores(nome, email, telefone, senha, matricula, cargoExercido, departamento));
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "OPÇÃO INVÁLIDA");
@@ -102,6 +105,17 @@ public class Main {
         }
         for (int i = 0; i < matricula.length(); i++) {
             if (!Character.isDigit(matricula.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+    private static boolean validartelefone() {
+        if (telefone.length() != 11) {
+            return false;
+        }
+        for (int i = 0; i < telefone.length(); i++) {
+            if (!Character.isDigit(telefone.charAt(i))) {
                 return false;
             }
         }
