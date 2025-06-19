@@ -1,8 +1,6 @@
-import java.time.LocalDate;
-
 public class Alunos extends Usuarios {
 
-    private String curso;
+    private final String curso;
     private String semestreMatriculado;
 
     public Alunos(String nomeCompleto, String email, String telefone, String senha, String matricula, String curso) {
@@ -15,26 +13,15 @@ public class Alunos extends Usuarios {
     }
 
     public String getSemestreMatriculado() {
-        semestreMatriculado = matricula.substring(2, 2);
+        semestreMatriculado = matricula.substring(2, 3);
         if (Integer.parseInt(semestreMatriculado) == 1) {
-            semestreMatriculado = "1 semestre";
+            semestreMatriculado = "1";
         } else if (Integer.parseInt(semestreMatriculado) == 2) {
-            semestreMatriculado = "2 semestre";
+            semestreMatriculado = "2";
         } else {
             semestreMatriculado = "matricula invalida";
         }
         return semestreMatriculado;
-    }
-
-    public int getAnoDeIngresso() {
-        String ano = matricula.substring(0, 2);
-        int anoAtual = LocalDate.now().getYear() % 100;
-        if (Integer.parseInt(ano) > anoAtual) {
-            ano = "19" + ano;
-        } else {
-            ano = "20" + ano;
-        }
-        return Integer.parseInt(ano);
     }
 
     @Override
@@ -44,7 +31,7 @@ public class Alunos extends Usuarios {
         informacoes += "MATRÍCULA: " + matricula + "\n";
         informacoes += "EMAIL: " + email + "\n";
         informacoes += "TELEFONE: " + telefone + "\n";
-        informacoes += "ANO DE INGRESSO: " + getAnoDeIngresso() + "\n";
+        informacoes += "ANO/SEMESTRE DE INGRESSO: " + getAnoDeIngresso() +"/" + semestreMatriculado + "\n";
         informacoes += "CURSO: " + curso + "\n";
         return informacoes;
     }
