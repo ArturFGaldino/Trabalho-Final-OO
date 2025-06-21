@@ -1,3 +1,4 @@
+package Entidades;
 
 public class Usuarios {
     protected final String nomeCompleto;

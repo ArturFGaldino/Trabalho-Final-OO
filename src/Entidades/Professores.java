@@ -1,3 +1,4 @@
+package Entidades;
 import java.time.LocalDate;
 
 public class Professores extends Usuarios {

@@ -1,3 +1,4 @@
+import Entidades.Usuarios;
 import java.time.LocalDate;
 
 public class Alunos extends Usuarios {

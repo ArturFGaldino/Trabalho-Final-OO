@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.util.ArrayList;
+import Servicos.EspacosFisicos;
+import Entidades.Usuarios;
 
 public class Main {
     public static String nome, email, telefone, matricula;
@@ -80,4 +82,6 @@ public class Main {
         }
         return true;
     }
+
+
 }
