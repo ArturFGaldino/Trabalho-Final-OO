@@ -1,9 +1,11 @@
+package Entidades;
+
 public class Servidores extends Usuarios {
 
     private final String cargoExercido;
     private final String departamento;
 
-    public Servidores(String nomeCompleto, String email, String telefone, String senha, String matricula,String cargoExercido,String departamento) {
+    public Servidores(String nomeCompleto, String email, String telefone, String senha, String matricula, String cargoExercido, String departamento) {
         super(nomeCompleto, email, telefone, senha, matricula);
         this.cargoExercido = cargoExercido;
         this.departamento = departamento;

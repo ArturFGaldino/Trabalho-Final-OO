@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.util.ArrayList;
+import Entidades.*;
 
 public class Main {
     public static String nome, email, telefone, matricula;

@@ -1,4 +1,6 @@
+package Entidades;
 import java.time.LocalDate;
+import Entidades.Usuarios;
 
 public class Usuarios {
     protected final String nomeCompleto;
