@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.util.ArrayList;
+import Entidades.*;
 
 public class Main {
     public static String nome, email, telefone, matricula;
@@ -35,9 +36,13 @@ public class Main {
 
     //CADASTRO
     private static void cadastro(){
+        int parar = 0;
         nome = JOptionPane.showInputDialog("NOME COMPLETO");
         email = JOptionPane.showInputDialog("EMAIL");
         telefone = JOptionPane.showInputDialog("TELEFONE");
+        while(!validartelefone()){
+            telefone = JOptionPane.showInputDialog("TELEFONE INVÁLIDO. DIGITE CORRETAMENTE: ");
+        }
         matricula = JOptionPane.showInputDialog("MATRÍCULA");
         while(!validaMatricula(matricula)){
             matricula = JOptionPane.showInputDialog("MATRÍCULA INVÁLIDA. DIGITE CORRETAMENTE: ");
@@ -46,7 +51,33 @@ public class Main {
             senha = JOptionPane.showInputDialog("DIGITE SUA SENHA");
             tempSenha = JOptionPane.showInputDialog("CONFIRME SUA SENHA");
         }
-        listaUsuarios.add(new Usuarios(nome, email, telefone, senha, matricula));
+        do{
+            String relacao = JOptionPane.showInputDialog("""
+                    INFORME O TIPO DE RELAÇÃO COM A INSTITUIÇÃO
+                    1-ALUNO
+                    2-PROFESSOR
+                    3-SERVIDOR""");
+            switch (relacao){
+                case "1":
+                    String curso = JOptionPane.showInputDialog("CURSO: ");
+                    listaUsuarios.add(new Alunos(nome, email, telefone, senha, matricula, curso));
+                    break;
+                case "2":
+                    String cargoAcademico = JOptionPane.showInputDialog("CARGO ACADEMICO: ");
+                    String cargoMinistrado = JOptionPane.showInputDialog("CARGO MINISTRADO: ");
+                    listaUsuarios.add(new Professores(nome, email, telefone, senha, matricula, cargoAcademico, cargoMinistrado));
+                    break;
+                case "3":
+                    String cargoExercido = JOptionPane.showInputDialog("CARGO EXERCIDO: ");
+                    String departamento = JOptionPane.showInputDialog("DEPARTAMENTO: ");
+                    listaUsuarios.add(new Servidores(nome, email, telefone, senha, matricula, cargoExercido, departamento));
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "OPÇÃO INVÁLIDA");
+                    parar = 1;
+                    break;
+            }
+        }while(parar == 1);
     }
 
     //VALIDA LOGIN
@@ -75,6 +106,17 @@ public class Main {
         }
         for (int i = 0; i < matricula.length(); i++) {
             if (!Character.isDigit(matricula.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+    private static boolean validartelefone() {
+        if (telefone.length() != 11) {
+            return false;
+        }
+        for (int i = 0; i < telefone.length(); i++) {
+            if (!Character.isDigit(telefone.charAt(i))) {
                 return false;
             }
         }

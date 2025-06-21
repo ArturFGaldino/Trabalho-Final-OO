@@ -1,3 +1,6 @@
+package Entidades;
+import java.time.LocalDate;
+import Entidades.Usuarios;
 
 public class Usuarios {
     protected final String nomeCompleto;
@@ -37,7 +40,16 @@ public class Usuarios {
     public String getMatricula() {
         return matricula;
     }
-
+    public int getAnoDeIngresso() {
+        String ano = matricula.substring(0, 2);
+        int anoAtual = LocalDate.now().getYear() % 100;
+        if (Integer.parseInt(ano) > anoAtual) {
+            ano = "19" + ano;
+        } else {
+            ano = "20" + ano;
+        }
+        return Integer.parseInt(ano);
+    }
     // SEMESTRE DE INGRESSO SO NA CLASSE DOS ALUNOS
 
     @Override
