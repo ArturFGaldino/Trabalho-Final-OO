@@ -2,12 +2,11 @@ package Servicos;
 
 public abstract class EspacosFisicos {
     public static int capacidade;
-    public static String localizacao, tipo, equipamentosDisponiveis, disponibilidades;
+    public static String localizacao, equipamentosDisponiveis, disponibilidades;
 
-    EspacosFisicos(int capacidade, String localizacao, String tipo, String equipamentosDisponiveis, String disponibilidades) {
+    EspacosFisicos(int capacidade, String localizacao, String equipamentosDisponiveis, String disponibilidades) {
         this.capacidade = capacidade;
         this.localizacao = localizacao;
-        this.tipo = tipo;
         this.equipamentosDisponiveis = equipamentosDisponiveis;
         this.disponibilidades = disponibilidades;
     }
@@ -20,10 +19,6 @@ public abstract class EspacosFisicos {
 
     public static String getLocalizacao() {
         return localizacao;
-    }
-
-    public static String getTipo() {
-        return tipo;
     }
 
     public static String getEquipamentosDisponiveis() {

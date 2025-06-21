@@ -8,12 +8,14 @@ public class Main {
     public static String tempSenha = "0";
     public static ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
     public static int continuar = 1;
+
     public static void main(String[] args) {
         do {
             int opcao = loginCadastro();
             switch (opcao) {
                 case 1:
-                    login();
+//                    login();
+                    mostrarEspacosFisicos();
                     break;
                 case 2:
                     cadastro();
@@ -122,4 +124,76 @@ public class Main {
         }
         return true;
     }
+
+    public static void mostrarEspacosFisicos() {
+
+        //Criar Matriz com os horários
+        String[] dias = {"Seg", "Ter", "Qua", "Qui", "Sex"};
+        String[] horarios = {"08:00", "10:00", "12:00", "14:00", "16:00"};
+        String[][] horariosPrincipais = new String[6][5];
+
+        for (int coluna = 0; coluna < dias.length; coluna++) {
+            horariosPrincipais[0][coluna] = dias[coluna];
+        }
+
+        for (int linha = 1; linha < (horarios.length + 1); linha++) {
+            for (int coluna = 0
+                 ; coluna < dias.length; coluna++) {
+                horariosPrincipais[linha][coluna] = horarios[linha - 1];
+            }
+        }
+
+        // Copiar matris principal
+        String[][] matrizLaboratorio = copiarMatriz(horariosPrincipais);
+        String[][] matrizSalaDeAula = copiarMatriz(horariosPrincipais);
+        String[][] matrizAuditorio = copiarMatriz(horariosPrincipais);
+
+        String espacoFisico = JOptionPane.showInputDialog("Qual local você deseja ver os horários disponíveis\n\n1 - Laboratório \n2 - Sala de aula\n3 - Auditório ");
+        String diaDaSemana = JOptionPane.showInputDialog(null, "Qual dia da semana você deseja ver os horários \n 1 - Segunda \n 2 - Terça \n 3 - Quarta \n 4 - Quinta \n 5 - Sexta");
+
+        switch (espacoFisico) {
+            case "1":
+                // Laboratório
+                String escolherHorarioLaboratorio = JOptionPane.showInputDialog(mostrarMatriz(matrizLaboratorio, (Integer.parseInt(diaDaSemana) - 1)) + "\n");
+
+                // Cofirmar Matricula e verificar o seu cargo, então, depois, criar o Objeto
+                break;
+            case "2":
+                // Sala de aula
+                String escolherHorarioSalaDeAula = JOptionPane.showInputDialog(mostrarMatriz(matrizSalaDeAula, (Integer.parseInt(diaDaSemana) - 1)) + "\n");
+                break;
+            case "3":
+                // Auditorio
+                String escolherHorarioAuditorio = JOptionPane.showInputDialog(mostrarMatriz(matrizAuditorio, (Integer.parseInt(diaDaSemana) - 1)) + "\n");
+                break;
+            default:
+
+        }
+    }
+
+    public static StringBuilder mostrarMatriz(String[][] matriz, int coluna) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<html> <font color='green'> ");
+        for (int j = 0; j < 6; j++) {
+            sb.append(String.format("%-10s", matriz[j][coluna]));
+        }
+        sb.append("\n");
+        sb.append("</font></html>");
+
+        return sb;
+    }
+
+    public static String[][] copiarMatriz(String[][] original) {
+        int linhas = original.length;
+        int colunas = original[0].length;
+        String[][] nova = new String[linhas][colunas];
+
+        for (int i = 0; i < linhas; i++) {
+            for (int j = 0; j < colunas; j++) {
+                nova[i][j] = original[i][j];
+            }
+        }
+        return nova;
+    }
+
 }
