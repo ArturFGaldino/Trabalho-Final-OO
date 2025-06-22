@@ -3,8 +3,7 @@ import java.time.LocalDate;
 
 public class Alunos extends Usuarios {
 
-    private String curso;
-    private String semestreMatriculado;
+    private final String curso;
 
     public Alunos(String nomeCompleto, String email, String telefone, String senha, String matricula, String curso) {
         super(nomeCompleto, email, telefone, senha, matricula);
@@ -16,7 +15,7 @@ public class Alunos extends Usuarios {
     }
 
     public String getSemestreMatriculado() {
-        semestreMatriculado = matricula.substring(2, 2);
+        String semestreMatriculado = matricula.substring(2, 3);
         if (Integer.parseInt(semestreMatriculado) == 1) {
             semestreMatriculado = "1 semestre";
         } else if (Integer.parseInt(semestreMatriculado) == 2) {
@@ -50,4 +49,8 @@ public class Alunos extends Usuarios {
         return informacoes;
     }
 
+    @Override
+    public boolean validaEmail(String matricula, String email){
+        return email.contains(matricula) && email.contains("@aluno.unb.br");
+    }
 }

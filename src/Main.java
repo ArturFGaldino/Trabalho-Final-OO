@@ -8,7 +8,6 @@ public class Main {
     public static String tempSenha = "0";
     public static ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
     public static int continuar = 1;
-
     public static void main(String[] args) {
         do {
             int opcao = loginCadastro();
@@ -16,13 +15,13 @@ public class Main {
                 case 1:
 //                    login();
                     mostrarEspacosFisicos();
-                    break;
+                break;
                 case 2:
                     cadastro();
-                    break;
+                break;
                 default:
                     JOptionPane.showMessageDialog(null, "Opção Inválida. Digite de novo uma opção válida");
-                    break;
+                break;
             }
 
         }while(continuar == 1);
@@ -40,13 +39,12 @@ public class Main {
     private static void cadastro(){
         int parar = 0;
         nome = JOptionPane.showInputDialog("NOME COMPLETO");
-        email = JOptionPane.showInputDialog("EMAIL");
         telefone = JOptionPane.showInputDialog("TELEFONE");
-        while(!validartelefone()){
+        while(!Usuarios.validaTelefone(telefone)){
             telefone = JOptionPane.showInputDialog("TELEFONE INVÁLIDO. DIGITE CORRETAMENTE: ");
         }
         matricula = JOptionPane.showInputDialog("MATRÍCULA");
-        while(!validaMatricula(matricula)){
+        while(!Usuarios.validaMatricula(matricula)){
             matricula = JOptionPane.showInputDialog("MATRÍCULA INVÁLIDA. DIGITE CORRETAMENTE: ");
         }
         while (!senha.equals(tempSenha)) {
@@ -59,27 +57,58 @@ public class Main {
                     1-ALUNO
                     2-PROFESSOR
                     3-SERVIDOR""");
+            boolean emailValido = false;
             switch (relacao){
                 case "1":
                     String curso = JOptionPane.showInputDialog("CURSO: ");
-                    listaUsuarios.add(new Alunos(nome, email, telefone, senha, matricula, curso));
-                    break;
+                    do{
+                        email = JOptionPane.showInputDialog("EMAIL INSTITUCIONAL");
+                        Alunos alunoTemp = new Alunos(nome, email, telefone, senha, matricula, curso);
+                        if(alunoTemp.validaEmail(matricula,email)){
+                            listaUsuarios.add(alunoTemp);
+                            emailValido = true;
+                        }else{
+                            JOptionPane.showMessageDialog(null, "EMAIL INVÁLIDO PARA ALUNO.");
+                        }
+                    }while(!emailValido);
+                break;
                 case "2":
-                    String cargoAcademico = JOptionPane.showInputDialog("CARGO ACADEMICO: ");
-                    String cargoMinistrado = JOptionPane.showInputDialog("CARGO MINISTRADO: ");
-                    listaUsuarios.add(new Professores(nome, email, telefone, senha, matricula, cargoAcademico, cargoMinistrado));
-                    break;
+                    do{
+                        String cargoAcademico = JOptionPane.showInputDialog("CARGO ACADEMICO: ");
+                        String cargoMinistrado = JOptionPane.showInputDialog("CARGO MINISTRADO: ");
+                        email = JOptionPane.showInputDialog("EMAIL INSTITUCIONAL");
+                        Professores professorTemp = new Professores(nome, email, telefone, senha, matricula, cargoAcademico, cargoMinistrado);
+                        if(professorTemp.validaEmail(matricula,email)){
+                            listaUsuarios.add(professorTemp);
+                            emailValido = true;
+                        }else{
+                            JOptionPane.showMessageDialog(null, "EMAIL INVÁLIDO.");
+                        }
+                    }while(!emailValido);
+                break;
                 case "3":
-                    String cargoExercido = JOptionPane.showInputDialog("CARGO EXERCIDO: ");
-                    String departamento = JOptionPane.showInputDialog("DEPARTAMENTO: ");
-                    listaUsuarios.add(new Servidores(nome, email, telefone, senha, matricula, cargoExercido, departamento));
-                    break;
+                    do{
+                        String cargoExercido = JOptionPane.showInputDialog("CARGO EXERCIDO: ");
+                        String departamento = JOptionPane.showInputDialog("DEPARTAMENTO: ");
+                        email = JOptionPane.showInputDialog("EMAIL INSTITUCIONAL");
+                        Servidores servidorTemp = new Servidores(nome, email, telefone, senha, matricula, cargoExercido, departamento);
+                        if(servidorTemp.validaEmail(matricula,email)){
+                            listaUsuarios.add(servidorTemp);
+                            emailValido = true;
+                        }else{
+                            JOptionPane.showMessageDialog(null, "EMAIL INVÁLIDO.");
+                        }
+                    }while(!emailValido);
+                break;
                 default:
                     JOptionPane.showMessageDialog(null, "OPÇÃO INVÁLIDA");
                     parar = 1;
                     break;
             }
         }while(parar == 1);
+        for(Usuarios usuario : listaUsuarios){
+            JOptionPane.showMessageDialog(null, usuario.toString());
+        }
     }
 
     //VALIDA LOGIN
@@ -101,30 +130,6 @@ public class Main {
         }
     }
 
-    //VALIDA MATRICULA
-    private static boolean validaMatricula(String matricula) {
-        if (matricula.length() != 9) {
-            return false;
-        }
-        for (int i = 0; i < matricula.length(); i++) {
-            if (!Character.isDigit(matricula.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
-    }
-    private static boolean validartelefone() {
-        if (telefone.length() != 11) {
-            return false;
-        }
-        for (int i = 0; i < telefone.length(); i++) {
-            if (!Character.isDigit(telefone.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     public static void mostrarEspacosFisicos() {
 
         //Criar Matriz com os horários
@@ -143,7 +148,7 @@ public class Main {
             }
         }
 
-        // Copiar matris principal
+        // Copiar matriz principal
         String[][] matrizLaboratorio = copiarMatriz(horariosPrincipais);
         String[][] matrizSalaDeAula = copiarMatriz(horariosPrincipais);
         String[][] matrizAuditorio = copiarMatriz(horariosPrincipais);
