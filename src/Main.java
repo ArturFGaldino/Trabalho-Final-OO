@@ -4,108 +4,181 @@ import Entidades.*;
 
 public class Main {
     public static String nome, email, telefone, matricula;
-    public static String senha = "1";
-    public static String tempSenha = "0";
+    public static String senha;
+    public static String tempSenha;
     public static ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
     public static int continuar = 1;
     public static String tempLogin;
     public static Usuarios usuarioLogado = null;
+    public static JFrame frame = new JFrame();
     public static void main(String[] args) {
         do {
             int opcao = loginCadastro();
-            switch (opcao) {
-                case 1:
+            if (opcao == 2 || opcao == JOptionPane.CLOSED_OPTION) {
+                JOptionPane.showMessageDialog(frame,
+                        "Operação cancelada pelo usuário.",
+                        " ",
+                        JOptionPane.INFORMATION_MESSAGE);
+                System.exit(0);
+            }else{
+                switch (opcao) {
+                    case 0:
 //                    login();
-                    mostrarEspacosFisicos();
-                break;
-                case 2:
-                    cadastro();
-                break;
-                default:
-                    JOptionPane.showMessageDialog(null, "Opção Inválida. Digite de novo uma opção válida");
-                break;
+                        mostrarEspacosFisicos();
+                        break;
+                    case 1:
+                        cadastro();
+                        break;
+                }
             }
-
         }while(continuar == 1);
     }
 
     //LOGIN OU CADASTRO
     private static int loginCadastro(){
-        String str = JOptionPane.showInputDialog("""
-                1-LOGIN
-                2-SE CADASTRAR""");
-        return Integer.parseInt(str);
+        Object[]opcoes = {"LOGIN","CADASTRO","CANCELAR"};
+        return JOptionPane.showOptionDialog(frame,
+                "",
+                "LOGIN",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                opcoes,
+                opcoes[0]
+        );
     }
 
     //CADASTRO
     private static void cadastro(){
         int parar = 0;
         nome = JOptionPane.showInputDialog("NOME COMPLETO");
+        if(Usuarios.validaNull(nome)){
+            return;
+        }
+        while (Usuarios.validaEmpty(nome)){
+            nome = JOptionPane.showInputDialog("NOME INVÁLIDO. DIGITE CORRETAMENTE:");
+        }
         telefone = JOptionPane.showInputDialog("TELEFONE");
-        while(!Usuarios.validaTelefone(telefone)){
+        if(Usuarios.validaNull(telefone)){
+            return;
+        }
+        while(Usuarios.validaTelefone(telefone)){
             telefone = JOptionPane.showInputDialog("TELEFONE INVÁLIDO. DIGITE CORRETAMENTE: ");
         }
         matricula = JOptionPane.showInputDialog("MATRÍCULA");
-        while(!Usuarios.validaMatricula(matricula)){
+        if(Usuarios.validaNull(matricula)){
+            return;
+        }
+        while(Usuarios.validaMatricula(matricula)){
             matricula = JOptionPane.showInputDialog("MATRÍCULA INVÁLIDA. DIGITE CORRETAMENTE: ");
         }
-        while (!senha.equals(tempSenha)) {
-            senha = JOptionPane.showInputDialog("DIGITE SUA SENHA");
+        senha = JOptionPane.showInputDialog("DIGITE SUA SENHA");
+        if(Usuarios.validaNull(senha)){
+            return;
+        }
+        tempSenha = JOptionPane.showInputDialog("CONFIRME SUA SENHA");
+        if(Usuarios.validaNull(tempSenha)){
+            return;
+        }
+        while (!senha.equals(tempSenha) || Usuarios.validaEmpty(senha)){
+            senha = JOptionPane.showInputDialog("DIGITE NOVAMENTE SUA SENHA");
             tempSenha = JOptionPane.showInputDialog("CONFIRME SUA SENHA");
         }
         do{
-            String relacao = JOptionPane.showInputDialog("""
-                    INFORME O TIPO DE RELAÇÃO COM A INSTITUIÇÃO
-                    1-ALUNO
-                    2-PROFESSOR
-                    3-SERVIDOR""");
+            Object[] opcoes = { "ALUNO" , "PROFESSOR" , "SERVIDOR", "CANCELAR"};
             boolean emailValido = false;
-            switch (relacao){
-                case "1":
-                    String curso = JOptionPane.showInputDialog("CURSO: ");
-                    do{
-                        email = JOptionPane.showInputDialog("EMAIL INSTITUCIONAL");
-                        Alunos alunoTemp = new Alunos(nome, email, telefone, senha, matricula, curso);
-                        if(alunoTemp.validaEmail(matricula,email)){
-                            listaUsuarios.add(alunoTemp);
-                            emailValido = true;
-                        }else{
-                            JOptionPane.showMessageDialog(null, "EMAIL INVÁLIDO PARA ALUNO.");
+            int relacao = JOptionPane.showOptionDialog(frame,
+                    "INFORME O TIPO DE RELAÇÃO COM A INSTITUIÇÃO",
+                    "RELAÇÃO COM A INSTITUIÇÃO",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    opcoes,
+                    opcoes[0]
+            );
+            if (relacao == 3 || relacao == JOptionPane.CLOSED_OPTION) {
+                JOptionPane.showMessageDialog(frame, "Operação cancelada pelo usuário.",
+                        " ",
+                        JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }else {
+                switch (relacao) {
+                    case 0:
+                        String curso = JOptionPane.showInputDialog("CURSO: ");
+                        if(Usuarios.validaNull(curso)){
+                            return;
                         }
-                    }while(!emailValido);
-                break;
-                case "2":
-                    String cargoAcademico = JOptionPane.showInputDialog("CARGO ACADEMICO: ");
-                    String cargoMinistrado = JOptionPane.showInputDialog("CARGO MINISTRADO: ");
-                    do{
-                        email = JOptionPane.showInputDialog("EMAIL INSTITUCIONAL");
-                        Professores professorTemp = new Professores(nome, email, telefone, senha, matricula, cargoAcademico, cargoMinistrado);
-                        if(professorTemp.validaEmail(matricula,email)){
-                            listaUsuarios.add(professorTemp);
-                            emailValido = true;
-                        }else{
-                            JOptionPane.showMessageDialog(null, "EMAIL INVÁLIDO.");
+                        while (Usuarios.validaEmpty(curso)){
+                            curso = JOptionPane.showInputDialog("DIGITE UM CURSO VÁLIDO: ");
                         }
-                    }while(!emailValido);
-                break;
-                case "3":
-                    String cargoExercido = JOptionPane.showInputDialog("CARGO EXERCIDO: ");
-                    String departamento = JOptionPane.showInputDialog("DEPARTAMENTO: ");
-                    do{
-                        email = JOptionPane.showInputDialog("EMAIL INSTITUCIONAL");
-                        Servidores servidorTemp = new Servidores(nome, email, telefone, senha, matricula, cargoExercido, departamento);
-                        if(servidorTemp.validaEmail(matricula,email)){
-                            listaUsuarios.add(servidorTemp);
-                            emailValido = true;
-                        }else{
-                            JOptionPane.showMessageDialog(null, "EMAIL INVÁLIDO.");
+                        do {
+                            email = JOptionPane.showInputDialog("EMAIL INSTITUCIONAL");
+                            Alunos alunoTemp = new Alunos(nome, email, telefone, senha, matricula, curso);
+                            if (alunoTemp.validaEmail(matricula, email)) {
+                                listaUsuarios.add(alunoTemp);
+                                emailValido = true;
+                            } else {
+                                JOptionPane.showMessageDialog(null, "EMAIL INVÁLIDO PARA ALUNO.");
+                            }
+                        } while (!emailValido);
+                        break;
+                    case 1:
+                        String cargoAcademico = JOptionPane.showInputDialog("CARGO ACADEMICO: ");
+                        if(Usuarios.validaNull(cargoAcademico)){
+                            return;
                         }
-                    }while(!emailValido);
-                break;
-                default:
-                    JOptionPane.showMessageDialog(null, "OPÇÃO INVÁLIDA");
-                    parar = 1;
-                    break;
+                        while (Usuarios.validaEmpty(cargoAcademico)){
+                            cargoAcademico = JOptionPane.showInputDialog("DIGITE UM CARGO ACADEMICO VÁLIDO: ");
+                        }
+                        String cargoMinistrado = JOptionPane.showInputDialog("CARGO MINISTRADO: ");
+                        if(Usuarios.validaNull(cargoMinistrado)){
+                            return;
+                        }
+                        while (Usuarios.validaEmpty(cargoMinistrado)){
+                            cargoMinistrado = JOptionPane.showInputDialog("DIGITE UM CARGO MINISTRADO VÁLIDO: ");
+                        }
+                        do {
+                            email = JOptionPane.showInputDialog("EMAIL INSTITUCIONAL");
+                            Professores professorTemp = new Professores(nome, email, telefone, senha, matricula, cargoAcademico, cargoMinistrado);
+                            if (professorTemp.validaEmail(matricula, email)) {
+                                listaUsuarios.add(professorTemp);
+                                emailValido = true;
+                            } else {
+                                JOptionPane.showMessageDialog(null, "EMAIL INVÁLIDO.");
+                            }
+                        } while (!emailValido);
+                        break;
+                    case 2:
+                        String cargoExercido = JOptionPane.showInputDialog("CARGO EXERCIDO: ");
+                        if(Usuarios.validaNull(cargoExercido)){
+                            return;
+                        }
+                        while (Usuarios.validaEmpty(cargoExercido)){
+                            cargoExercido = JOptionPane.showInputDialog("DIGITE UM CARGO EXERCÍDO VÁLIDO: ");
+                        }
+                        String departamento = JOptionPane.showInputDialog("DEPARTAMENTO: ");
+                        if(Usuarios.validaNull(departamento)){
+                            return;
+                        }
+                        while (Usuarios.validaEmpty(departamento)){
+                            departamento = JOptionPane.showInputDialog("DIGITE UM DEPARTAMENTO VÁLIDO: ");
+                        }
+                        do {
+                            email = JOptionPane.showInputDialog("EMAIL INSTITUCIONAL");
+                            Servidores servidorTemp = new Servidores(nome, email, telefone, senha, matricula, cargoExercido, departamento);
+                            if (servidorTemp.validaEmail(matricula, email)) {
+                                listaUsuarios.add(servidorTemp);
+                                emailValido = true;
+                            } else {
+                                JOptionPane.showMessageDialog(null, "EMAIL INVÁLIDO.");
+                            }
+                        } while (!emailValido);
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "OPÇÃO INVÁLIDA");
+                        parar = 1;
+                        break;
+                }
             }
         }while(parar == 1);
     }
@@ -115,7 +188,13 @@ public class Main {
         boolean logado = false;
         while (!logado) {
             tempLogin = JOptionPane.showInputDialog("MATRÍCULA: ");
+            if(Usuarios.validaNull(tempLogin)){
+                return;
+            }
             tempSenha = JOptionPane.showInputDialog("SENHA: ");
+            if(Usuarios.validaNull(tempSenha)){
+                return;
+            }
             for (Usuarios usuario : listaUsuarios) {
                 if (usuario.getMatricula().equals(tempLogin) && usuario.getSenha().equals(tempSenha)) {
                     JOptionPane.showMessageDialog(null, "Login bem-sucedido! Bem-vindo, " + usuario.getNomeCompleto());
@@ -153,11 +232,20 @@ public class Main {
         String[][] matrizSalaDeAula = copiarMatriz(horariosPrincipais);
         String[][] matrizAuditorio = copiarMatriz(horariosPrincipais);
 
-        String espacoFisico = JOptionPane.showInputDialog("Qual local você deseja ver os horários disponíveis\n\n1 - Laboratório \n2 - Sala de aula\n3 - Auditório ");
+        Object[] opcoes = {"LABORATÓRIO", "SALA DE AULA", "AUDITÓRIO"};
+        int espacoFisico = JOptionPane.showOptionDialog(frame,
+                "INFORME O TIPO DE RELAÇÃO COM A INSTITUIÇÃO",
+                "ESPAÇOS FÍSICOS",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                opcoes,
+                opcoes[0]
+        );
         String diaDaSemana = JOptionPane.showInputDialog(null, "Qual dia da semana você deseja ver os horários \n 1 - Segunda \n 2 - Terça \n 3 - Quarta \n 4 - Quinta \n 5 - Sexta");
 
         switch (espacoFisico) {
-            case "1":
+            case 0:
                 // Laboratório
                 String escolherHorarioLaboratorio = JOptionPane.showInputDialog(mostrarMatriz(matrizLaboratorio, (Integer.parseInt(diaDaSemana) - 1)) + "\n");
 
@@ -175,7 +263,7 @@ public class Main {
                 }
 
                 break;
-            case "2":
+            case 1:
                 // Sala de aula
                 String escolherHorarioSalaDeAula = JOptionPane.showInputDialog(mostrarMatriz(matrizSalaDeAula, (Integer.parseInt(diaDaSemana) - 1)) + "\n");
 
@@ -188,7 +276,7 @@ public class Main {
                     //restricoes e criacao do objeto
                 }
                 break;
-            case "3":
+            case 2:
                 // Auditorio
                 String escolherHorarioAuditorio = JOptionPane.showInputDialog(mostrarMatriz(matrizAuditorio, (Integer.parseInt(diaDaSemana) - 1)) + "\n");
 
