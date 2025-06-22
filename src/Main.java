@@ -8,6 +8,8 @@ public class Main {
     public static String tempSenha = "0";
     public static ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
     public static int continuar = 1;
+    public static String tempLogin;
+    public static Usuarios usuarioLogado = null;
     public static void main(String[] args) {
         do {
             int opcao = loginCadastro();
@@ -107,7 +109,7 @@ public class Main {
             }
         }while(parar == 1);
         for(Usuarios usuario : listaUsuarios){
-            JOptionPane.showMessageDialog(null, usuario.toString());
+//            JOptionPane.showMessageDialog(null, usuario.toString());
         }
     }
 
@@ -115,11 +117,12 @@ public class Main {
     private static void login(){
         boolean logado = false;
         while (!logado) {
-            String tempLogin = JOptionPane.showInputDialog("MATRÍCULA: ");
+            tempLogin = JOptionPane.showInputDialog("MATRÍCULA: ");
             tempSenha = JOptionPane.showInputDialog("SENHA: ");
             for (Usuarios usuario : listaUsuarios) {
                 if (usuario.getMatricula().equals(tempLogin) && usuario.getSenha().equals(tempSenha)) {
                     JOptionPane.showMessageDialog(null, "Login bem-sucedido! Bem-vindo, " + usuario.getNomeCompleto());
+                    usuarioLogado = usuario;
                     logado = true;
                     break;
                 }
@@ -162,14 +165,43 @@ public class Main {
                 String escolherHorarioLaboratorio = JOptionPane.showInputDialog(mostrarMatriz(matrizLaboratorio, (Integer.parseInt(diaDaSemana) - 1)) + "\n");
 
                 // Cofirmar Matricula e verificar o seu cargo, então, depois, criar o Objeto
+                String matriculaConfirmacao = JOptionPane.showInputDialog(" Digite sua matricula para confirmar ");
+                while(!matriculaConfirmacao.equals(usuarioLogado.getMatricula())){
+                    matriculaConfirmacao = JOptionPane.showInputDialog("Matricula incorreta! Digite novamente");
+                }
+                if(usuarioLogado instanceof Alunos){
+                    //restricoes e criacao do objeto
+                } else if (usuarioLogado instanceof Professores) {
+                    //restricoes e criacao do objeto
+                }else{
+                    //restricoes e criacao do objeto
+                }
+
                 break;
             case "2":
                 // Sala de aula
                 String escolherHorarioSalaDeAula = JOptionPane.showInputDialog(mostrarMatriz(matrizSalaDeAula, (Integer.parseInt(diaDaSemana) - 1)) + "\n");
+
+
+                if(usuarioLogado instanceof Alunos){
+                    //restricoes e criacao do objeto
+                } else if (usuarioLogado instanceof Professores) {
+                    //restricoes e criacao do objeto
+                }else{
+                    //restricoes e criacao do objeto
+                }
                 break;
             case "3":
                 // Auditorio
                 String escolherHorarioAuditorio = JOptionPane.showInputDialog(mostrarMatriz(matrizAuditorio, (Integer.parseInt(diaDaSemana) - 1)) + "\n");
+
+                if(usuarioLogado instanceof Alunos){
+                    //restricoes e criacao do objeto
+                } else if (usuarioLogado instanceof Professores) {
+                    //restricoes e criacao do objeto
+                }else{
+                    //restricoes e criacao do objeto
+                }
                 break;
             default:
 
