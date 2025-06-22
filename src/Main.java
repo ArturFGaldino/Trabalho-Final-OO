@@ -75,9 +75,9 @@ public class Main {
                     }while(!emailValido);
                 break;
                 case "2":
+                    String cargoAcademico = JOptionPane.showInputDialog("CARGO ACADEMICO: ");
+                    String cargoMinistrado = JOptionPane.showInputDialog("CARGO MINISTRADO: ");
                     do{
-                        String cargoAcademico = JOptionPane.showInputDialog("CARGO ACADEMICO: ");
-                        String cargoMinistrado = JOptionPane.showInputDialog("CARGO MINISTRADO: ");
                         email = JOptionPane.showInputDialog("EMAIL INSTITUCIONAL");
                         Professores professorTemp = new Professores(nome, email, telefone, senha, matricula, cargoAcademico, cargoMinistrado);
                         if(professorTemp.validaEmail(matricula,email)){
@@ -89,9 +89,9 @@ public class Main {
                     }while(!emailValido);
                 break;
                 case "3":
+                    String cargoExercido = JOptionPane.showInputDialog("CARGO EXERCIDO: ");
+                    String departamento = JOptionPane.showInputDialog("DEPARTAMENTO: ");
                     do{
-                        String cargoExercido = JOptionPane.showInputDialog("CARGO EXERCIDO: ");
-                        String departamento = JOptionPane.showInputDialog("DEPARTAMENTO: ");
                         email = JOptionPane.showInputDialog("EMAIL INSTITUCIONAL");
                         Servidores servidorTemp = new Servidores(nome, email, telefone, senha, matricula, cargoExercido, departamento);
                         if(servidorTemp.validaEmail(matricula,email)){
@@ -108,9 +108,6 @@ public class Main {
                     break;
             }
         }while(parar == 1);
-        for(Usuarios usuario : listaUsuarios){
-//            JOptionPane.showMessageDialog(null, usuario.toString());
-        }
     }
 
     //VALIDA LOGIN
