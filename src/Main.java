@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import Entidades.*;
 
@@ -10,20 +11,21 @@ public class Main {
     public static int continuar = 1;
     public static String tempLogin;
     public static Usuarios usuarioLogado = null;
-    public static JFrame frame = new JFrame();
+
     public static void main(String[] args) {
+
         do {
-            int opcao = loginCadastro();
-            if (opcao == 2 || opcao == JOptionPane.CLOSED_OPTION) {
-                JOptionPane.showMessageDialog(frame,
+            int opcao02 = loginCadastro();
+            if (opcao02 == 2 || opcao02 == JOptionPane.CLOSED_OPTION) {
+                JOptionPane.showMessageDialog(null,
                         "Operação cancelada pelo usuário.",
                         " ",
                         JOptionPane.INFORMATION_MESSAGE);
                 System.exit(0);
-            }else{
-                switch (opcao) {
+            } else {
+                switch (opcao02) {
                     case 0:
-//                    login();
+                        login();
                         mostrarEspacosFisicos();
                         break;
                     case 1:
@@ -31,63 +33,64 @@ public class Main {
                         break;
                 }
             }
-        }while(continuar == 1);
+        }while (continuar == 1);
+
     }
 
     //LOGIN OU CADASTRO
-    private static int loginCadastro(){
-        Object[]opcoes = {"LOGIN","CADASTRO","CANCELAR"};
-        return JOptionPane.showOptionDialog(frame,
+    private static int loginCadastro() {
+        Object[] opcoes001 = {"LOGIN", "CADASTRO", "CANCELAR"};
+        return JOptionPane.showOptionDialog(null,
                 "",
                 "LOGIN",
                 JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
                 null,
-                opcoes,
-                opcoes[0]
+                opcoes001,
+                opcoes001[0]
         );
     }
 
     //CADASTRO
-    private static void cadastro(){
+    private static void cadastro() {
         int parar = 0;
         nome = JOptionPane.showInputDialog("NOME COMPLETO");
-        if(Usuarios.validaNull(nome)){
+        if (Usuarios.validaNull(nome)) {
             return;
         }
-        while (Usuarios.validaEmpty(nome)){
+        while (Usuarios.validaEmpty(nome)) {
             nome = JOptionPane.showInputDialog("NOME INVÁLIDO. DIGITE CORRETAMENTE:");
         }
         telefone = JOptionPane.showInputDialog("TELEFONE");
-        if(Usuarios.validaNull(telefone)){
+        if (Usuarios.validaNull(telefone)) {
             return;
         }
-        while(Usuarios.validaTelefone(telefone)){
+        while (!Usuarios.validaTelefone(telefone)) {
             telefone = JOptionPane.showInputDialog("TELEFONE INVÁLIDO. DIGITE CORRETAMENTE: ");
         }
         matricula = JOptionPane.showInputDialog("MATRÍCULA");
-        if(Usuarios.validaNull(matricula)){
+        if (Usuarios.validaNull(matricula)) {
             return;
         }
-        while(Usuarios.validaMatricula(matricula)){
+        while (!Usuarios.validaMatricula(matricula)) {
             matricula = JOptionPane.showInputDialog("MATRÍCULA INVÁLIDA. DIGITE CORRETAMENTE: ");
         }
         senha = JOptionPane.showInputDialog("DIGITE SUA SENHA");
-        if(Usuarios.validaNull(senha)){
+        if (Usuarios.validaNull(senha)) {
             return;
         }
         tempSenha = JOptionPane.showInputDialog("CONFIRME SUA SENHA");
-        if(Usuarios.validaNull(tempSenha)){
+        if (Usuarios.validaNull(tempSenha)) {
             return;
         }
-        while (!senha.equals(tempSenha) || Usuarios.validaEmpty(senha)){
+        while (!senha.equals(tempSenha) || Usuarios.validaEmpty(senha)) {
             senha = JOptionPane.showInputDialog("DIGITE NOVAMENTE SUA SENHA");
             tempSenha = JOptionPane.showInputDialog("CONFIRME SUA SENHA");
         }
-        do{
-            Object[] opcoes = { "ALUNO" , "PROFESSOR" , "SERVIDOR", "CANCELAR"};
+        do {
+            Object[] opcoes = {"ALUNO", "PROFESSOR", "SERVIDOR", "CANCELAR"};
             boolean emailValido = false;
-            int relacao = JOptionPane.showOptionDialog(frame,
+            int relacao = JOptionPane.showOptionDialog(null,
                     "INFORME O TIPO DE RELAÇÃO COM A INSTITUIÇÃO",
                     "RELAÇÃO COM A INSTITUIÇÃO",
                     JOptionPane.DEFAULT_OPTION,
@@ -97,18 +100,18 @@ public class Main {
                     opcoes[0]
             );
             if (relacao == 3 || relacao == JOptionPane.CLOSED_OPTION) {
-                JOptionPane.showMessageDialog(frame, "Operação cancelada pelo usuário.",
+                JOptionPane.showMessageDialog(null, "Operação cancelada pelo usuário.",
                         " ",
                         JOptionPane.INFORMATION_MESSAGE);
                 return;
-            }else {
+            } else {
                 switch (relacao) {
                     case 0:
                         String curso = JOptionPane.showInputDialog("CURSO: ");
-                        if(Usuarios.validaNull(curso)){
+                        if (Usuarios.validaNull(curso)) {
                             return;
                         }
-                        while (Usuarios.validaEmpty(curso)){
+                        while (Usuarios.validaEmpty(curso)) {
                             curso = JOptionPane.showInputDialog("DIGITE UM CURSO VÁLIDO: ");
                         }
                         do {
@@ -124,17 +127,17 @@ public class Main {
                         break;
                     case 1:
                         String cargoAcademico = JOptionPane.showInputDialog("CARGO ACADEMICO: ");
-                        if(Usuarios.validaNull(cargoAcademico)){
+                        if (Usuarios.validaNull(cargoAcademico)) {
                             return;
                         }
-                        while (Usuarios.validaEmpty(cargoAcademico)){
+                        while (Usuarios.validaEmpty(cargoAcademico)) {
                             cargoAcademico = JOptionPane.showInputDialog("DIGITE UM CARGO ACADEMICO VÁLIDO: ");
                         }
                         String cargoMinistrado = JOptionPane.showInputDialog("CARGO MINISTRADO: ");
-                        if(Usuarios.validaNull(cargoMinistrado)){
+                        if (Usuarios.validaNull(cargoMinistrado)) {
                             return;
                         }
-                        while (Usuarios.validaEmpty(cargoMinistrado)){
+                        while (Usuarios.validaEmpty(cargoMinistrado)) {
                             cargoMinistrado = JOptionPane.showInputDialog("DIGITE UM CARGO MINISTRADO VÁLIDO: ");
                         }
                         do {
@@ -150,17 +153,17 @@ public class Main {
                         break;
                     case 2:
                         String cargoExercido = JOptionPane.showInputDialog("CARGO EXERCIDO: ");
-                        if(Usuarios.validaNull(cargoExercido)){
+                        if (Usuarios.validaNull(cargoExercido)) {
                             return;
                         }
-                        while (Usuarios.validaEmpty(cargoExercido)){
+                        while (Usuarios.validaEmpty(cargoExercido)) {
                             cargoExercido = JOptionPane.showInputDialog("DIGITE UM CARGO EXERCÍDO VÁLIDO: ");
                         }
                         String departamento = JOptionPane.showInputDialog("DEPARTAMENTO: ");
-                        if(Usuarios.validaNull(departamento)){
+                        if (Usuarios.validaNull(departamento)) {
                             return;
                         }
-                        while (Usuarios.validaEmpty(departamento)){
+                        while (Usuarios.validaEmpty(departamento)) {
                             departamento = JOptionPane.showInputDialog("DIGITE UM DEPARTAMENTO VÁLIDO: ");
                         }
                         do {
@@ -180,19 +183,19 @@ public class Main {
                         break;
                 }
             }
-        }while(parar == 1);
+        } while (parar == 1);
     }
 
     //VALIDA LOGIN
-    private static void login(){
+    private static void login() {
         boolean logado = false;
         while (!logado) {
             tempLogin = JOptionPane.showInputDialog("MATRÍCULA: ");
-            if(Usuarios.validaNull(tempLogin)){
+            if (Usuarios.validaNull(tempLogin)) {
                 return;
             }
             tempSenha = JOptionPane.showInputDialog("SENHA: ");
-            if(Usuarios.validaNull(tempSenha)){
+            if (Usuarios.validaNull(tempSenha)) {
                 return;
             }
             for (Usuarios usuario : listaUsuarios) {
@@ -210,112 +213,82 @@ public class Main {
     }
 
     public static void mostrarEspacosFisicos() {
-
-        //Criar Matriz com os horários
-        String[] dias = {"Seg", "Ter", "Qua", "Qui", "Sex"};
-        String[] horarios = {"08:00", "10:00", "12:00", "14:00", "16:00"};
-        String[][] horariosPrincipais = new String[6][5];
-
-        for (int coluna = 0; coluna < dias.length; coluna++) {
-            horariosPrincipais[0][coluna] = dias[coluna];
-        }
-
-        for (int linha = 1; linha < (horarios.length + 1); linha++) {
-            for (int coluna = 0
-                 ; coluna < dias.length; coluna++) {
-                horariosPrincipais[linha][coluna] = horarios[linha - 1];
-            }
-        }
-
-        // Copiar matriz principal
-        String[][] matrizLaboratorio = copiarMatriz(horariosPrincipais);
-        String[][] matrizSalaDeAula = copiarMatriz(horariosPrincipais);
-        String[][] matrizAuditorio = copiarMatriz(horariosPrincipais);
-
-        Object[] opcoes = {"LABORATÓRIO", "SALA DE AULA", "AUDITÓRIO"};
-        int espacoFisico = JOptionPane.showOptionDialog(frame,
-                "INFORME O TIPO DE RELAÇÃO COM A INSTITUIÇÃO",
-                "ESPAÇOS FÍSICOS",
-                JOptionPane.YES_NO_CANCEL_OPTION,
+        Object[] opcoes1 = {"Laboratório", "Sala de aula", "Auditório"};
+        int escolhaEspacoFisico = JOptionPane.showOptionDialog(
+                null,
+                "QUAL ESPAÇO VOCÊ DESEJA SELECIONAR",
+                "Espaços disponíveis",
+                JOptionPane.DEFAULT_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
                 null,
-                opcoes,
-                opcoes[0]
+                opcoes1,
+                opcoes1[0]
         );
-        String diaDaSemana = JOptionPane.showInputDialog(null, "Qual dia da semana você deseja ver os horários \n 1 - Segunda \n 2 - Terça \n 3 - Quarta \n 4 - Quinta \n 5 - Sexta");
 
-        switch (espacoFisico) {
-            case 0:
-                // Laboratório
-                String escolherHorarioLaboratorio = JOptionPane.showInputDialog(mostrarMatriz(matrizLaboratorio, (Integer.parseInt(diaDaSemana) - 1)) + "\n");
+        mostrarGradeHoraria();
 
-                // Cofirmar Matricula e verificar o seu cargo, então, depois, criar o Objeto
-                String matriculaConfirmacao = JOptionPane.showInputDialog(" Digite sua matricula para confirmar ");
-                while(!matriculaConfirmacao.equals(usuarioLogado.getMatricula())){
-                    matriculaConfirmacao = JOptionPane.showInputDialog("Matricula incorreta! Digite novamente");
-                }
-                if(usuarioLogado instanceof Alunos){
-                    //restricoes e criacao do objeto
-                } else if (usuarioLogado instanceof Professores) {
-                    //restricoes e criacao do objeto
-                }else{
-                    //restricoes e criacao do objeto
-                }
-
-                break;
-            case 1:
-                // Sala de aula
-                String escolherHorarioSalaDeAula = JOptionPane.showInputDialog(mostrarMatriz(matrizSalaDeAula, (Integer.parseInt(diaDaSemana) - 1)) + "\n");
-
-
-                if(usuarioLogado instanceof Alunos){
-                    //restricoes e criacao do objeto
-                } else if (usuarioLogado instanceof Professores) {
-                    //restricoes e criacao do objeto
-                }else{
-                    //restricoes e criacao do objeto
-                }
-                break;
-            case 2:
-                // Auditorio
-                String escolherHorarioAuditorio = JOptionPane.showInputDialog(mostrarMatriz(matrizAuditorio, (Integer.parseInt(diaDaSemana) - 1)) + "\n");
-
-                if(usuarioLogado instanceof Alunos){
-                    //restricoes e criacao do objeto
-                } else if (usuarioLogado instanceof Professores) {
-                    //restricoes e criacao do objeto
-                }else{
-                    //restricoes e criacao do objeto
-                }
-                break;
-            default:
-
-        }
     }
 
-    public static StringBuilder mostrarMatriz(String[][] matriz, int coluna) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("<html> <font color='green'> ");
-        for (int j = 0; j < 6; j++) {
-            sb.append(String.format("%-10s", matriz[j][coluna]));
+    public static void mostrarGradeHoraria() {
+        String[] dias = {"Segunda", "Terça", "Quarta", "Quinta", "Sexta"};
+        String[] horas = {"08h", "10h", "14h", "16h"};
+
+        JFrame frame = new JFrame("Hórarios disponíveis");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(700, 400);
+        frame.setLocationRelativeTo(null);
+
+        JPanel painel = new JPanel(new GridLayout(horas.length + 1, dias.length + 1, 5, 5));
+        painel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        Font fonte = new Font("Segoe UI", Font.PLAIN, 14);
+
+        painel.add(new JLabel("")); // Canto superior vazio
+
+        // Cabeçalhos dos dias
+        for (String dia : dias) {
+            JLabel labelDia = new JLabel(dia, SwingConstants.CENTER);
+            labelDia.setFont(new Font("Segoe UI", Font.BOLD, 14));
+            painel.add(labelDia);
         }
-        sb.append("\n");
-        sb.append("</font></html>");
 
-        return sb;
-    }
+        // Linhas de horários + botões
+        for (String hora : horas) {
+            JLabel labelHora = new JLabel(hora, SwingConstants.CENTER);
+            labelHora.setFont(new Font("Segoe UI", Font.BOLD, 14));
+            painel.add(labelHora);
 
-    public static String[][] copiarMatriz(String[][] original) {
-        int linhas = original.length;
-        int colunas = original[0].length;
-        String[][] nova = new String[linhas][colunas];
+            for (String dia : dias) {
+                JButton botao = new JButton("Livre");
+                botao.setFont(fonte);
+                botao.setBackground(new Color(200, 230, 250));
+                botao.setFocusPainted(false);
 
-        for (int i = 0; i < linhas; i++) {
-            for (int j = 0; j < colunas; j++) {
-                nova[i][j] = original[i][j];
+                // Evento ao clicar
+                botao.addActionListener(e -> {
+                    String matricula = JOptionPane.showInputDialog(frame, "Digite sua matrícula:");
+                    if (matricula != null && !matricula.isBlank()) {
+                        botao.setText("Alocado");
+                        botao.setBackground(new Color(180, 220, 180));
+                        botao.setEnabled(false);
+                        JOptionPane.showMessageDialog(null,
+                                "Você foi alocado para " + dia + " às " + hora +
+                                        "\nMatrícula: " + matricula,
+                                "Confirmação", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                });
+
+                painel.add(botao);
             }
         }
-        return nova;
+
+        frame.add(painel);
+        frame.setVisible(true);
     }
 
+
 }
+
+
+
+
