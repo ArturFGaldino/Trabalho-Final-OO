@@ -89,11 +89,4 @@ public class Usuarios {
         return email.contains(matricula) && email.contains("@unb.br");
     }
 
-    public static boolean validaNull(String qualquer){
-        return qualquer == null;
-    }
-
-    public static boolean validaEmpty(String qualquer){
-        return qualquer.isEmpty();
-    }
 }
