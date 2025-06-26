@@ -3,6 +3,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 
 import Entidades.*;
 
@@ -15,8 +16,10 @@ public class Main {
     public static String tempLogin;
     public static Map<String, ArrayList<String>> horariosReservados = new HashMap<>();
     public static Usuarios usuarioLogado = null;
-    //testes
-//    public static Usuarios usuarioLogado = new Alunos("Aluno","1","1","1","1","eng");
+
+    // testes
+    // public static Usuarios usuarioLogado = new
+    // Alunos("Aluno","1","1","1","1","eng");
     public static void main(String[] args) {
 
         do {
@@ -38,13 +41,13 @@ public class Main {
                         break;
                 }
             }
-        }while (continuar == 1);
+        } while (continuar == 1);
 
     }
 
-    //LOGIN OU CADASTRO
+    // LOGIN OU CADASTRO
     private static int loginCadastro() {
-        Object[] opcoes001 = {"LOGIN", "CADASTRO", "CANCELAR"};
+        Object[] opcoes001 = { "LOGIN", "CADASTRO", "CANCELAR" };
         return JOptionPane.showOptionDialog(null,
                 "",
                 "LOGIN",
@@ -52,63 +55,62 @@ public class Main {
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 opcoes001,
-                opcoes001[0]
-        );
+                opcoes001[0]);
     }
 
-    //CADASTRO
+    // CADASTRO
     private static void cadastro() {
         int parar = 0;
         nome = JOptionPane.showInputDialog("NOME COMPLETO");
-        if (nome==null) {
+        if (nome == null) {
             return;
         }
         while (nome.isEmpty()) {
             nome = JOptionPane.showInputDialog("NOME INVÁLIDO. DIGITE CORRETAMENTE:");
-            if (nome==null) {
+            if (nome == null) {
                 return;
             }
         }
         telefone = JOptionPane.showInputDialog("TELEFONE");
-        if (telefone==null) {
+        if (telefone == null) {
             return;
         }
         while (!Usuarios.validaTelefone(telefone)) {
             telefone = JOptionPane.showInputDialog("TELEFONE INVÁLIDO. DIGITE CORRETAMENTE: ");
-            if (telefone==null) {
+            if (telefone == null) {
                 return;
             }
         }
         matricula = JOptionPane.showInputDialog("MATRÍCULA");
-        if (matricula==null) {
+        if (matricula == null) {
             return;
         }
         while (!Usuarios.validaMatricula(matricula)) {
             matricula = JOptionPane.showInputDialog("MATRÍCULA INVÁLIDA. DIGITE CORRETAMENTE: ");
-            if (matricula==null) {
+            if (matricula == null) {
                 return;
             }
         }
         senha = JOptionPane.showInputDialog("DIGITE SUA SENHA");
-        if (senha==null) {
+        if (senha == null) {
             return;
         }
         tempSenha = JOptionPane.showInputDialog("CONFIRME SUA SENHA");
-        if (tempSenha==null) {
+        if (tempSenha == null) {
             return;
         }
         while (!senha.equals(tempSenha) || senha.isEmpty()) {
             senha = JOptionPane.showInputDialog("DIGITE NOVAMENTE SUA SENHA");
-            if (senha==null) {
+            if (senha == null) {
                 return;
             }
             tempSenha = JOptionPane.showInputDialog("CONFIRME SUA SENHA");
-            if (tempSenha==null) {
+            if (tempSenha == null) {
                 return;
             }
         }
         do {
-            Object[] opcoes = {"ALUNO", "PROFESSOR", "SERVIDOR", "CANCELAR"};
+            Object[] opcoes = { "ALUNO", "PROFESSOR", "SERVIDOR", "CANCELAR" };
             boolean emailValido = false;
             int relacao = JOptionPane.showOptionDialog(null,
                     "INFORME O TIPO DE RELAÇÃO COM A INSTITUIÇÃO",
@@ -117,8 +119,7 @@ public class Main {
                     JOptionPane.QUESTION_MESSAGE,
                     null,
                     opcoes,
-                    opcoes[0]
-            );
+                    opcoes[0]);
             if (relacao == 3 || relacao == JOptionPane.CLOSED_OPTION) {
                 JOptionPane.showMessageDialog(null, "Operação cancelada pelo usuário.",
                         " ",
@@ -128,12 +129,12 @@ public class Main {
                 switch (relacao) {
                     case 0:
                         String curso = JOptionPane.showInputDialog("CURSO: ");
-                        if (curso==null) {
+                        if (curso == null) {
                             return;
                         }
                         while (curso.isEmpty()) {
                             curso = JOptionPane.showInputDialog("DIGITE UM CURSO VÁLIDO: ");
-                            if (curso==null) {
+                            if (curso == null) {
                                 return;
                             }
                         }
@@ -150,28 +151,29 @@ public class Main {
                         break;
                     case 1:
                         String cargoAcademico = JOptionPane.showInputDialog("CARGO ACADEMICO: ");
-                        if (cargoAcademico==null) {
+                        if (cargoAcademico == null) {
                             return;
                         }
                         while (cargoAcademico.isEmpty()) {
                             cargoAcademico = JOptionPane.showInputDialog("DIGITE UM CARGO ACADEMICO VÁLIDO: ");
-                            if (cargoAcademico==null) {
+                            if (cargoAcademico == null) {
                                 return;
                             }
                         }
                         String cargoMinistrado = JOptionPane.showInputDialog("CARGO MINISTRADO: ");
-                        if (cargoMinistrado==null) {
+                        if (cargoMinistrado == null) {
                             return;
                         }
                         while (cargoMinistrado.isEmpty()) {
                             cargoMinistrado = JOptionPane.showInputDialog("DIGITE UM CARGO MINISTRADO VÁLIDO: ");
-                            if (cargoMinistrado==null) {
+                            if (cargoMinistrado == null) {
                                 return;
                             }
                         }
                         do {
                             email = JOptionPane.showInputDialog("EMAIL INSTITUCIONAL");
-                            Professores professorTemp = new Professores(nome, email, telefone, senha, matricula, cargoAcademico, cargoMinistrado);
+                            Professores professorTemp = new Professores(nome, email, telefone, senha, matricula,
+                                    cargoAcademico, cargoMinistrado);
                             if (professorTemp.validaEmail(matricula, email)) {
                                 listaUsuarios.add(professorTemp);
                                 emailValido = true;
@@ -182,28 +184,29 @@ public class Main {
                         break;
                     case 2:
                         String cargoExercido = JOptionPane.showInputDialog("CARGO EXERCIDO: ");
-                        if (cargoExercido==null) {
+                        if (cargoExercido == null) {
                             return;
                         }
                         while (cargoExercido.isEmpty()) {
                             cargoExercido = JOptionPane.showInputDialog("DIGITE UM CARGO EXERCÍDO VÁLIDO: ");
-                            if (cargoExercido==null) {
+                            if (cargoExercido == null) {
                                 return;
                             }
                         }
                         String departamento = JOptionPane.showInputDialog("DEPARTAMENTO: ");
-                        if (departamento==null) {
+                        if (departamento == null) {
                             return;
                         }
                         while (departamento.isEmpty()) {
                             departamento = JOptionPane.showInputDialog("DIGITE UM DEPARTAMENTO VÁLIDO: ");
-                            if (departamento==null) {
+                            if (departamento == null) {
                                 return;
                             }
                         }
                         do {
                             email = JOptionPane.showInputDialog("EMAIL INSTITUCIONAL");
-                            Servidores servidorTemp = new Servidores(nome, email, telefone, senha, matricula, cargoExercido, departamento);
+                            Servidores servidorTemp = new Servidores(nome, email, telefone, senha, matricula,
+                                    cargoExercido, departamento);
                             if (servidorTemp.validaEmail(matricula, email)) {
                                 listaUsuarios.add(servidorTemp);
                                 emailValido = true;
@@ -221,16 +224,16 @@ public class Main {
         } while (parar == 1);
     }
 
-    //VALIDA LOGIN
+    // VALIDA LOGIN
     private static void login() {
         boolean logado = false;
         while (!logado) {
             tempLogin = JOptionPane.showInputDialog("MATRÍCULA: ");
-            if (tempLogin==null) {
+            if (tempLogin == null) {
                 return;
             }
             tempSenha = JOptionPane.showInputDialog("SENHA: ");
-            if (tempSenha==null) {
+            if (tempSenha == null) {
                 return;
             }
             for (Usuarios usuario : listaUsuarios) {
@@ -248,7 +251,7 @@ public class Main {
     }
 
     public static void mostrarEspacosFisicos() {
-        Object[] opcoes1 = {"Laboratório", "Sala de aula", "Auditório"};
+        Object[] opcoes1 = { "Laboratório", "Sala de aula", "Auditório" };
         int escolhaEspacoFisico = JOptionPane.showOptionDialog(
                 null,
                 "QUAL ESPAÇO VOCÊ DESEJA SELECIONAR",
@@ -257,16 +260,15 @@ public class Main {
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 opcoes1,
-                opcoes1[0]
-        );
+                opcoes1[0]);
 
         String espacoSelecionado = opcoes1[escolhaEspacoFisico].toString();
         mostrarGradeHoraria(espacoSelecionado);
     }
 
     public static void mostrarGradeHoraria(String espacoSelecionado) {
-        String[] dias = {"Segunda", "Terça", "Quarta", "Quinta", "Sexta"};
-        String[] horas = {"08h", "10h", "12h", "14h", "16h"};
+        String[] dias = { "Segunda", "Terça", "Quarta", "Quinta", "Sexta" };
+        String[] horas = { "08h", "10h", "12h", "14h", "16h" };
 
         // Cria um JDialog MODAL (bloqueia interação com outras janelas até fechar)
         JDialog dialog = new JDialog();
@@ -325,18 +327,27 @@ public class Main {
 
         // Evento ao clicar
         botao.addActionListener(e -> {
-                botao.setText("Alocado");
-                botao.setBackground(new Color(180, 220, 180));
-                botao.setEnabled(false);
-                JOptionPane.showMessageDialog(null,
-                        "Você foi alocado para " + dia + " às " + hora,
-                        "Confirmação", JOptionPane.INFORMATION_MESSAGE);
-                // Adicionar ao mapa de horários reservados
-                String horarioReservado = dia + " às " + hora;
-                if (!horariosReservados.containsKey(usuarioLogado.getMatricula())) {
-                    horariosReservados.put(usuarioLogado.getMatricula(), new ArrayList<>());
-                }
+            botao.setText("Alocado");
+            botao.setBackground(new Color(180, 220, 180));
+            botao.setEnabled(false);
+            JOptionPane.showMessageDialog(null,
+                    "Você foi alocado para " + dia + " às " + hora,
+                    "Confirmação", JOptionPane.INFORMATION_MESSAGE);
+            // Adicionar ao mapa de horários reservados
+            String horarioReservado = dia + " às " + hora;
+            if (!horariosReservados.containsKey(usuarioLogado.getMatricula())) {
+                horariosReservados.put(usuarioLogado.getMatricula(), new ArrayList<>());
+            }
+            boolean condicao = podeReservarHorario(dia, hora);
+            if (condicao == true) {
                 horariosReservados.get(usuarioLogado.getMatricula()).add(horarioReservado);
+            } else {
+                botao.setText("Livre");
+                botao.setFont(fonte);
+                botao.setBackground(new Color(200, 230, 250));
+                botao.setFocusPainted(false);
+
+            }
 
         });
         return botao;
@@ -356,8 +367,30 @@ public class Main {
             return "NENHUMA RESERVA ESCOLHIDA";
         }
     }
+
+    private static boolean podeReservarHorario(String dia, String hora) {
+        // verifica se o usuario é aluno
+        if (usuarioLogado instanceof Alunos) {
+            List<String> reservas = horariosReservados.get(usuarioLogado.getMatricula());
+
+            if (reservas != null && !reservas.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Alunos só podem reservar um horário.");
+                return false;
+            }
+            // Verifica se é um horário consecutivo
+            int horaInt = Integer.parseInt(hora.replace("h", ""));
+            for (Object reserva : reservas != null ? reservas : new ArrayList<>()) {
+                if (((String) reserva).contains(dia)) {
+                    int horaReservada = Integer.parseInt(((String) reserva).replaceAll("[^0-9]", ""));
+                    if (Math.abs(horaReservada - horaInt) == 2) {
+                        JOptionPane.showMessageDialog(null, "Alunos não podem reservar horários consecutivos.");
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
 }
-
-
-
-
