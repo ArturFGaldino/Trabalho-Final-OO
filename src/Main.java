@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
@@ -338,7 +339,7 @@ public class Main {
             if (!horariosReservados.containsKey(usuarioLogado.getMatricula())) {
                 horariosReservados.put(usuarioLogado.getMatricula(), new ArrayList<>());
             }
-            boolean condicao = podeReservarHorario(dia, hora);
+            boolean condicao = podeReservarHorario(dia);
             if (condicao == true) {
                 horariosReservados.get(usuarioLogado.getMatricula()).add(horarioReservado);
             } else {
@@ -368,27 +369,57 @@ public class Main {
         }
     }
 
-    private static boolean podeReservarHorario(String dia, String hora) {
-        // verifica se o usuario é aluno
+    /*
+     * private static boolean podeReservarHorario(String dia, String hora) {
+     * // verifica se o usuario é aluno
+     * if (usuarioLogado instanceof Alunos) {
+     * List<String> reservas = horariosReservados.get(usuarioLogado.getMatricula());
+     * 
+     * if (reservas != null && !reservas.isEmpty()) {
+     * JOptionPane.showMessageDialog(null, "Alunos só podem reservar um horário.");
+     * return false;
+     * }
+     * // Verifica se é um horário consecutivo
+     * int horaInt = Integer.parseInt(hora.replace("h", ""));
+     * for (Object reserva : reservas != null ? reservas : new ArrayList<>()) {
+     * if (((String) reserva).contains(dia)) {
+     * int horaReservada = Integer.parseInt(((String) reserva).replaceAll("[^0-9]",
+     * ""));
+     * if (Math.abs(horaReservada - horaInt) == 2) {
+     * JOptionPane.showMessageDialog(null,
+     * "Alunos não podem reservar horários consecutivos.");
+     * return false;
+     * }
+     * }
+     * }
+     * }
+     * 
+     * return true;
+     */
+    private static boolean podeReservarHorario(String dia) {
         if (usuarioLogado instanceof Alunos) {
             List<String> reservas = horariosReservados.get(usuarioLogado.getMatricula());
 
             if (reservas != null && !reservas.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Alunos só podem reservar um horário.");
-                return false;
-            }
-            // Verifica se é um horário consecutivo
-            int horaInt = Integer.parseInt(hora.replace("h", ""));
-            for (Object reserva : reservas != null ? reservas : new ArrayList<>()) {
-                if (((String) reserva).contains(dia)) {
-                    int horaReservada = Integer.parseInt(((String) reserva).replaceAll("[^0-9]", ""));
-                    if (Math.abs(horaReservada - horaInt) == 2) {
-                        JOptionPane.showMessageDialog(null, "Alunos não podem reservar horários consecutivos.");
-                        return false;
+                // Verifica se algum dia reservado é consecutivo ao novo dia
+                List<String> diasSemana = Arrays.asList("Segunda", "Terça", "Quarta", "Quinta", "Sexta");
+
+                int diaAtualIndex = diasSemana.indexOf(dia);
+                for (String reserva : reservas) {
+                    for (String diaReservado : diasSemana) {
+                        if (reserva.contains(diaReservado)) {
+                            int indexReservado = diasSemana.indexOf(diaReservado);
+                            if (Math.abs(diaAtualIndex - indexReservado) == 1) {
+                                JOptionPane.showMessageDialog(null, "Alunos não podem reservar em dias consecutivos.");
+                                return false;
+                            }
+                        }
                     }
                 }
             }
         }
+
+        // Outras regras para Professores ou Servidores podem ir aqui
 
         return true;
     }
