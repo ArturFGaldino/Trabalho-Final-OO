@@ -1,12 +1,9 @@
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.List;
-
 import Entidades.*;
+import Servicos.*;
 
 public class Main {
     public static String nome, email, telefone, matricula;
@@ -17,12 +14,9 @@ public class Main {
     public static String tempLogin;
     public static Map<String, ArrayList<String>> horariosReservados = new HashMap<>();
     public static Usuarios usuarioLogado = null;
-
-    // testes
-    // public static Usuarios usuarioLogado = new
-    // Alunos("Aluno","1","1","1","1","eng");
+    public static Usuarios artur = new Alunos("Artur Fernandes Galdino", "241010923@aluno.unb.br","61998658594","1","241010923","Engenharia de Software");
     public static void main(String[] args) {
-
+        listaUsuarios.add(artur);
         do {
             int opcao02 = loginCadastro();
             if (opcao02 == 2 || opcao02 == JOptionPane.CLOSED_OPTION) {
@@ -262,166 +256,20 @@ public class Main {
                 null,
                 opcoes1,
                 opcoes1[0]);
-
         String espacoSelecionado = opcoes1[escolhaEspacoFisico].toString();
-        mostrarGradeHoraria(espacoSelecionado);
-    }
-
-    public static void mostrarGradeHoraria(String espacoSelecionado) {
-        String[] dias = { "Segunda", "Terça", "Quarta", "Quinta", "Sexta" };
-        String[] horas = { "08h", "10h", "12h", "14h", "16h" };
-
-        // Cria um JDialog MODAL (bloqueia interação com outras janelas até fechar)
-        JDialog dialog = new JDialog();
-        dialog.setModal(true); // Faz com que o código espere aqui até fechar
-        dialog.setTitle("Horários disponíveis - " + espacoSelecionado);
-        dialog.setSize(700, 450);
-        dialog.setLocationRelativeTo(null);
-        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-
-        JPanel painel = new JPanel(new GridLayout(horas.length + 1, dias.length + 1, 5, 5));
-        painel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
-        Font fonte = new Font("Segoe UI", Font.PLAIN, 14);
-
-        painel.add(new JLabel("")); // Canto superior vazio
-
-        // Cabeçalhos dos dias
-        for (String dia : dias) {
-            JLabel labelDia = new JLabel(dia, SwingConstants.CENTER);
-            labelDia.setFont(new Font("Segoe UI", Font.BOLD, 14));
-            painel.add(labelDia);
-        }
-
-        // Linhas de horários + botões
-        for (String hora : horas) {
-            JLabel labelHora = new JLabel(hora, SwingConstants.CENTER);
-            labelHora.setFont(new Font("Segoe UI", Font.BOLD, 14));
-            painel.add(labelHora);
-
-            for (String dia : dias) {
-                JButton botao = getJButton(hora, dia, fonte);
-                painel.add(botao);
-            }
-        }
-
-        // Botão para finalizar reservas
-        JButton btnFinalizar = new JButton("Finalizar Reservas");
-        btnFinalizar.addActionListener(e -> {
-            dialog.dispose(); // Fecha a janela de grade horária
-        });
-
-        // Adicionar os componentes à janela
-        dialog.add(painel, BorderLayout.CENTER);
-        dialog.add(btnFinalizar, BorderLayout.SOUTH);
-
-        dialog.setVisible(true);
-        String reservas = exibirReservas();// Chama o exibir reservas mostrando as reservas do usuario
-        JOptionPane.showMessageDialog(null, reservas);
-    }
-
-    private static JButton getJButton(String hora, String dia, Font fonte) {
-        JButton botao = new JButton("Livre");
-        botao.setFont(fonte);
-        botao.setBackground(new Color(200, 230, 250));
-        botao.setFocusPainted(false);
-
-        // Evento ao clicar
-        botao.addActionListener(e -> {
-            botao.setText("Alocado");
-            botao.setBackground(new Color(180, 220, 180));
-            botao.setEnabled(false);
-            JOptionPane.showMessageDialog(null,
-                    "Você foi alocado para " + dia + " às " + hora,
-                    "Confirmação", JOptionPane.INFORMATION_MESSAGE);
-            // Adicionar ao mapa de horários reservados
-            String horarioReservado = dia + " às " + hora;
-            if (!horariosReservados.containsKey(usuarioLogado.getMatricula())) {
-                horariosReservados.put(usuarioLogado.getMatricula(), new ArrayList<>());
-            }
-            boolean condicao = podeReservarHorario(dia);
-            if (condicao == true) {
-                horariosReservados.get(usuarioLogado.getMatricula()).add(horarioReservado);
-            } else {
-                botao.setText("Livre");
-                botao.setFont(fonte);
-                botao.setBackground(new Color(200, 230, 250));
-                botao.setFocusPainted(false);
-
-            }
-
-        });
-        return botao;
-    }
-
-    private static String exibirReservas() {
-        matricula = JOptionPane.showInputDialog(null, "Digite sua matrícula:");
-        if (horariosReservados.containsKey(matricula)) {
-            StringBuilder reservas = new StringBuilder("SUAS RESERVAS:\n\n");
-            for (String hr : horariosReservados.get(matricula)) {
-                reservas.append("- ").append(hr).append("\n");
-            }
-            reservas.insert(0, "Resumo de reservas para matrícula: " + matricula + "\n\n");
-
-            return reservas.toString();
-        } else {
-            return "NENHUMA RESERVA ESCOLHIDA";
+        switch (escolhaEspacoFisico){
+            case 0:
+                Laboratorio laboratorio = new Laboratorio(100, "Bloco A", "Projetor", "Disponível"); // Exemplo com Laboratório
+                laboratorio.mostrarGradeHoraria(espacoSelecionado, usuarioLogado, horariosReservados);
+            break;
+            case 1:
+                SalaDeAula salaDeAula = new SalaDeAula(100, "Bloco A", "Projetor", "Disponível"); // Exemplo com Laboratório
+                salaDeAula.mostrarGradeHoraria(espacoSelecionado, usuarioLogado, horariosReservados);
+            break;
+            case 2:
+                Auditorio auditorio = new Auditorio(100, "Bloco A", "Projetor", "Disponível"); // Exemplo com Laboratório
+                auditorio.mostrarGradeHoraria(espacoSelecionado, usuarioLogado, horariosReservados);
+            break;
         }
     }
-
-    /*
-     * private static boolean podeReservarHorario(String dia, String hora) {
-     * // verifica se o usuario é aluno
-     * if (usuarioLogado instanceof Alunos) {
-     * List<String> reservas = horariosReservados.get(usuarioLogado.getMatricula());
-     * 
-     * if (reservas != null && !reservas.isEmpty()) {
-     * JOptionPane.showMessageDialog(null, "Alunos só podem reservar um horário.");
-     * return false;
-     * }
-     * // Verifica se é um horário consecutivo
-     * int horaInt = Integer.parseInt(hora.replace("h", ""));
-     * for (Object reserva : reservas != null ? reservas : new ArrayList<>()) {
-     * if (((String) reserva).contains(dia)) {
-     * int horaReservada = Integer.parseInt(((String) reserva).replaceAll("[^0-9]",
-     * ""));
-     * if (Math.abs(horaReservada - horaInt) == 2) {
-     * JOptionPane.showMessageDialog(null,
-     * "Alunos não podem reservar horários consecutivos.");
-     * return false;
-     * }
-     * }
-     * }
-     * }
-     * 
-     * return true;
-     */
-    private static boolean podeReservarHorario(String dia) {
-        if (usuarioLogado instanceof Alunos) {
-            List<String> reservas = horariosReservados.get(usuarioLogado.getMatricula());
-
-            if (reservas != null && !reservas.isEmpty()) {
-                // Verifica se algum dia reservado é consecutivo ao novo dia
-                List<String> diasSemana = Arrays.asList("Segunda", "Terça", "Quarta", "Quinta", "Sexta");
-
-                int diaAtualIndex = diasSemana.indexOf(dia);
-                for (String reserva : reservas) {
-                    for (String diaReservado : diasSemana) {
-                        if (reserva.contains(diaReservado)) {
-                            int indexReservado = diasSemana.indexOf(diaReservado);
-                            if (Math.abs(diaAtualIndex - indexReservado) == 1) {
-                                JOptionPane.showMessageDialog(null, "Alunos não podem reservar em dias consecutivos.");
-                                return false;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        // Outras regras para Professores ou Servidores podem ir aqui
-
-        return true;
-    }
-
 }
