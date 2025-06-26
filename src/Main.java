@@ -12,7 +12,7 @@ public class Main {
     public static ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
     public static int continuar = 1;
     public static String tempLogin;
-    public static Map<String, ArrayList<String>> horariosReservados = new HashMap<>();
+//    public static Map<String, ArrayList<String>> horariosReservados = new HashMap<>();
     public static Usuarios usuarioLogado = null;
     public static Usuarios artur = new Alunos("Artur Fernandes Galdino", "241010923@aluno.unb.br","61998658594","1","241010923","Engenharia de Software");
     public static void main(String[] args) {
@@ -260,15 +260,16 @@ public class Main {
         switch (escolhaEspacoFisico){
             case 0:
                 Laboratorio laboratorio = new Laboratorio(100, "Bloco A", "Projetor", "Disponível"); // Exemplo com Laboratório
-                laboratorio.mostrarGradeHoraria(espacoSelecionado, usuarioLogado, horariosReservados);
+                laboratorio.mostrarGradeHoraria(espacoSelecionado, usuarioLogado);
             break;
             case 1:
                 SalaDeAula salaDeAula = new SalaDeAula(100, "Bloco A", "Projetor", "Disponível"); // Exemplo com Laboratório
-                salaDeAula.mostrarGradeHoraria(espacoSelecionado, usuarioLogado, horariosReservados);
+                salaDeAula.mostrarGradeHoraria(espacoSelecionado, usuarioLogado);
             break;
             case 2:
                 Auditorio auditorio = new Auditorio(100, "Bloco A", "Projetor", "Disponível"); // Exemplo com Laboratório
-                auditorio.mostrarGradeHoraria(espacoSelecionado, usuarioLogado, horariosReservados);
+                auditorio.mostrarGradeHoraria(espacoSelecionado, usuarioLogado
+                );
             break;
         }
     }

@@ -1,16 +1,16 @@
 package Servicos;
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
+
 import Entidades.Usuarios;
 import Entidades.Alunos;
 
 public abstract class EspacosFisicos {
     private final int capacidade;
     private final String localizacao, equipamentosDisponiveis, disponibilidades;
+    private final Map<String, ArrayList<String>> horariosReservados = new HashMap<>();
 
     EspacosFisicos(int capacidade, String localizacao, String equipamentosDisponiveis, String disponibilidades) {
         this.capacidade = capacidade;
@@ -37,7 +37,7 @@ public abstract class EspacosFisicos {
         return disponibilidades;
     }
 
-    public void mostrarGradeHoraria(String espacoSelecionado, Usuarios usuarioLogado, Map<String, ArrayList<String>> horariosReservados) {
+    public void mostrarGradeHoraria(String espacoSelecionado, Usuarios usuarioLogado) {
         String[] dias = { "Segunda", "Terça", "Quarta", "Quinta", "Sexta" };
         String[] horas = { "08h", "10h", "12h", "14h", "16h" };
 
@@ -67,7 +67,7 @@ public abstract class EspacosFisicos {
             painel.add(labelHora);
 
             for (String dia : dias) {
-                JButton botao = getJButton(hora, dia, fonte, usuarioLogado, horariosReservados);
+                JButton botao = getJButton(hora, dia, fonte, usuarioLogado);
                 painel.add(botao);
             }
         }
@@ -78,11 +78,11 @@ public abstract class EspacosFisicos {
         dialog.add(painel, BorderLayout.CENTER);
         dialog.add(btnFinalizar, BorderLayout.SOUTH);
         dialog.setVisible(true);
-        String reservas = exibirReservasUsuario(usuarioLogado, horariosReservados);
+        String reservas = exibirReservasUsuario(usuarioLogado);
         JOptionPane.showMessageDialog(null, reservas);
     }
 
-    private JButton getJButton(String hora, String dia, Font fonte, Usuarios usuarioLogado, Map<String, ArrayList<String>> horariosReservados) {
+    private JButton getJButton(String hora, String dia, Font fonte, Usuarios usuarioLogado) {
         JButton botao = new JButton("Livre");
         botao.setFont(fonte);
         botao.setBackground(new Color(200, 230, 250));
@@ -100,7 +100,7 @@ public abstract class EspacosFisicos {
             if (!horariosReservados.containsKey(usuarioLogado.getMatricula())) {
                 horariosReservados.put(usuarioLogado.getMatricula(), new ArrayList<>());
             }
-            boolean condicao = podeReservarHorario(dia, usuarioLogado, horariosReservados);
+            boolean condicao = podeReservarHorario(dia, usuarioLogado);
             if (condicao) {
                 horariosReservados.get(usuarioLogado.getMatricula()).add(horarioReservado);
             } else {
@@ -111,7 +111,7 @@ public abstract class EspacosFisicos {
         return botao;
     }
 
-    public String exibirReservasUsuario(Usuarios usuarioLogado, Map<String, ArrayList<String>> horariosReservados) {
+    public String exibirReservasUsuario(Usuarios usuarioLogado) {
         if (horariosReservados.containsKey(usuarioLogado.getMatricula())) {
             StringBuilder reservas = new StringBuilder("SUAS RESERVAS:\n\n");
             for (String hr : horariosReservados.get(usuarioLogado.getMatricula())) {
@@ -124,7 +124,7 @@ public abstract class EspacosFisicos {
         }
     }
 
-    private boolean podeReservarHorario(String dia, Usuarios usuarioLogado, Map<String, ArrayList<String>> horariosReservados) {
+    private boolean podeReservarHorario(String dia, Usuarios usuarioLogado) {
         if (usuarioLogado instanceof Alunos) {
             List<String> reservas = horariosReservados.get(usuarioLogado.getMatricula());
 
