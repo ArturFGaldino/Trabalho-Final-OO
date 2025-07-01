@@ -12,9 +12,19 @@ public class Main {
     public static ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
     public static int continuar = 1;
     public static String tempLogin;
-//    public static Map<String, ArrayList<String>> horariosReservados = new HashMap<>();
+    // public static Map<String, ArrayList<String>> horariosReservados = new
+    // HashMap<>();
     public static Usuarios usuarioLogado = null;
-    public static Usuarios artur = new Alunos("Artur Fernandes Galdino", "241010923@aluno.unb.br","61998658594","1","241010923","Engenharia de Software");
+    public static Usuarios artur = new Alunos("Artur Fernandes Galdino", "241010923@aluno.unb.br", "61998658594", "1",
+            "241010923", "Engenharia de Software");
+    public static Usuarios pedro = new Alunos(
+            "Pedro Augusto Macedo Del Castilo",
+            "241025354@aluno.unb.br",
+            "61082859745",
+            "1",
+            "241025354",
+            "Engenharia de Software");
+
     public static void main(String[] args) {
         listaUsuarios.add(artur);
         do {
@@ -257,20 +267,57 @@ public class Main {
                 opcoes1,
                 opcoes1[0]);
         String espacoSelecionado = opcoes1[escolhaEspacoFisico].toString();
-        switch (escolhaEspacoFisico){
+        switch (escolhaEspacoFisico) {
             case 0:
-                Laboratorio laboratorio = new Laboratorio(100, "Bloco A", "Projetor", "Disponível"); // Exemplo com Laboratório
+                Object[] opcoesLab = { "Laboratório de Física", "laboratório de Química" };
+                int escolherLaboratorio = JOptionPane.showOptionDialog(
+                        null,
+                        "Escolha um laboratório",
+                        "Laboratórios disponíveis",
+                        JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        opcoesLab,
+                        opcoesLab[0]);
+                String nomeLab = opcoesLab[escolherLaboratorio].toString();
+                Laboratorio laboratorio = new Laboratorio(100, "UED", "Projetor", "Disponível", nomeLab);
+                // Exemplo com Laboratório
+                espacoSelecionado = opcoesLab[escolherLaboratorio].toString();
                 laboratorio.mostrarGradeHoraria(espacoSelecionado, usuarioLogado);
-            break;
+                break;
             case 1:
-                SalaDeAula salaDeAula = new SalaDeAula(100, "Bloco A", "Projetor", "Disponível"); // Exemplo com Laboratório
+                Object[] opcoesSala = { "I1", "I2", "I3", "I4", "I5", "I6", "I7", "I8", "I9", "I10", "S1", "S2", "S3",
+                        "S4", "S5", "S6", "S7", "S8", "S9", "S10" };
+                int escolherSala = JOptionPane.showOptionDialog(
+                        null,
+                        "Escolha uma sala",
+                        "Salas disponíveis",
+                        JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        opcoesSala,
+                        opcoesSala[0]);
+                SalaDeAula salaDeAula = new SalaDeAula(100, "Bloco A", "Projetor", "Disponível");
+                // Exemplo com Sala
+                espacoSelecionado = opcoesSala[escolherSala].toString();
                 salaDeAula.mostrarGradeHoraria(espacoSelecionado, usuarioLogado);
-            break;
+                break;
             case 2:
-                Auditorio auditorio = new Auditorio(100, "Bloco A", "Projetor", "Disponível"); // Exemplo com Laboratório
-                auditorio.mostrarGradeHoraria(espacoSelecionado, usuarioLogado
-                );
-            break;
+                Object[] opcoesAudi = { "Auditório principal", "Mocap" };
+                int escolherAudi = JOptionPane.showOptionDialog(
+                        null,
+                        "Escolha um auditório",
+                        "Auditórios disponíveis",
+                        JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        opcoesAudi,
+                        opcoesAudi[0]);
+                espacoSelecionado = opcoesAudi[escolherAudi].toString();
+                Auditorio auditorio = new Auditorio(100, "Bloco A", "Projetor", "Disponível");
+                // Exemplo com Auditorio
+                auditorio.mostrarGradeHoraria(espacoSelecionado, usuarioLogado);
+                break;
         }
     }
 }
