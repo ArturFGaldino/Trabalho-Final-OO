@@ -9,8 +9,12 @@ import Entidades.Alunos;
 public abstract class EspacosFisicos {
     private final int capacidade;
     private final String localizacao, equipamentosDisponiveis, disponibilidades, nome;
-    private final static Map<String, ArrayList<String>> horariosReservados = new HashMap<>();
-
+//    private final static Map<String, ArrayList<String>> horariosReservados = new HashMap<>();
+    // Alteração: Mapa que armazena quem reservou cada horário (chave: horário, valor: matrícula)
+    private final static Map<String, String> reservasPorHorario = new HashMap<>();
+    // Alteração: Mapa que armazena as reservas por usuário (para exibição individual)
+    private final static Map<String, ArrayList<String>> reservasPorUsuario = new HashMap<>();
+    private static final Map<String, Map<String, String>> reservasPorEspaco = new HashMap<>();
     EspacosFisicos(String nome, int capacidade, String localizacao, String equipamentosDisponiveis, String disponibilidades) {
         this.capacidade = capacidade;
         this.localizacao = localizacao;
@@ -41,13 +45,16 @@ public abstract class EspacosFisicos {
         return nome;
     }
 
-    public void mostrarGradeHoraria(String espacoSelecionado, Usuarios usuarioLogado) {
+    public void mostrarGradeHoraria( Usuarios usuarioLogado) {
         String[] dias = { "Segunda", "Terça", "Quarta", "Quinta", "Sexta" };
         String[] horas = { "08h", "10h", "12h", "14h", "16h" };
 
+        if (!reservasPorEspaco.containsKey(this.nome)) {
+            reservasPorEspaco.put(this.nome, new HashMap<>());
+        }
         JDialog dialog = new JDialog();
         dialog.setModal(true);
-        dialog.setTitle("Horários disponíveis - " + espacoSelecionado);
+        dialog.setTitle("Horários disponíveis - " + getNome());
         dialog.setSize(700, 450);
         dialog.setLocationRelativeTo(null);
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -91,39 +98,53 @@ public abstract class EspacosFisicos {
         botao.setFont(fonte);
         botao.setBackground(new Color(200, 230, 250));
         botao.setFocusPainted(false);
-        String horarioReservado = dia + " às " + hora;
-
+        String horarioKey = dia + " às " + hora;
+        // Verifica se o horário já está reservado
+        if (reservasPorEspaco.get(this.nome).containsKey(horarioKey)) {
+            String matriculaReserva = reservasPorEspaco.get(this.nome).get(horarioKey);
+            if(matriculaReserva.equals(usuarioLogado.getMatricula())){
+                botao.setText("Minha Reserva");
+                botao.setBackground(new Color(180,220,180));
+            }else {
+                botao.setText("Reservado");
+                botao.setBackground(new Color(220, 180, 180)); // Vermelho claro para indicar ocupado
+                botao.setEnabled(false); // Desabilita o botão se já estiver reservado
+            }
+        }
         botao.addActionListener(e -> {
             if (botao.getText().equals("Livre")){
-                botao.setText("Alocado");
+                botao.setText("Minha Reserva");
                 botao.setBackground(new Color(180, 220, 180));
+                reservasPorEspaco.get(this.nome).put(horarioKey, usuarioLogado.getMatricula());
                 JOptionPane.showMessageDialog(null,
                         "Você foi alocado para " + dia + " às " + hora,
                         "Confirmação", JOptionPane.INFORMATION_MESSAGE);
 
-                if (!horariosReservados.containsKey(usuarioLogado.getMatricula())) {
-                    horariosReservados.put(usuarioLogado.getMatricula(), new ArrayList<>());
+                if (!reservasPorUsuario.containsKey(usuarioLogado.getMatricula())) {
+                    reservasPorUsuario.put(usuarioLogado.getMatricula(), new ArrayList<>());
                 }
                 boolean condicao = podeReservarHorario(dia, usuarioLogado);
                 if (condicao) {
-                    horariosReservados.get(usuarioLogado.getMatricula()).add(horarioReservado);
+                    reservasPorUsuario.get(usuarioLogado.getMatricula()).add(horarioKey);
                 } else {
                     botao.setText("Livre");
                     botao.setBackground(new Color(200, 230, 250));
                 }
-            }else{
+            }else if(botao.getText().equals("Minha Reserva")){
                 botao.setText("Livre");
                 botao.setBackground(new Color(200, 230, 250));
-                horariosReservados.get(usuarioLogado.getMatricula()).remove(horarioReservado);
+                reservasPorUsuario.get(usuarioLogado.getMatricula()).remove(horarioKey);
+                reservasPorHorario.remove(horarioKey);
+                reservasPorEspaco.get(this.nome).remove(horarioKey);
             }
         });
         return botao;
     }
 
     public String exibirReservasUsuario(Usuarios usuarioLogado) {
-        if (horariosReservados.containsKey(usuarioLogado.getMatricula())) {
+        if (reservasPorUsuario.containsKey(usuarioLogado.getMatricula())) {
             StringBuilder reservas = new StringBuilder("SUAS RESERVAS:\n\n");
-            for (String hr : horariosReservados.get(usuarioLogado.getMatricula())) {
+            for (String hr : reservasPorUsuario.get(usuarioLogado.getMatricula())) {
                 reservas.append("- ").append(hr).append("\n");
             }
             reservas.insert(0, "Resumo de reservas para matrícula: " + usuarioLogado.getMatricula() + "\n\n");
@@ -135,7 +156,7 @@ public abstract class EspacosFisicos {
 
     private boolean podeReservarHorario(String dia, Usuarios usuarioLogado) {
         if (usuarioLogado instanceof Alunos) {
-            List<String> reservas = horariosReservados.get(usuarioLogado.getMatricula());
+            List<String> reservas = reservasPorUsuario.get(usuarioLogado.getMatricula());
 
             if (reservas != null && !reservas.isEmpty()) {
                 List<String> diasSemana = Arrays.asList("Segunda", "Terça", "Quarta", "Quinta", "Sexta");

@@ -20,7 +20,8 @@ public class Main {
             "1",
             "241025354",
             "Engenharia de Software");
-
+    public static Laboratorio laboratorio = new Laboratorio("Lab1",100, "UED", "Projetor", "Disponível");
+    public static Auditorio auditorio = new Auditorio("MOCAP",100, "Bloco A", "Projetor", "Disponível");
     public static void main(String[] args) {
         listaUsuarios.add(artur);
         listaUsuarios.add(pedro);
@@ -266,20 +267,19 @@ public class Main {
                 opcoes1[0]);
         switch (escolhaEspacoFisico) {
             case 0:
-                Object[] opcoesLab = { "Laboratório de Física", "Laboratório de Química" };
-                int escolherLaboratorio = JOptionPane.showOptionDialog(
-                        null,
-                        "Escolha um laboratório",
-                        "Laboratórios disponíveis",
-                        JOptionPane.DEFAULT_OPTION,
-                        JOptionPane.QUESTION_MESSAGE,
-                        null,
-                        opcoesLab,
-                        opcoesLab[0]);
-                espacoSelecionado = opcoesLab[escolherLaboratorio].toString();
-                Laboratorio laboratorio = new Laboratorio(espacoSelecionado,100, "UED", "Projetor", "Disponível");
+//                Object[] opcoesLab = { "Laboratório de Física", "Laboratório de Química" };
+//                int escolherLaboratorio = JOptionPane.showOptionDialog(
+//                        null,
+//                        "Escolha um laboratório",
+//                        "Laboratórios disponíveis",
+//                        JOptionPane.DEFAULT_OPTION,
+//                        JOptionPane.QUESTION_MESSAGE,
+//                        null,
+//                        opcoesLab,
+//                        opcoesLab[0]);
+//                espacoSelecionado = opcoesLab[escolherLaboratorio].toString();
                 // Exemplo com Laboratório
-                laboratorio.mostrarGradeHoraria(espacoSelecionado, usuarioLogado);
+                laboratorio.mostrarGradeHoraria(usuarioLogado);
                 break;
             case 1:
                 Object[] opcoesSala = { "I1", "I2", "I3", "I4", "I5", "I6", "I7", "I8", "I9", "I10", "S1", "S2", "S3",
@@ -296,23 +296,23 @@ public class Main {
                 espacoSelecionado = opcoesSala[escolherSala].toString();
                 SalaDeAula salaDeAula = new SalaDeAula(espacoSelecionado,100, "Bloco A", "Projetor", "Disponível");
                 // Exemplo com Sala
-                salaDeAula.mostrarGradeHoraria(espacoSelecionado, usuarioLogado);
+                salaDeAula.mostrarGradeHoraria(usuarioLogado);
                 break;
             case 2:
-                Object[] opcoesAudi = { "Auditório principal", "Mocap" };
-                int escolherAudi = JOptionPane.showOptionDialog(
-                        null,
-                        "Escolha um auditório",
-                        "Auditórios disponíveis",
-                        JOptionPane.DEFAULT_OPTION,
-                        JOptionPane.QUESTION_MESSAGE,
-                        null,
-                        opcoesAudi,
-                        opcoesAudi[0]);
-                espacoSelecionado = opcoesAudi[escolherAudi].toString();
-                Auditorio auditorio = new Auditorio(espacoSelecionado,100, "Bloco A", "Projetor", "Disponível");
+//                Object[] opcoesAudi = { "Auditório principal", "Mocap" };
+//                int escolherAudi = JOptionPane.showOptionDialog(
+//                        null,
+//                        "Escolha um auditório",
+//                        "Auditórios disponíveis",
+//                        JOptionPane.DEFAULT_OPTION,
+//                        JOptionPane.QUESTION_MESSAGE,
+//                        null,
+//                        opcoesAudi,
+//                        opcoesAudi[0]);
+//                espacoSelecionado = opcoesAudi[escolherAudi].toString();
+//                Auditorio auditorio = new Auditorio(espacoSelecionado,100, "Bloco A", "Projetor", "Disponível");
                 // Exemplo com Auditorio
-                auditorio.mostrarGradeHoraria(espacoSelecionado, usuarioLogado);
+                auditorio.mostrarGradeHoraria(usuarioLogado);
                 break;
         }
     }
