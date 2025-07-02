@@ -20,8 +20,21 @@ public class Main {
             "1",
             "241025354",
             "Engenharia de Software");
-    public static Laboratorio laboratorio = new Laboratorio("Lab1",100, "UED", "Projetor", "Disponível");
-    public static Auditorio auditorio = new Auditorio("MOCAP",100, "Bloco A", "Projetor", "Disponível");
+    public static Laboratorio lab1 = new Laboratorio("Lab1", 100, "UED", "Projetor", "Disponível");
+    public static Laboratorio lab2 = new Laboratorio("Lab2", 100, "UED", "Projetor", "Disponível");
+    public static Auditorio MOCAP = new Auditorio("MOCAP", 100, "Bloco A", "Projetor", "Disponível");
+    public static Auditorio auditorio = new Auditorio("auditorio", 100, "Bloco A", "Projetor", "Disponível");
+    public static SalaDeAula salaI1 = new SalaDeAula("I1", 10, "UAC", "Projetor", "Disponível");
+    public static SalaDeAula salaI2 = new SalaDeAula("I2", 10, "UAC", "Projetor", "Disponível");
+    public static SalaDeAula salaI3 = new SalaDeAula("I3", 10, "UAC", "Projetor", "Disponível");
+    public static SalaDeAula salaI4 = new SalaDeAula("I4", 10, "UAC", "Projetor", "Disponível");
+    public static SalaDeAula salaI5 = new SalaDeAula("I5", 10, "UAC", "Projetor", "Disponível");
+    public static SalaDeAula salaS1 = new SalaDeAula("S1", 10, "UAC", "Projetor", "Disponível");
+    public static SalaDeAula salaS2 = new SalaDeAula("S2", 10, "UAC", "Projetor", "Disponível");
+    public static SalaDeAula salaS3 = new SalaDeAula("S3", 10, "UAC", "Projetor", "Disponível");
+    public static SalaDeAula salaS4 = new SalaDeAula("S4", 10, "UAC", "Projetor", "Disponível");
+    public static SalaDeAula salaS5 = new SalaDeAula("S5", 10, "UAC", "Projetor", "Disponível");
+
     public static void main(String[] args) {
         listaUsuarios.add(artur);
         listaUsuarios.add(pedro);
@@ -255,7 +268,6 @@ public class Main {
 
     public static void mostrarEspacosFisicos() {
         Object[] opcoes1 = { "Laboratório", "Sala de aula", "Auditório" };
-        String espacoSelecionado;
         int escolhaEspacoFisico = JOptionPane.showOptionDialog(
                 null,
                 "QUAL ESPAÇO VOCÊ DESEJA SELECIONAR",
@@ -267,23 +279,30 @@ public class Main {
                 opcoes1[0]);
         switch (escolhaEspacoFisico) {
             case 0:
-//                Object[] opcoesLab = { "Laboratório de Física", "Laboratório de Química" };
-//                int escolherLaboratorio = JOptionPane.showOptionDialog(
-//                        null,
-//                        "Escolha um laboratório",
-//                        "Laboratórios disponíveis",
-//                        JOptionPane.DEFAULT_OPTION,
-//                        JOptionPane.QUESTION_MESSAGE,
-//                        null,
-//                        opcoesLab,
-//                        opcoesLab[0]);
-//                espacoSelecionado = opcoesLab[escolherLaboratorio].toString();
-                // Exemplo com Laboratório
-                laboratorio.mostrarGradeHoraria(usuarioLogado);
+                Object[] opcoesLab = { "Lab1", "Lab2" };
+                int escolherLaboratorio = JOptionPane.showOptionDialog(
+                        null,
+                        "Escolha um laboratório",
+                        "Laboratórios disponíveis",
+                        JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        opcoesLab,
+                        opcoesLab[0]);
+                switch (escolherLaboratorio) {
+                    case 0:
+                        lab1.mostrarGradeHoraria(usuarioLogado);
+                        break;
+                    case 1:
+                        lab2.mostrarGradeHoraria(usuarioLogado);
+                        break;
+                    default:
+                        break;
+                }
                 break;
             case 1:
-                Object[] opcoesSala = { "I1", "I2", "I3", "I4", "I5", "I6", "I7", "I8", "I9", "I10", "S1", "S2", "S3",
-                        "S4", "S5", "S6", "S7", "S8", "S9", "S10" };
+                Object[] opcoesSala = { "I1", "I2", "I3", "I4", "I5", "S1", "S2", "S3",
+                        "S4", "S5" };
                 int escolherSala = JOptionPane.showOptionDialog(
                         null,
                         "Escolha uma sala",
@@ -293,26 +312,63 @@ public class Main {
                         null,
                         opcoesSala,
                         opcoesSala[0]);
-                espacoSelecionado = opcoesSala[escolherSala].toString();
-                SalaDeAula salaDeAula = new SalaDeAula(espacoSelecionado,100, "Bloco A", "Projetor", "Disponível");
-                // Exemplo com Sala
-                salaDeAula.mostrarGradeHoraria(usuarioLogado);
+                switch (escolherSala) {
+                    case 0:
+                        salaI1.mostrarGradeHoraria(usuarioLogado);
+                        break;
+                    case 1:
+                        salaI2.mostrarGradeHoraria(usuarioLogado);
+                        break;
+                    case 2:
+                        salaI3.mostrarGradeHoraria(usuarioLogado);
+                        break;
+                    case 3:
+                        salaI4.mostrarGradeHoraria(usuarioLogado);
+                        break;
+                    case 4:
+                        salaI5.mostrarGradeHoraria(usuarioLogado);
+                        break;
+                    case 5:
+                        salaS1.mostrarGradeHoraria(usuarioLogado);
+                        break;
+                    case 6:
+                        salaS2.mostrarGradeHoraria(usuarioLogado);
+                        break;
+                    case 7:
+                        salaS3.mostrarGradeHoraria(usuarioLogado);
+                        break;
+                    case 8:
+                        salaS4.mostrarGradeHoraria(usuarioLogado);
+                        break;
+                    case 9:
+                        salaS5.mostrarGradeHoraria(usuarioLogado);
+                        break;
+                    default:
+                        break;
+                }
+
                 break;
             case 2:
-//                Object[] opcoesAudi = { "Auditório principal", "Mocap" };
-//                int escolherAudi = JOptionPane.showOptionDialog(
-//                        null,
-//                        "Escolha um auditório",
-//                        "Auditórios disponíveis",
-//                        JOptionPane.DEFAULT_OPTION,
-//                        JOptionPane.QUESTION_MESSAGE,
-//                        null,
-//                        opcoesAudi,
-//                        opcoesAudi[0]);
-//                espacoSelecionado = opcoesAudi[escolherAudi].toString();
-//                Auditorio auditorio = new Auditorio(espacoSelecionado,100, "Bloco A", "Projetor", "Disponível");
-                // Exemplo com Auditorio
-                auditorio.mostrarGradeHoraria(usuarioLogado);
+                Object[] opcoesAudi = { "Auditório principal", "Mocap" };
+                int escolherAudi = JOptionPane.showOptionDialog(
+                        null,
+                        "Escolha um auditório",
+                        "Auditórios disponíveis",
+                        JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        opcoesAudi,
+                        opcoesAudi[0]);
+                switch (escolherAudi) {
+                    case 0:
+                        auditorio.mostrarGradeHoraria(usuarioLogado);
+                        break;
+                    case 1:
+                        MOCAP.mostrarGradeHoraria(usuarioLogado);
+                    default:
+                        break;
+                }
+
                 break;
         }
     }

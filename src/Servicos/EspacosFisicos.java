@@ -1,4 +1,5 @@
 package Servicos;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
@@ -8,14 +9,20 @@ import Entidades.Alunos;
 
 public abstract class EspacosFisicos {
     private final int capacidade;
-    private final String localizacao, equipamentosDisponiveis, disponibilidades, nome;
-//    private final static Map<String, ArrayList<String>> horariosReservados = new HashMap<>();
-    // Alteração: Mapa que armazena quem reservou cada horário (chave: horário, valor: matrícula)
-    private final static Map<String, String> reservasPorHorario = new HashMap<>();
-    // Alteração: Mapa que armazena as reservas por usuário (para exibição individual)
-    private final static Map<String, ArrayList<String>> reservasPorUsuario = new HashMap<>();
-    private static final Map<String, Map<String, String>> reservasPorEspaco = new HashMap<>();
-    EspacosFisicos(String nome, int capacidade, String localizacao, String equipamentosDisponiveis, String disponibilidades) {
+    private final String localizacao, equipamentosDisponiveis, disponibilidades;
+    protected final String nome;
+    // private final static Map<String, ArrayList<String>> horariosReservados = new
+    // HashMap<>();
+    // Alteração: Mapa que armazena quem reservou cada horário (chave: horário,
+    // valor: matrícula)
+    protected final static Map<String, String> reservasPorHorario = new HashMap<>();
+    // Alteração: Mapa que armazena as reservas por usuário (para exibição
+    // individual)
+    protected final static Map<String, ArrayList<String>> reservasPorUsuario = new HashMap<>();
+    protected static final Map<String, Map<String, String>> reservasPorEspaco = new HashMap<>();
+
+    EspacosFisicos(String nome, int capacidade, String localizacao, String equipamentosDisponiveis,
+            String disponibilidades) {
         this.capacidade = capacidade;
         this.localizacao = localizacao;
         this.equipamentosDisponiveis = equipamentosDisponiveis;
@@ -23,10 +30,9 @@ public abstract class EspacosFisicos {
         this.nome = nome;
     }
 
-
     // Gets
-    public int getCapacidade(){
-        return  capacidade;
+    public int getCapacidade() {
+        return capacidade;
     }
 
     public String getLocalizacao() {
@@ -45,7 +51,7 @@ public abstract class EspacosFisicos {
         return nome;
     }
 
-    public void mostrarGradeHoraria( Usuarios usuarioLogado) {
+    public void mostrarGradeHoraria(Usuarios usuarioLogado) {
         String[] dias = { "Segunda", "Terça", "Quarta", "Quinta", "Sexta" };
         String[] horas = { "08h", "10h", "12h", "14h", "16h" };
 
@@ -89,7 +95,7 @@ public abstract class EspacosFisicos {
         dialog.add(painel, BorderLayout.CENTER);
         dialog.add(btnFinalizar, BorderLayout.SOUTH);
         dialog.setVisible(true);
-        String reservas = exibirReservasUsuario(usuarioLogado);
+        String reservas = exibirReservasUsuario(usuarioLogado, nome);
         JOptionPane.showMessageDialog(null, reservas);
     }
 
@@ -102,17 +108,17 @@ public abstract class EspacosFisicos {
         // Verifica se o horário já está reservado
         if (reservasPorEspaco.get(this.nome).containsKey(horarioKey)) {
             String matriculaReserva = reservasPorEspaco.get(this.nome).get(horarioKey);
-            if(matriculaReserva.equals(usuarioLogado.getMatricula())){
+            if (matriculaReserva.equals(usuarioLogado.getMatricula())) {
                 botao.setText("Minha Reserva");
-                botao.setBackground(new Color(180,220,180));
-            }else {
+                botao.setBackground(new Color(180, 220, 180));
+            } else {
                 botao.setText("Reservado");
                 botao.setBackground(new Color(220, 180, 180)); // Vermelho claro para indicar ocupado
                 botao.setEnabled(false); // Desabilita o botão se já estiver reservado
             }
         }
         botao.addActionListener(e -> {
-            if (botao.getText().equals("Livre")){
+            if (botao.getText().equals("Livre")) {
                 botao.setText("Minha Reserva");
                 botao.setBackground(new Color(180, 220, 180));
                 reservasPorEspaco.get(this.nome).put(horarioKey, usuarioLogado.getMatricula());
@@ -130,7 +136,7 @@ public abstract class EspacosFisicos {
                     botao.setText("Livre");
                     botao.setBackground(new Color(200, 230, 250));
                 }
-            }else if(botao.getText().equals("Minha Reserva")){
+            } else if (botao.getText().equals("Minha Reserva")) {
                 botao.setText("Livre");
                 botao.setBackground(new Color(200, 230, 250));
                 reservasPorUsuario.get(usuarioLogado.getMatricula()).remove(horarioKey);
@@ -141,9 +147,9 @@ public abstract class EspacosFisicos {
         return botao;
     }
 
-    public String exibirReservasUsuario(Usuarios usuarioLogado) {
+    public String exibirReservasUsuario(Usuarios usuarioLogado, String nome) {
         if (reservasPorUsuario.containsKey(usuarioLogado.getMatricula())) {
-            StringBuilder reservas = new StringBuilder("SUAS RESERVAS:\n\n");
+            StringBuilder reservas = new StringBuilder("SUAS RESERVAS:\n\n" + nome + "\n");
             for (String hr : reservasPorUsuario.get(usuarioLogado.getMatricula())) {
                 reservas.append("- ").append(hr).append("\n");
             }
@@ -154,7 +160,7 @@ public abstract class EspacosFisicos {
         }
     }
 
-    private boolean podeReservarHorario(String dia, Usuarios usuarioLogado) {
+    protected boolean podeReservarHorario(String dia, Usuarios usuarioLogado) {
         if (usuarioLogado instanceof Alunos) {
             List<String> reservas = reservasPorUsuario.get(usuarioLogado.getMatricula());
 
@@ -176,5 +182,5 @@ public abstract class EspacosFisicos {
         }
         return true;
     }
-    
+
 }
