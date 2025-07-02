@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import Entidades.*;
 import Servicos.*;
 
@@ -12,8 +10,6 @@ public class Main {
     public static ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
     public static int continuar = 1;
     public static String tempLogin;
-    // public static Map<String, ArrayList<String>> horariosReservados = new
-    // HashMap<>();
     public static Usuarios usuarioLogado = null;
     public static Usuarios artur = new Alunos("Artur Fernandes Galdino", "241010923@aluno.unb.br", "61998658594", "1",
             "241010923", "Engenharia de Software");
@@ -27,6 +23,7 @@ public class Main {
 
     public static void main(String[] args) {
         listaUsuarios.add(artur);
+        listaUsuarios.add(pedro);
         do {
             int opcao02 = loginCadastro();
             if (opcao02 == 2 || opcao02 == JOptionPane.CLOSED_OPTION) {
@@ -257,6 +254,7 @@ public class Main {
 
     public static void mostrarEspacosFisicos() {
         Object[] opcoes1 = { "Laboratório", "Sala de aula", "Auditório" };
+        String espacoSelecionado;
         int escolhaEspacoFisico = JOptionPane.showOptionDialog(
                 null,
                 "QUAL ESPAÇO VOCÊ DESEJA SELECIONAR",
@@ -266,10 +264,9 @@ public class Main {
                 null,
                 opcoes1,
                 opcoes1[0]);
-        String espacoSelecionado = opcoes1[escolhaEspacoFisico].toString();
         switch (escolhaEspacoFisico) {
             case 0:
-                Object[] opcoesLab = { "Laboratório de Física", "laboratório de Química" };
+                Object[] opcoesLab = { "Laboratório de Física", "Laboratório de Química" };
                 int escolherLaboratorio = JOptionPane.showOptionDialog(
                         null,
                         "Escolha um laboratório",
@@ -279,10 +276,9 @@ public class Main {
                         null,
                         opcoesLab,
                         opcoesLab[0]);
-                String nomeLab = opcoesLab[escolherLaboratorio].toString();
-                Laboratorio laboratorio = new Laboratorio(100, "UED", "Projetor", "Disponível", nomeLab);
-                // Exemplo com Laboratório
                 espacoSelecionado = opcoesLab[escolherLaboratorio].toString();
+                Laboratorio laboratorio = new Laboratorio(espacoSelecionado,100, "UED", "Projetor", "Disponível");
+                // Exemplo com Laboratório
                 laboratorio.mostrarGradeHoraria(espacoSelecionado, usuarioLogado);
                 break;
             case 1:
@@ -297,9 +293,9 @@ public class Main {
                         null,
                         opcoesSala,
                         opcoesSala[0]);
-                SalaDeAula salaDeAula = new SalaDeAula(100, "Bloco A", "Projetor", "Disponível");
-                // Exemplo com Sala
                 espacoSelecionado = opcoesSala[escolherSala].toString();
+                SalaDeAula salaDeAula = new SalaDeAula(espacoSelecionado,100, "Bloco A", "Projetor", "Disponível");
+                // Exemplo com Sala
                 salaDeAula.mostrarGradeHoraria(espacoSelecionado, usuarioLogado);
                 break;
             case 2:
@@ -314,7 +310,7 @@ public class Main {
                         opcoesAudi,
                         opcoesAudi[0]);
                 espacoSelecionado = opcoesAudi[escolherAudi].toString();
-                Auditorio auditorio = new Auditorio(100, "Bloco A", "Projetor", "Disponível");
+                Auditorio auditorio = new Auditorio(espacoSelecionado,100, "Bloco A", "Projetor", "Disponível");
                 // Exemplo com Auditorio
                 auditorio.mostrarGradeHoraria(espacoSelecionado, usuarioLogado);
                 break;

@@ -3,20 +3,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
-
 import Entidades.Usuarios;
 import Entidades.Alunos;
 
 public abstract class EspacosFisicos {
     private final int capacidade;
-    private final String localizacao, equipamentosDisponiveis, disponibilidades;
-    private final Map<String, ArrayList<String>> horariosReservados = new HashMap<>();
+    private final String localizacao, equipamentosDisponiveis, disponibilidades, nome;
+    private final static Map<String, ArrayList<String>> horariosReservados = new HashMap<>();
 
-    EspacosFisicos(int capacidade, String localizacao, String equipamentosDisponiveis, String disponibilidades) {
+    EspacosFisicos(String nome, int capacidade, String localizacao, String equipamentosDisponiveis, String disponibilidades) {
         this.capacidade = capacidade;
         this.localizacao = localizacao;
         this.equipamentosDisponiveis = equipamentosDisponiveis;
         this.disponibilidades = disponibilidades;
+        this.nome = nome;
     }
 
 
@@ -35,6 +35,10 @@ public abstract class EspacosFisicos {
 
     public String getDisponibilidades() {
         return disponibilidades;
+    }
+
+    public String getNome() {
+        return nome;
     }
 
     public void mostrarGradeHoraria(String espacoSelecionado, Usuarios usuarioLogado) {
@@ -87,25 +91,30 @@ public abstract class EspacosFisicos {
         botao.setFont(fonte);
         botao.setBackground(new Color(200, 230, 250));
         botao.setFocusPainted(false);
+        String horarioReservado = dia + " às " + hora;
 
         botao.addActionListener(e -> {
-            botao.setText("Alocado");
-            botao.setBackground(new Color(180, 220, 180));
-            botao.setEnabled(false);
-            JOptionPane.showMessageDialog(null,
-                    "Você foi alocado para " + dia + " às " + hora,
-                    "Confirmação", JOptionPane.INFORMATION_MESSAGE);
+            if (botao.getText().equals("Livre")){
+                botao.setText("Alocado");
+                botao.setBackground(new Color(180, 220, 180));
+                JOptionPane.showMessageDialog(null,
+                        "Você foi alocado para " + dia + " às " + hora,
+                        "Confirmação", JOptionPane.INFORMATION_MESSAGE);
 
-            String horarioReservado = dia + " às " + hora;
-            if (!horariosReservados.containsKey(usuarioLogado.getMatricula())) {
-                horariosReservados.put(usuarioLogado.getMatricula(), new ArrayList<>());
-            }
-            boolean condicao = podeReservarHorario(dia, usuarioLogado);
-            if (condicao) {
-                horariosReservados.get(usuarioLogado.getMatricula()).add(horarioReservado);
-            } else {
+                if (!horariosReservados.containsKey(usuarioLogado.getMatricula())) {
+                    horariosReservados.put(usuarioLogado.getMatricula(), new ArrayList<>());
+                }
+                boolean condicao = podeReservarHorario(dia, usuarioLogado);
+                if (condicao) {
+                    horariosReservados.get(usuarioLogado.getMatricula()).add(horarioReservado);
+                } else {
+                    botao.setText("Livre");
+                    botao.setBackground(new Color(200, 230, 250));
+                }
+            }else{
                 botao.setText("Livre");
                 botao.setBackground(new Color(200, 230, 250));
+                horariosReservados.get(usuarioLogado.getMatricula()).remove(horarioReservado);
             }
         });
         return botao;
