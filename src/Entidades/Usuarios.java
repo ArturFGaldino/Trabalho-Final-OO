@@ -1,6 +1,5 @@
 package Entidades;
 import java.time.LocalDate;
-import Entidades.Usuarios;
 
 public class Usuarios {
     protected final String nomeCompleto;
@@ -40,6 +39,7 @@ public class Usuarios {
     public String getMatricula() {
         return matricula;
     }
+
     public int getAnoDeIngresso() {
         String ano = matricula.substring(0, 2);
         int anoAtual = LocalDate.now().getYear() % 100;
@@ -50,7 +50,6 @@ public class Usuarios {
         }
         return Integer.parseInt(ano);
     }
-    // SEMESTRE DE INGRESSO SO NA CLASSE DOS ALUNOS
 
     @Override
     public String toString() {
@@ -61,4 +60,33 @@ public class Usuarios {
         informacoes += "TELEFONE: " + telefone + "\n";
         return informacoes;
     }
+
+    public static boolean validaTelefone(String telefone){
+        if (telefone.length() != 11) {
+            return false;
+        }
+        for (int i = 0; i < telefone.length(); i++) {
+            if (!Character.isDigit(telefone.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean validaMatricula(String matricula){
+        if (matricula.length() != 9) {
+            return false;
+        }
+        for (int i = 0; i < matricula.length(); i++) {
+            if (!Character.isDigit(matricula.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean validaEmail(String matricula, String email){
+        return email.contains(matricula) && email.contains("@unb.br");
+    }
+
 }

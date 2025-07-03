@@ -1,7 +1,9 @@
 package Servicos;
 
-public class SalaDeAula extends EspacosFisicos{
-    SalaDeAula(int capacidade, String localizacao, String tipo, String equipamentosDisponiveis, String disponibilidades) {
-        super(capacidade, localizacao, tipo, equipamentosDisponiveis, disponibilidades);
+public class SalaDeAula extends EspacosFisicos {
+    public SalaDeAula(String nome, int capacidade, String localizacao, String equipamentosDisponiveis,
+            String disponibilidades) {
+        super(nome, capacidade, localizacao, equipamentosDisponiveis, disponibilidades);
     }
+
 }
