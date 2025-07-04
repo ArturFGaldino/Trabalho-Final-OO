@@ -1,4 +1,5 @@
 package Entidades;
+
 import java.time.LocalDate;
 
 public class Alunos extends Usuarios {
@@ -50,7 +51,7 @@ public class Alunos extends Usuarios {
     }
 
     @Override
-    public boolean validaEmail(String matricula, String email){
+    public boolean validaEmail(String matricula, String email) {
         return email.contains(matricula) && email.contains("@aluno.unb.br");
     }
 }

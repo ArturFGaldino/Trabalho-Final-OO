@@ -95,7 +95,7 @@ public abstract class EspacosFisicos {
         dialog.add(painel, BorderLayout.CENTER);
         dialog.add(btnFinalizar, BorderLayout.SOUTH);
         dialog.setVisible(true);
-        String reservas = exibirReservasUsuario(usuarioLogado, nome);
+        String reservas = usuarioLogado.exibirReservasUsuario(usuarioLogado, nome, reservasPorUsuario);
         JOptionPane.showMessageDialog(null, reservas);
     }
 
@@ -145,19 +145,6 @@ public abstract class EspacosFisicos {
             }
         });
         return botao;
-    }
-
-    public String exibirReservasUsuario(Usuarios usuarioLogado, String nome) {
-        if (reservasPorUsuario.containsKey(usuarioLogado.getMatricula())) {
-            StringBuilder reservas = new StringBuilder("SUAS RESERVAS:\n\n" + nome + "\n");
-            for (String hr : reservasPorUsuario.get(usuarioLogado.getMatricula())) {
-                reservas.append("- ").append(hr).append("\n");
-            }
-            reservas.insert(0, "Resumo de reservas para matrícula: " + usuarioLogado.getMatricula() + "\n\n");
-            return reservas.toString();
-        } else {
-            return "NENHUMA RESERVA ESCOLHIDA";
-        }
     }
 
     protected boolean podeReservarHorario(String dia, Usuarios usuarioLogado) {
