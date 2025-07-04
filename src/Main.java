@@ -9,6 +9,7 @@ public class Main {
     public static String tempSenha;
     public static ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
     public static int continuar = 1;
+    public static int sair;
     public static String tempLogin;
     public static Usuarios usuarioLogado = null;
     public static Usuarios artur = new Alunos("Artur Fernandes Galdino", "241010923@aluno.unb.br", "61998658594", "1",
@@ -20,6 +21,7 @@ public class Main {
             "1",
             "241025354",
             "Engenharia de Software");
+    public static String reservas = "";
     public static Laboratorio lab1 = new Laboratorio("Lab1", 100, "UED", "Projetor", "Disponível");
     public static Laboratorio lab2 = new Laboratorio("Lab2", 100, "UED", "Projetor", "Disponível");
     public static Auditorio MOCAP = new Auditorio("MOCAP", 100, "Bloco A", "Projetor", "Disponível");
@@ -50,7 +52,12 @@ public class Main {
                 switch (opcao02) {
                     case 0:
                         login();
-                        mostrarEspacosFisicos();
+                        do {
+                            mostrarEspacosFisicos();
+                            sair = sair();
+                        }while(sair == 0);
+                        reservas = "";
+                        usuarioLogado=null;
                         break;
                     case 1:
                         cadastro();
@@ -59,6 +66,18 @@ public class Main {
             }
         } while (continuar == 1);
 
+    }
+
+    private static int sair() {
+        Object[] opcoes001 = { "CONTINUAR", "SAIR"};
+        return JOptionPane.showOptionDialog(null,
+                "",
+                "SAIR",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                opcoes001,
+                opcoes001[0]);
     }
 
     // LOGIN OU CADASTRO
@@ -277,6 +296,7 @@ public class Main {
                 null,
                 opcoes1,
                 opcoes1[0]);
+
         switch (escolhaEspacoFisico) {
             case 0:
                 Object[] opcoesLab = { "Lab1", "Lab2" };
@@ -292,9 +312,13 @@ public class Main {
                 switch (escolherLaboratorio) {
                     case 0:
                         lab1.mostrarGradeHoraria(usuarioLogado);
+                        reservas += lab1.exibirReservas(usuarioLogado.getMatricula(),reservas);
+                        JOptionPane.showMessageDialog(null,reservas);
                         break;
                     case 1:
                         lab2.mostrarGradeHoraria(usuarioLogado);
+                        reservas += lab2.exibirReservas(usuarioLogado.getMatricula(),reservas);
+                        JOptionPane.showMessageDialog(null,reservas);
                         break;
                     default:
                         break;

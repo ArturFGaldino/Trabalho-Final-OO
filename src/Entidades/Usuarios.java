@@ -95,17 +95,4 @@ public class Usuarios {
         return email.contains(matricula) && email.contains("@unb.br");
     }
 
-    public String exibirReservasUsuario(Usuarios usuarioLogado, String nome,
-            Map<String, ArrayList<String>> reservasPorUsuario) {
-        if (reservasPorUsuario.containsKey(usuarioLogado.getMatricula())) {
-            StringBuilder reservas = new StringBuilder("SUAS RESERVAS:\n\n" + nome + "\n");
-            for (String hr : reservasPorUsuario.get(usuarioLogado.getMatricula())) {
-                reservas.append("- ").append(hr).append("\n");
-            }
-            reservas.insert(0, "Resumo de reservas para matrícula: " + usuarioLogado.getMatricula() + "\n\n");
-            return reservas.toString();
-        } else {
-            return "NENHUMA RESERVA ESCOLHIDA";
-        }
-    }
 }
