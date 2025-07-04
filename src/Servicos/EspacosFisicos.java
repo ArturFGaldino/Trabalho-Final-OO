@@ -167,60 +167,62 @@ public abstract class EspacosFisicos {
         }
         return true;
     }
-//    public String exibirReservas(String matricula) {
-//        StringBuilder reservasStr = new StringBuilder();
-//
-//        if (reservasPorUsuario.containsKey(matricula)) {
-//            ArrayList<String> reservas = reservasPorUsuario.get(matricula);
-//
-////            reservasStr.append("Reservas para a matrícula ").append(matricula).append(":\n");
-//            reservasStr.append("Espaço: ").append(this.nome).append("\n\n");
-//
-//            if (reservas.isEmpty()) {
-//                reservasStr.append("Nenhuma reserva encontrada.\n");
-//            } else {
-//                for (String reserva : reservas) {
-//                    reservasStr.append("- ").append(reserva).append("\n");
-//                }
-//            }
-//        } else {
-//            reservasStr.append("Nenhuma reserva encontrada para a matrícula ");
-//        }
-//
-//        return reservasStr.toString();
-//
-//    }
-public String exibirReservas(String matricula, String reservas) {
-    StringBuilder sb = new StringBuilder();
-    if (!reservas.contains("Reservas de") || !reservas.contains(matricula)){
-        sb.append("Reservas de ").append(matricula).append("\n\n");
-    }
-    // Verifica se o usuário tem reservas no sistema
-    if (reservasPorUsuario.containsKey(matricula)) {
-        ArrayList<String> reservasDoUsuario = reservasPorUsuario.get(matricula);
-        int contador = 0;
-        if (reservasPorEspaco.containsKey(this.nome)){
-            sb.append(this.nome).append("\n");
-        }
-        // Filtra apenas as reservas deste espaço físico
-        for (String horario : reservasDoUsuario) {
-            // Verifica se a reserva pertence a este espaço (this.nome)
-            if (reservasPorEspaco.containsKey(this.nome) &&
-                    reservasPorEspaco.get(this.nome).containsKey(horario) &&
-                    reservasPorEspaco.get(this.nome).get(horario).equals(matricula)) {
 
-                sb.append(horario).append("\n");
-                contador++;
+    // public String exibirReservas(String matricula) {
+    // StringBuilder reservasStr = new StringBuilder();
+    //
+    // if (reservasPorUsuario.containsKey(matricula)) {
+    // ArrayList<String> reservas = reservasPorUsuario.get(matricula);
+    //
+    //// reservasStr.append("Reservas para a matrícula
+    // ").append(matricula).append(":\n");
+    // reservasStr.append("Espaço: ").append(this.nome).append("\n\n");
+    //
+    // if (reservas.isEmpty()) {
+    // reservasStr.append("Nenhuma reserva encontrada.\n");
+    // } else {
+    // for (String reserva : reservas) {
+    // reservasStr.append("- ").append(reserva).append("\n");
+    // }
+    // }
+    // } else {
+    // reservasStr.append("Nenhuma reserva encontrada para a matrícula ");
+    // }
+    //
+    // return reservasStr.toString();
+    //
+    // }
+    public String exibirReservas(String matricula, String reservas) {
+        StringBuilder sb = new StringBuilder();
+        if (!reservas.contains("Reservas de") || !reservas.contains(matricula)) {
+            sb.append("Reservas de ").append(matricula).append("\n\n");
+        }
+        // Verifica se o usuário tem reservas no sistema
+        if (reservasPorUsuario.containsKey(matricula)) {
+            ArrayList<String> reservasDoUsuario = reservasPorUsuario.get(matricula);
+            int contador = 0;
+            if (reservasPorEspaco.containsKey(this.nome)) {
+                sb.append(this.nome).append("\n");
             }
-        }
+            // Filtra apenas as reservas deste espaço físico
+            for (String horario : reservasDoUsuario) {
+                // Verifica se a reserva pertence a este espaço
+                if (reservasPorEspaco.containsKey(this.nome) &&
+                        reservasPorEspaco.get(this.nome).containsKey(horario) &&
+                        reservasPorEspaco.get(this.nome).get(horario).equals(matricula)) {
 
-        if (contador == 0) {
-            sb.append("Nenhuma reserva encontrada neste espaço.\n");
+                    sb.append(horario).append("\n");
+                    contador++;
+                }
+            }
+
+            if (contador == 0) {
+                sb.append("Nenhuma reserva encontrada neste espaço.\n");
+            }
+        } else {
+            sb.append("Nenhuma reserva encontrada para esta matrícula.\n");
         }
-    } else {
-        sb.append("Nenhuma reserva encontrada para esta matrícula.\n");
+        reservas = sb.toString();
+        return reservas;
     }
-        reservas=sb.toString();
-    return reservas;
-}
 }
