@@ -170,7 +170,7 @@ public abstract class EspacosFisicos {
     public String exibirReservas(Usuarios usuarioLogado, String reservas) {
         StringBuilder sb = new StringBuilder();
         if (!reservas.contains("Reservas de") || !reservas.contains(usuarioLogado.getMatricula())) {
-            sb.append("Reservas de: \n").append(usuarioLogado.toString()).append("\n\n");
+            sb.append("Reservas de: \n").append(usuarioLogado.getNomeCompleto()).append("\n\n");
         }
         // Verifica se o usuário tem reservas no sistema
         if (reservasPorUsuario.containsKey(usuarioLogado.getMatricula())) {
