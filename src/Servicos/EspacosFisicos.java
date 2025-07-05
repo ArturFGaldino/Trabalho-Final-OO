@@ -168,14 +168,14 @@ public abstract class EspacosFisicos {
         return true;
     }
 
-    public String exibirReservas(String matricula, String reservas) {
+    public String exibirReservas(Usuarios usuarioLogado, String reservas) {
         StringBuilder sb = new StringBuilder();
-        if (!reservas.contains("Reservas de") || !reservas.contains(matricula)) {
-            sb.append("Reservas de ").append(matricula).append("\n\n");
+        if (!reservas.contains("Reservas de") || !reservas.contains(usuarioLogado.getMatricula())) {
+            sb.append("Reservas de: \n").append(usuarioLogado.toString()).append("\n\n");
         }
         // Verifica se o usuário tem reservas no sistema
-        if (reservasPorUsuario.containsKey(matricula)) {
-            ArrayList<String> reservasDoUsuario = reservasPorUsuario.get(matricula);
+        if (reservasPorUsuario.containsKey(usuarioLogado.getMatricula())) {
+            ArrayList<String> reservasDoUsuario = reservasPorUsuario.get(usuarioLogado.getMatricula());
             int contador = 0;
             if (reservasPorEspaco.containsKey(this.nome)) {
                 sb.append(this.nome).append("\n");
@@ -185,7 +185,7 @@ public abstract class EspacosFisicos {
                 // Verifica se a reserva pertence a este espaço
                 if (reservasPorEspaco.containsKey(this.nome) &&
                         reservasPorEspaco.get(this.nome).containsKey(horario) &&
-                        reservasPorEspaco.get(this.nome).get(horario).equals(matricula)) {
+                        reservasPorEspaco.get(this.nome).get(horario).equals(usuarioLogado.getMatricula())) {
 
                     sb.append(horario).append("\n");
                     contador++;

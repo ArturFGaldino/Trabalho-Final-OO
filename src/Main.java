@@ -315,13 +315,13 @@ public class Main {
                     case 0:
                         reservas = "";
                         lab1.mostrarGradeHoraria(usuarioLogado);
-                        reservas += lab1.exibirReservas(usuarioLogado.getMatricula(), reservas);
+                        reservas += lab1.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
                         break;
                     case 1:
                         reservas = "";
                         lab2.mostrarGradeHoraria(usuarioLogado);
-                        reservas += lab2.exibirReservas(usuarioLogado.getMatricula(), reservas);
+                        reservas += lab2.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
                         break;
                     default:
@@ -344,61 +344,61 @@ public class Main {
                     case 0:
                         reservas = "";
                         salaI1.mostrarGradeHoraria(usuarioLogado);
-                        reservas += salaI1.exibirReservas(usuarioLogado.getMatricula(), reservas);
+                        reservas += salaI1.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
                         break;
                     case 1:
                         reservas = "";
                         salaI2.mostrarGradeHoraria(usuarioLogado);
-                        reservas += salaI2.exibirReservas(usuarioLogado.getMatricula(), reservas);
+                        reservas += salaI2.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
                         break;
                     case 2:
                         reservas = "";
                         salaI3.mostrarGradeHoraria(usuarioLogado);
-                        reservas += salaI3.exibirReservas(usuarioLogado.getMatricula(), reservas);
+                        reservas += salaI3.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
                         break;
                     case 3:
                         reservas = "";
                         salaI4.mostrarGradeHoraria(usuarioLogado);
-                        reservas += salaI4.exibirReservas(usuarioLogado.getMatricula(), reservas);
+                        reservas += salaI4.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
                         break;
                     case 4:
                         reservas = "";
                         salaI5.mostrarGradeHoraria(usuarioLogado);
-                        reservas += salaI5.exibirReservas(usuarioLogado.getMatricula(), reservas);
+                        reservas += salaI5.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
                         break;
                     case 5:
                         reservas = "";
                         salaS1.mostrarGradeHoraria(usuarioLogado);
-                        reservas += salaS1.exibirReservas(usuarioLogado.getMatricula(), reservas);
+                        reservas += salaS1.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
                         break;
                     case 6:
                         reservas = "";
                         salaS2.mostrarGradeHoraria(usuarioLogado);
-                        reservas += salaS2.exibirReservas(usuarioLogado.getMatricula(), reservas);
+                        reservas += salaS2.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
                         break;
                     case 7:
                         reservas = "";
                         salaS3.mostrarGradeHoraria(usuarioLogado);
-                        reservas += salaS3.exibirReservas(usuarioLogado.getMatricula(), reservas);
+                        reservas += salaS3.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
                         break;
                     case 8:
                         reservas = "";
                         salaS4.mostrarGradeHoraria(usuarioLogado);
-                        reservas += salaS4.exibirReservas(usuarioLogado.getMatricula(), reservas);
+                        reservas += salaS4.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
                         break;
                     case 9:
                         reservas = "";
                         salaS5.mostrarGradeHoraria(usuarioLogado);
-                        reservas += salaS5.exibirReservas(usuarioLogado.getMatricula(), reservas);
+                        reservas += salaS5.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
                         break;
                     default:
@@ -421,13 +421,13 @@ public class Main {
                     case 0:
                         reservas = "";
                         auditorio.mostrarGradeHoraria(usuarioLogado);
-                        reservas += auditorio.exibirReservas(usuarioLogado.getMatricula(), reservas);
+                        reservas += auditorio.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
                         break;
                     case 1:
                         reservas = "";
                         MOCAP.mostrarGradeHoraria(usuarioLogado);
-                        reservas += MOCAP.exibirReservas(usuarioLogado.getMatricula(), reservas);
+                        reservas += MOCAP.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
                         break;
                 }
