@@ -22,8 +22,8 @@ public class Main {
             "241025354",
             "Engenharia de Software");
     public static String reservas = "";
-    public static Laboratorio lab1 = new Laboratorio("Laboratório de Física", 30, "UED", "Projetor", "Disponível");
-    public static Laboratorio lab2 = new Laboratorio("Laboratório de Quimica", 30, "UED", "Projetor", "Disponível");
+    public static Laboratorio lab1 = new Laboratorio("Laboratório de Física", 30, "UED", "", "Disponível");
+    public static Laboratorio lab2 = new Laboratorio("Laboratório de Quimica", 30, "UED", "", "Disponível");
     public static Auditorio MOCAP = new Auditorio("MOCAP", 200, "Bloco A", "Projetor", "Disponível");
     public static Auditorio auditorio = new Auditorio("Auditorio", 500, "Bloco A", "Projetor", "Disponível");
     public static SalaDeAula salaI1 = new SalaDeAula("I1", 60, "UAC", "Canetão, Giz e Computador", "Disponível");
