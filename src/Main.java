@@ -22,20 +22,20 @@ public class Main {
             "241025354",
             "Engenharia de Software");
     public static String reservas = "";
-    public static Laboratorio lab1 = new Laboratorio("Lab1", 100, "UED", "Projetor", "Disponível");
-    public static Laboratorio lab2 = new Laboratorio("Lab2", 100, "UED", "Projetor", "Disponível");
-    public static Auditorio MOCAP = new Auditorio("MOCAP", 100, "Bloco A", "Projetor", "Disponível");
-    public static Auditorio auditorio = new Auditorio("auditorio", 100, "Bloco A", "Projetor", "Disponível");
-    public static SalaDeAula salaI1 = new SalaDeAula("I1", 10, "UAC", "Projetor", "Disponível");
-    public static SalaDeAula salaI2 = new SalaDeAula("I2", 10, "UAC", "Projetor", "Disponível");
-    public static SalaDeAula salaI3 = new SalaDeAula("I3", 10, "UAC", "Projetor", "Disponível");
-    public static SalaDeAula salaI4 = new SalaDeAula("I4", 10, "UAC", "Projetor", "Disponível");
-    public static SalaDeAula salaI5 = new SalaDeAula("I5", 10, "UAC", "Projetor", "Disponível");
-    public static SalaDeAula salaS1 = new SalaDeAula("S1", 10, "UAC", "Projetor", "Disponível");
-    public static SalaDeAula salaS2 = new SalaDeAula("S2", 10, "UAC", "Projetor", "Disponível");
-    public static SalaDeAula salaS3 = new SalaDeAula("S3", 10, "UAC", "Projetor", "Disponível");
-    public static SalaDeAula salaS4 = new SalaDeAula("S4", 10, "UAC", "Projetor", "Disponível");
-    public static SalaDeAula salaS5 = new SalaDeAula("S5", 10, "UAC", "Projetor", "Disponível");
+    public static Laboratorio lab1 = new Laboratorio("Laboratório de Física", 30, "UED", "Projetor", "Disponível");
+    public static Laboratorio lab2 = new Laboratorio("Laboratório de Quimica", 30, "UED", "Projetor", "Disponível");
+    public static Auditorio MOCAP = new Auditorio("MOCAP", 200, "Bloco A", "Projetor", "Disponível");
+    public static Auditorio auditorio = new Auditorio("Auditorio", 500, "Bloco A", "Projetor", "Disponível");
+    public static SalaDeAula salaI1 = new SalaDeAula("I1", 60, "UAC", "Canetão, Giz e Computador", "Disponível");
+    public static SalaDeAula salaI2 = new SalaDeAula("I2", 60, "UAC", "Canetão, Giz e Computador", "Disponível");
+    public static SalaDeAula salaI3 = new SalaDeAula("I3", 60, "UAC", "Canetão, Giz e Computador", "Disponível");
+    public static SalaDeAula salaI4 = new SalaDeAula("I4", 60, "UAC", "Canetão, Giz e Computador", "Disponível");
+    public static SalaDeAula salaI5 = new SalaDeAula("I5", 60, "UAC", "Canetão, Giz e Computador", "Disponível");
+    public static SalaDeAula salaS1 = new SalaDeAula("S1", 130, "UAC", "Canetão e Giz", "Disponível");
+    public static SalaDeAula salaS2 = new SalaDeAula("S2", 130, "UAC", "Canetão e Giz", "Disponível");
+    public static SalaDeAula salaS3 = new SalaDeAula("S3", 130, "UAC", "Canetão e Giz", "Disponível");
+    public static SalaDeAula salaS4 = new SalaDeAula("S4", 130, "UAC", "Canetão e Giz", "Disponível");
+    public static SalaDeAula salaS5 = new SalaDeAula("S5", 130, "UAC", "Canetão e Giz", "Disponível");
 
     public static void main(String[] args) {
         listaUsuarios.add(artur);
@@ -301,7 +301,7 @@ public class Main {
 
         switch (escolhaEspacoFisico) {
             case 0:
-                Object[] opcoesLab = { "Lab1", "Lab2" };
+                Object[] opcoesLab = { "Laboratório de Física", "Laboratório de Quimica" };
                 int escolherLaboratorio = JOptionPane.showOptionDialog(
                         null,
                         "Escolha um laboratório",
@@ -329,6 +329,7 @@ public class Main {
                 }
                 break;
             case 1:
+                JOptionPane.showMessageDialog(null,"Salas inferiores são equipadas com computadores!");
                 Object[] opcoesSala = { "I1", "I2", "I3", "I4", "I5", "S1", "S2", "S3",
                         "S4", "S5" };
                 int escolherSala = JOptionPane.showOptionDialog(
@@ -346,66 +347,73 @@ public class Main {
                         salaI1.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaI1.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
+                        salaI1.quantidadeEquipamentos();
                         break;
                     case 1:
                         reservas = "";
                         salaI2.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaI2.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
+                        salaI2.quantidadeEquipamentos();
                         break;
                     case 2:
                         reservas = "";
                         salaI3.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaI3.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
+                        salaI3.quantidadeEquipamentos();
                         break;
                     case 3:
                         reservas = "";
                         salaI4.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaI4.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
+                        salaI4.quantidadeEquipamentos();
                         break;
                     case 4:
                         reservas = "";
                         salaI5.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaI5.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
+                        salaI5.quantidadeEquipamentos();
                         break;
                     case 5:
                         reservas = "";
                         salaS1.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaS1.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
+                        salaS1.quantidadeEquipamentos();
                         break;
                     case 6:
                         reservas = "";
                         salaS2.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaS2.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
+                        salaS2.quantidadeEquipamentos();
                         break;
                     case 7:
                         reservas = "";
                         salaS3.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaS3.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
+                        salaS3.quantidadeEquipamentos();
                         break;
                     case 8:
                         reservas = "";
                         salaS4.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaS4.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
+                        salaS4.quantidadeEquipamentos();
                         break;
                     case 9:
                         reservas = "";
                         salaS5.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaS5.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
-                        break;
-                    default:
+                        salaS5.quantidadeEquipamentos();
                         break;
                 }
-
-                break;
+            break;
             case 2:
                 Object[] opcoesAudi = { "Auditório principal", "Mocap" };
                 int escolherAudi = JOptionPane.showOptionDialog(
@@ -431,8 +439,7 @@ public class Main {
                         JOptionPane.showMessageDialog(null, reservas);
                         break;
                 }
-
-                break;
+            break;
         }
     }
 }
