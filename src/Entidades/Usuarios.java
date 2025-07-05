@@ -1,11 +1,5 @@
 package Entidades;
-
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import Servicos.EspacosFisicos;
 
 public class Usuarios {
     protected final String nomeCompleto;

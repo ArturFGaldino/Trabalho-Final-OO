@@ -52,10 +52,12 @@ public class Main {
                 switch (opcao02) {
                     case 0:
                         login();
-                        do {
-                            mostrarEspacosFisicos();
-                            sair = sair();
-                        } while (sair == 0);
+                        if(usuarioLogado!=null){
+                            do {
+                                mostrarEspacosFisicos();
+                                sair = sair();
+                            } while (sair == 0);
+                        }
                         reservas = "";
                         usuarioLogado = null;
                         break;
@@ -311,8 +313,8 @@ public class Main {
                         opcoesLab[0]);
                 switch (escolherLaboratorio) {
                     case 0:
-                        lab1.mostrarGradeHoraria(usuarioLogado);
                         reservas = "";
+                        lab1.mostrarGradeHoraria(usuarioLogado);
                         reservas += lab1.exibirReservas(usuarioLogado.getMatricula(), reservas);
                         JOptionPane.showMessageDialog(null, reservas);
                         break;
@@ -350,63 +352,54 @@ public class Main {
                         salaI2.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaI2.exibirReservas(usuarioLogado.getMatricula(), reservas);
                         JOptionPane.showMessageDialog(null, reservas);
-                        salaI2.mostrarGradeHoraria(usuarioLogado);
                         break;
                     case 2:
                         reservas = "";
                         salaI3.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaI3.exibirReservas(usuarioLogado.getMatricula(), reservas);
                         JOptionPane.showMessageDialog(null, reservas);
-                        salaI3.mostrarGradeHoraria(usuarioLogado);
                         break;
                     case 3:
                         reservas = "";
                         salaI4.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaI4.exibirReservas(usuarioLogado.getMatricula(), reservas);
                         JOptionPane.showMessageDialog(null, reservas);
-                        salaI4.mostrarGradeHoraria(usuarioLogado);
                         break;
                     case 4:
                         reservas = "";
                         salaI5.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaI5.exibirReservas(usuarioLogado.getMatricula(), reservas);
                         JOptionPane.showMessageDialog(null, reservas);
-                        salaI5.mostrarGradeHoraria(usuarioLogado);
                         break;
                     case 5:
                         reservas = "";
                         salaS1.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaS1.exibirReservas(usuarioLogado.getMatricula(), reservas);
                         JOptionPane.showMessageDialog(null, reservas);
-                        salaS1.mostrarGradeHoraria(usuarioLogado);
                         break;
                     case 6:
                         reservas = "";
                         salaS2.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaS2.exibirReservas(usuarioLogado.getMatricula(), reservas);
                         JOptionPane.showMessageDialog(null, reservas);
-                        salaS2.mostrarGradeHoraria(usuarioLogado);
                         break;
                     case 7:
                         reservas = "";
                         salaS3.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaS3.exibirReservas(usuarioLogado.getMatricula(), reservas);
                         JOptionPane.showMessageDialog(null, reservas);
-                        salaS3.mostrarGradeHoraria(usuarioLogado);
                         break;
                     case 8:
                         reservas = "";
                         salaS4.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaS4.exibirReservas(usuarioLogado.getMatricula(), reservas);
                         JOptionPane.showMessageDialog(null, reservas);
-                        salaS4.mostrarGradeHoraria(usuarioLogado);
                         break;
                     case 9:
                         reservas = "";
                         salaS5.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaS5.exibirReservas(usuarioLogado.getMatricula(), reservas);
                         JOptionPane.showMessageDialog(null, reservas);
-                        salaS5.mostrarGradeHoraria(usuarioLogado);
                         break;
                     default:
                         break;
@@ -430,15 +423,12 @@ public class Main {
                         auditorio.mostrarGradeHoraria(usuarioLogado);
                         reservas += auditorio.exibirReservas(usuarioLogado.getMatricula(), reservas);
                         JOptionPane.showMessageDialog(null, reservas);
-                        auditorio.mostrarGradeHoraria(usuarioLogado);
                         break;
                     case 1:
                         reservas = "";
                         MOCAP.mostrarGradeHoraria(usuarioLogado);
                         reservas += MOCAP.exibirReservas(usuarioLogado.getMatricula(), reservas);
                         JOptionPane.showMessageDialog(null, reservas);
-                        MOCAP.mostrarGradeHoraria(usuarioLogado);
-                    default:
                         break;
                 }
 

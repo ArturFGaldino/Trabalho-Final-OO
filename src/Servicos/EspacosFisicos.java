@@ -168,30 +168,6 @@ public abstract class EspacosFisicos {
         return true;
     }
 
-    // public String exibirReservas(String matricula) {
-    // StringBuilder reservasStr = new StringBuilder();
-    //
-    // if (reservasPorUsuario.containsKey(matricula)) {
-    // ArrayList<String> reservas = reservasPorUsuario.get(matricula);
-    //
-    //// reservasStr.append("Reservas para a matrícula
-    // ").append(matricula).append(":\n");
-    // reservasStr.append("Espaço: ").append(this.nome).append("\n\n");
-    //
-    // if (reservas.isEmpty()) {
-    // reservasStr.append("Nenhuma reserva encontrada.\n");
-    // } else {
-    // for (String reserva : reservas) {
-    // reservasStr.append("- ").append(reserva).append("\n");
-    // }
-    // }
-    // } else {
-    // reservasStr.append("Nenhuma reserva encontrada para a matrícula ");
-    // }
-    //
-    // return reservasStr.toString();
-    //
-    // }
     public String exibirReservas(String matricula, String reservas) {
         StringBuilder sb = new StringBuilder();
         if (!reservas.contains("Reservas de") || !reservas.contains(matricula)) {
