@@ -37,17 +37,16 @@ public class loginCadastro {
             } else {
                 switch (opcao02) {
                     case 0:
-                        Usuarios usuarioLogado = login.loginCadastro(listaUsuarios);
-                        if(usuarioLogado!=null){
-                            int sair;
-                            do {
-                                mostrarEspacos.mostrarEspacosFisicos(usuarioLogado);
-                                sair = loginCadastro.sair();
-                            } while (sair == 0);
-                        }
-                        mostrarEspacos.reservas = "";
-                        usuarioLogado = null;
-                        break;
+                    Usuarios usuarioLogado = login.loginCadastro(listaUsuarios);
+                    if(usuarioLogado!=null){
+                        int sair;
+                        do {
+                            mostrarEspacos.mostrarEspacosFisicos(usuarioLogado);
+                            sair = loginCadastro.sair();
+                        } while (sair == 0);
+                    }
+                    mostrarEspacos.reservas = "";
+                    usuarioLogado = null;   
                     case 1:
                         cadastro.cadastroUsuario(listaUsuarios);
                         break;

@@ -5,24 +5,19 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 import Entidades.Usuarios;
+import Execoes.DiasExcedidosException;
 import Entidades.Alunos;
 
 public abstract class EspacosFisicos {
     private final int capacidade;
     private final String localizacao, equipamentosDisponiveis, disponibilidades;
     protected final String nome;
-    // private final static Map<String, ArrayList<String>> horariosReservados = new
-    // HashMap<>();
-    // Alteração: Mapa que armazena quem reservou cada horário (chave: horário,
-    // valor: matrícula)
     protected final static Map<String, String> reservasPorHorario = new HashMap<>();
-    // Alteração: Mapa que armazena as reservas por usuário (para exibição
-    // individual)
     protected final static Map<String, ArrayList<String>> reservasPorUsuario = new HashMap<>();
     protected static final Map<String, Map<String, String>> reservasPorEspaco = new HashMap<>();
 
     EspacosFisicos(String nome, int capacidade, String localizacao, String equipamentosDisponiveis,
-            String disponibilidades) {
+        String disponibilidades) {
         this.capacidade = capacidade;
         this.localizacao = localizacao;
         this.equipamentosDisponiveis = equipamentosDisponiveis;
@@ -84,7 +79,7 @@ public abstract class EspacosFisicos {
             painel.add(labelHora);
 
             for (String dia : dias) {
-                JButton botao = getJButton(hora, dia, fonte, usuarioLogado);
+                JButton botao = botao(hora, dia, fonte, usuarioLogado);
                 painel.add(botao);
             }
         }
@@ -97,7 +92,7 @@ public abstract class EspacosFisicos {
         dialog.setVisible(true);
     }
 
-    private JButton getJButton(String hora, String dia, Font fonte, Usuarios usuarioLogado) {
+    private JButton botao(String hora, String dia, Font fonte, Usuarios usuarioLogado) {
         JButton botao = new JButton("Livre");
         botao.setFont(fonte);
         botao.setBackground(new Color(200, 230, 250));
@@ -157,8 +152,12 @@ public abstract class EspacosFisicos {
                         if (reserva.contains(diaReservado)) {
                             int indexReservado = diasSemana.indexOf(diaReservado);
                             if (Math.abs(diaAtualIndex - indexReservado) == 1) {
-                                JOptionPane.showMessageDialog(null, "Alunos não podem reservar em dias consecutivos.");
-                                return false;
+                                try {
+                                    throw new DiasExcedidosException("Alunos não podem reservar em dias consecutivos.");
+                                } catch (DiasExcedidosException erro) {
+                                    JOptionPane.showMessageDialog(null, erro.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                                    return false;
+                                }
                             }
                         }
                     }
