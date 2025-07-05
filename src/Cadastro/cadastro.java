@@ -110,6 +110,7 @@ public class cadastro {
                                     JOptionPane.showMessageDialog(null, "EMAIL INVÁLIDO PARA ALUNO.");
                                 }
                             } while (!emailValido);
+                            JOptionPane.showMessageDialog(null,"Cadastro Concluído!");
                             break;
                         case 1:
                             String cargoAcademico = JOptionPane.showInputDialog("CARGO ACADEMICO: ");
@@ -143,6 +144,7 @@ public class cadastro {
                                     JOptionPane.showMessageDialog(null, "EMAIL INVÁLIDO.");
                                 }
                             } while (!emailValido);
+                            JOptionPane.showMessageDialog(null,"Cadastro Concluído!");
                             break;
                         case 2:
                             String cargoExercido = JOptionPane.showInputDialog("CARGO EXERCIDO: ");
@@ -176,6 +178,7 @@ public class cadastro {
                                     JOptionPane.showMessageDialog(null, "EMAIL INVÁLIDO.");
                                 }
                             } while (!emailValido);
+                            JOptionPane.showMessageDialog(null,"Cadastro Concluído!");
                             break;
                         default:
                             JOptionPane.showMessageDialog(null, "OPÇÃO INVÁLIDA");

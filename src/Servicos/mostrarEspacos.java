@@ -2,6 +2,7 @@ package Servicos;
 
 import javax.swing.JOptionPane;
 
+import Entidades.Alunos;
 import Entidades.Usuarios;
 
 public class mostrarEspacos {
@@ -51,12 +52,34 @@ public class mostrarEspacos {
                         lab1.mostrarGradeHoraria(usuarioLogado);
                         reservas += lab1.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
+                        if(!(usuarioLogado instanceof Alunos)){
+                            int escolha = opcaoAdicionaRemove();
+                            switch (escolha){
+                                case 0:
+                                    lab1.adicionarEquipamento();
+                                    break;
+                                case 1:
+                                    lab1.removerEquipamento();
+                                    break;
+                            }
+                        }
                         break;
                     case 1:
                         reservas = "";
                         lab2.mostrarGradeHoraria(usuarioLogado);
                         reservas += lab2.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
+                        if (!(usuarioLogado instanceof Alunos)) {
+                            int escolha1 = opcaoAdicionaRemove();
+                            switch (escolha1){
+                                case 0:
+                                    lab2.adicionarEquipamento();
+                                    break;
+                                case 1:
+                                    lab2.removerEquipamento();
+                                    break;
+                            }
+                        }
                         break;
                     default:
                         break;
@@ -80,65 +103,73 @@ public class mostrarEspacos {
                         salaI1.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaI1.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
+                        salaI1.quantidadeEquipamentos();
                         break;
                     case 1:
                         reservas = "";
                         salaI2.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaI2.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
+                        salaI2.quantidadeEquipamentos();
                         break;
                     case 2:
                         reservas = "";
                         salaI3.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaI3.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
+                        salaI3.quantidadeEquipamentos();
                         break;
                     case 3:
                         reservas = "";
                         salaI4.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaI4.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
+                        salaI4.quantidadeEquipamentos();
                         break;
                     case 4:
                         reservas = "";
                         salaI5.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaI5.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
+                        salaI5.quantidadeEquipamentos();
+
                         break;
                     case 5:
                         reservas = "";
                         salaS1.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaS1.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
+                        salaS1.quantidadeEquipamentos();
                         break;
                     case 6:
                         reservas = "";
                         salaS2.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaS2.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
+                        salaS2.quantidadeEquipamentos();
                         break;
                     case 7:
                         reservas = "";
                         salaS3.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaS3.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
+                        salaS3.quantidadeEquipamentos();
                         break;
                     case 8:
                         reservas = "";
                         salaS4.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaS4.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
+                        salaS4.quantidadeEquipamentos();
                         break;
                     case 9:
                         reservas = "";
                         salaS5.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaS5.exibirReservas(usuarioLogado, reservas);
                         JOptionPane.showMessageDialog(null, reservas);
-                        break;
-                    default:
+                        salaS5.quantidadeEquipamentos();
                         break;
                 }
-
                 break;
             case 2:
                 Object[] opcoesAudi = { "Auditório principal", "Mocap" };
@@ -168,5 +199,17 @@ public class mostrarEspacos {
 
                 break;
         }
+    }
+    public static int opcaoAdicionaRemove(){
+        Object[] opcoesLab = { "Adiciona", "Remove", "Nenhum" };
+        return JOptionPane.showOptionDialog(
+                null,
+                "Deseja Adicionar ou remover equipamentos",
+                "Equipamentos",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                opcoesLab,
+                opcoesLab[0]);
     }
 }
