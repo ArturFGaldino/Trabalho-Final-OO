@@ -16,15 +16,7 @@ public class Alunos extends Usuarios {
     }
 
     public String getSemestreMatriculado() {
-        String semestreMatriculado = matricula.substring(2, 3);
-        if (Integer.parseInt(semestreMatriculado) == 1) {
-            semestreMatriculado = "1 semestre";
-        } else if (Integer.parseInt(semestreMatriculado) == 2) {
-            semestreMatriculado = "2 semestre";
-        } else {
-            semestreMatriculado = "matricula invalida";
-        }
-        return semestreMatriculado;
+        return matricula.substring(2, 3);
     }
 
     public int getAnoDeIngresso() {
@@ -45,7 +37,7 @@ public class Alunos extends Usuarios {
         informacoes += "MATRÍCULA: " + matricula + "\n";
         informacoes += "EMAIL: " + email + "\n";
         informacoes += "TELEFONE: " + telefone + "\n";
-        informacoes += "ANO DE INGRESSO: " + getAnoDeIngresso() + "\n";
+        informacoes += "ANO DE INGRESSO/SEMESTRE: " + getAnoDeIngresso() + "/" + getSemestreMatriculado() + "\n";
         informacoes += "CURSO: " + curso + "\n";
         return informacoes;
     }

@@ -6,20 +6,20 @@ import Entidades.Usuarios;
 
 public class mostrarEspacos {
     public static String reservas = "";
-    public static Laboratorio lab1 = new Laboratorio("Lab1", 100, "UED", "Projetor", "Disponível");
-    public static Laboratorio lab2 = new Laboratorio("Lab2", 100, "UED", "Projetor", "Disponível");
-    public static Auditorio MOCAP = new Auditorio("MOCAP", 100, "Bloco A", "Projetor", "Disponível");
-    public static Auditorio auditorio = new Auditorio("auditorio", 100, "Bloco A", "Projetor", "Disponível");
-    public static SalaDeAula salaI1 = new SalaDeAula("I1", 10, "UAC", "Projetor", "Disponível");
-    public static SalaDeAula salaI2 = new SalaDeAula("I2", 10, "UAC", "Projetor", "Disponível");
-    public static SalaDeAula salaI3 = new SalaDeAula("I3", 10, "UAC", "Projetor", "Disponível");
-    public static SalaDeAula salaI4 = new SalaDeAula("I4", 10, "UAC", "Projetor", "Disponível");
-    public static SalaDeAula salaI5 = new SalaDeAula("I5", 10, "UAC", "Projetor", "Disponível");
-    public static SalaDeAula salaS1 = new SalaDeAula("S1", 10, "UAC", "Projetor", "Disponível");
-    public static SalaDeAula salaS2 = new SalaDeAula("S2", 10, "UAC", "Projetor", "Disponível");
-    public static SalaDeAula salaS3 = new SalaDeAula("S3", 10, "UAC", "Projetor", "Disponível");
-    public static SalaDeAula salaS4 = new SalaDeAula("S4", 10, "UAC", "Projetor", "Disponível");
-    public static SalaDeAula salaS5 = new SalaDeAula("S5", 10, "UAC", "Projetor", "Disponível");
+    public static Laboratorio lab1 = new Laboratorio("Laboratório de Física", 30, "UED", "", "Disponível");
+    public static Laboratorio lab2 = new Laboratorio("Laboratório de Quimica", 30, "UED", "", "Disponível");
+    public static Auditorio MOCAP = new Auditorio("MOCAP", 200, "Bloco A", "Projetor", "Disponível");
+    public static Auditorio auditorio = new Auditorio("Auditorio", 500, "Bloco A", "Projetor", "Disponível");
+    public static SalaDeAula salaI1 = new SalaDeAula("I1", 60, "UAC", "Canetão, Giz e Computador", "Disponível");
+    public static SalaDeAula salaI2 = new SalaDeAula("I2", 60, "UAC", "Canetão, Giz e Computador", "Disponível");
+    public static SalaDeAula salaI3 = new SalaDeAula("I3", 60, "UAC", "Canetão, Giz e Computador", "Disponível");
+    public static SalaDeAula salaI4 = new SalaDeAula("I4", 60, "UAC", "Canetão, Giz e Computador", "Disponível");
+    public static SalaDeAula salaI5 = new SalaDeAula("I5", 60, "UAC", "Canetão, Giz e Computador", "Disponível");
+    public static SalaDeAula salaS1 = new SalaDeAula("S1", 130, "UAC", "Canetão e Giz", "Disponível");
+    public static SalaDeAula salaS2 = new SalaDeAula("S2", 130, "UAC", "Canetão e Giz", "Disponível");
+    public static SalaDeAula salaS3 = new SalaDeAula("S3", 130, "UAC", "Canetão e Giz", "Disponível");
+    public static SalaDeAula salaS4 = new SalaDeAula("S4", 130, "UAC", "Canetão e Giz", "Disponível");
+    public static SalaDeAula salaS5 = new SalaDeAula("S5", 130, "UAC", "Canetão e Giz", "Disponível");
     public static void mostrarEspacosFisicos(Usuarios usuarioLogado) {
 
         Object[] opcoes1 = { "Laboratório", "Sala de aula", "Auditório" };
