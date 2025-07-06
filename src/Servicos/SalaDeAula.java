@@ -1,6 +1,7 @@
 package Servicos;
 
 import javax.swing.*;
+import java.util.Map;
 import java.util.Random;
 
 public class SalaDeAula extends EspacosFisicos {
@@ -33,5 +34,13 @@ public class SalaDeAula extends EspacosFisicos {
         }
         return equipamentos.toString();
     }
-
+    public String montaReservas(SalaDeAula sala){
+        StringBuilder sb = new StringBuilder();
+        sb.append(sala.getNome()).append(": \n");
+        Map<String, String> esp = reservasPorEspaco.get(sala.getNome());
+        for (Map.Entry<String, String> map:  esp.entrySet()){
+            sb.append(map.getKey()).append(map.getValue());
+        }
+        return sb.toString();
+    }
 }

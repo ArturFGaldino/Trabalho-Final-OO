@@ -1,6 +1,7 @@
 package Servicos;
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Laboratorio extends EspacosFisicos {
     public Laboratorio(String nome, int capacidade, String localizacao, String equipamentosDisponiveis, String disponibilidades) {
@@ -49,5 +50,14 @@ public class Laboratorio extends EspacosFisicos {
         } else {
             JOptionPane.showMessageDialog(null, "Equipamento não encontrado!");
         }
+    }
+    public String montaReservas(Laboratorio lab){
+        StringBuilder sb = new StringBuilder();
+        sb.append(lab.getNome()).append(": \n");
+        Map<String, String> esp = reservasPorEspaco.get(lab.getNome());
+        for (Map.Entry<String, String> map:  esp.entrySet()){
+            sb.append(map.getKey()).append(map.getValue());
+        }
+        return sb.toString();
     }
 }

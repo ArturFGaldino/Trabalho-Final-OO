@@ -229,4 +229,8 @@ public abstract class EspacosFisicos {
         }
         return reservas;
     }
+
+    public String montaReservas() {
+        return null;
+    }
 }
