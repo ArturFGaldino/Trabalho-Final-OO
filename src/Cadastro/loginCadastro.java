@@ -38,7 +38,8 @@ public class loginCadastro {
                         } while (sair == 0);
                     }
                     mostrarEspacos.historicoReserva = "";
-                    usuarioLogado = null;   
+                    usuarioLogado = null;
+                    break;
                     case 1:
                         cadastro.cadastroUsuario(listaUsuarios);
                         break;
