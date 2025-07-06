@@ -61,7 +61,7 @@ public class Usuarios {
         return informacoes;
     }
 
-    public static boolean validaTelefone(String telefone){
+    public static boolean validaTelefone(String telefone) {
         if (telefone.length() != 11) {
             return false;
         }
@@ -73,7 +73,7 @@ public class Usuarios {
         return true;
     }
 
-    public static boolean validaMatricula(String matricula){
+    public static boolean validaMatricula(String matricula) {
         if (matricula.length() != 9) {
             return false;
         }
@@ -85,7 +85,7 @@ public class Usuarios {
         return true;
     }
 
-    public boolean validaEmail(String matricula, String email){
+    public boolean validaEmail(String matricula, String email) {
         return email.contains(matricula) && email.contains("@unb.br");
     }
 
