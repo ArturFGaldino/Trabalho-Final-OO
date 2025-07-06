@@ -7,9 +7,11 @@ import Entidades.Usuarios;
 
 public class mostrarEspacos {
     public static String reservas = "";
+    public static String[] reservasV = new String[14];
+    public static String historicoReserva= "";
     public static Laboratorio lab1 = new Laboratorio("Laboratório de Física", 30, "UED", "", "Disponível");
     public static Laboratorio lab2 = new Laboratorio("Laboratório de Quimica", 30, "UED", "", "Disponível");
-    public static Auditorio MOCAP = new Auditorio("MOCAP", 200, "Bloco A", "Projetor", "Disponível");
+    public static Auditorio mocap = new Auditorio("MOCAP", 200, "Bloco A", "Projetor", "Disponível");
     public static Auditorio auditorio = new Auditorio("Auditorio", 500, "Bloco A", "Projetor", "Disponível");
     public static SalaDeAula salaI1 = new SalaDeAula("I1", 60, "UAC", "Canetão, Giz e Computador", "Disponível");
     public static SalaDeAula salaI2 = new SalaDeAula("I2", 60, "UAC", "Canetão, Giz e Computador", "Disponível");
@@ -22,7 +24,7 @@ public class mostrarEspacos {
     public static SalaDeAula salaS4 = new SalaDeAula("S4", 130, "UAC", "Canetão e Giz", "Disponível");
     public static SalaDeAula salaS5 = new SalaDeAula("S5", 130, "UAC", "Canetão e Giz", "Disponível");
     public static void mostrarEspacosFisicos(Usuarios usuarioLogado) {
-
+        reservas = "";
         Object[] opcoes1 = { "Laboratório", "Sala de aula", "Auditório" };
         int escolhaEspacoFisico = JOptionPane.showOptionDialog(
                 null,
@@ -48,10 +50,10 @@ public class mostrarEspacos {
                         opcoesLab[0]);
                 switch (escolherLaboratorio) {
                     case 0:
-                        reservas = "";
                         lab1.mostrarGradeHoraria(usuarioLogado);
                         reservas += lab1.exibirReservas(usuarioLogado, reservas);
-                        JOptionPane.showMessageDialog(null, reservas);
+                        reservasV[0] = reservas;
+                        JOptionPane.showMessageDialog(null,"Sua(s) reserva(s) " + "\n" + reservas);
                         if(!(usuarioLogado instanceof Alunos)){
                             int escolha = opcaoAdicionaRemove();
                             switch (escolha){
@@ -65,10 +67,10 @@ public class mostrarEspacos {
                         }
                         break;
                     case 1:
-                        reservas = "";
                         lab2.mostrarGradeHoraria(usuarioLogado);
                         reservas += lab2.exibirReservas(usuarioLogado, reservas);
-                        JOptionPane.showMessageDialog(null, reservas);
+                        reservasV[1] = reservas;
+                        JOptionPane.showMessageDialog(null,"Sua(s) reserva(s)" + "\n" + reservas);
                         if(!(usuarioLogado instanceof Alunos)){
                             int escolha = opcaoAdicionaRemove();
                             switch (escolha){
@@ -99,73 +101,73 @@ public class mostrarEspacos {
                         opcoesSala[0]);
                 switch (escolherSala) {
                     case 0:
-                        reservas = "";
                         salaI1.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaI1.exibirReservas(usuarioLogado, reservas);
-                        JOptionPane.showMessageDialog(null, reservas);
+                        reservasV[3] = reservas;
+                        JOptionPane.showMessageDialog(null,"Sua(s) reserva(s)" + "\n" + reservas);
                         salaI1.quantidadeEquipamentos();
                         break;
                     case 1:
-                        reservas = "";
                         salaI2.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaI2.exibirReservas(usuarioLogado, reservas);
-                        JOptionPane.showMessageDialog(null, reservas);
+                        reservasV[4] = reservas;
+                        JOptionPane.showMessageDialog(null,"Sua(s) reserva(s) " + "\n" + reservas);
                         salaI2.quantidadeEquipamentos();
                         break;
                     case 2:
-                        reservas = "";
                         salaI3.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaI3.exibirReservas(usuarioLogado, reservas);
-                        JOptionPane.showMessageDialog(null, reservas);
+                        reservasV[5] = reservas;
+                        JOptionPane.showMessageDialog(null,"Sua(s) reserva(s) " + "\n" + reservas);
                         salaI3.quantidadeEquipamentos();
                         break;
                     case 3:
-                        reservas = "";
                         salaI4.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaI4.exibirReservas(usuarioLogado, reservas);
-                        JOptionPane.showMessageDialog(null, reservas);
+                        reservasV[6] = reservas;
+                        JOptionPane.showMessageDialog(null,"Sua(s) reserva(s) " + "\n" + reservas);
                         salaI4.quantidadeEquipamentos();
                         break;
                     case 4:
-                        reservas = "";
                         salaI5.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaI5.exibirReservas(usuarioLogado, reservas);
-                        JOptionPane.showMessageDialog(null, reservas);
+                        reservasV[7]=reservas;
+                        JOptionPane.showMessageDialog(null,"Sua(s) reserva(s) " + "\n" + reservas);
                         salaI5.quantidadeEquipamentos();
                         break;
                     case 5:
-                        reservas = "";
                         salaS1.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaS1.exibirReservas(usuarioLogado, reservas);
-                        JOptionPane.showMessageDialog(null, reservas);
+                        reservasV[8] = reservas;
+                        JOptionPane.showMessageDialog(null,"Sua(s) reserva(s) " + "\n" + reservas);
                         salaS1.quantidadeEquipamentos();
                         break;
                     case 6:
-                        reservas = "";
                         salaS2.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaS2.exibirReservas(usuarioLogado, reservas);
-                        JOptionPane.showMessageDialog(null, reservas);
+                        reservasV[9] = reservas;
+                        JOptionPane.showMessageDialog(null,"Sua(s) reserva(s) " + "\n" + reservas);
                         salaS2.quantidadeEquipamentos();
                         break;
                     case 7:
-                        reservas = "";
                         salaS3.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaS3.exibirReservas(usuarioLogado, reservas);
-                        JOptionPane.showMessageDialog(null, reservas);
+                        reservasV[9] = reservas;
+                        JOptionPane.showMessageDialog(null,"Sua(s) reserva(s) " + "\n" + reservas);
                         salaS3.quantidadeEquipamentos();
                         break;
                     case 8:
-                        reservas = "";
                         salaS4.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaS4.exibirReservas(usuarioLogado, reservas);
-                        JOptionPane.showMessageDialog(null, reservas);
+                        reservasV[10] = reservas;
+                        JOptionPane.showMessageDialog(null,"Sua(s) reserva(s) " + "\n" + reservas);
                         salaS4.quantidadeEquipamentos();
                         break;
                     case 9:
-                        reservas = "";
                         salaS5.mostrarGradeHoraria(usuarioLogado);
                         reservas += salaS5.exibirReservas(usuarioLogado, reservas);
-                        JOptionPane.showMessageDialog(null, reservas);
+                        reservasV[11] = reservas;
+                        JOptionPane.showMessageDialog(null,"Sua(s) reserva(s) " + "\n" + reservas);
                         salaS5.quantidadeEquipamentos();
                         break;
                     default:
@@ -186,16 +188,16 @@ public class mostrarEspacos {
                         opcoesAudi[0]);
                 switch (escolherAudi) {
                     case 0:
-                        reservas = "";
                         auditorio.mostrarGradeHoraria(usuarioLogado);
                         reservas += auditorio.exibirReservas(usuarioLogado, reservas);
-                        JOptionPane.showMessageDialog(null, reservas);
+                        reservasV[12] = reservas;
+                        JOptionPane.showMessageDialog(null,"Sua(s) reserva(s) " + "\n" + reservas);
                         break;
                     case 1:
-                        reservas = "";
-                        MOCAP.mostrarGradeHoraria(usuarioLogado);
-                        reservas += MOCAP.exibirReservas(usuarioLogado, reservas);
-                        JOptionPane.showMessageDialog(null, reservas);
+                        mocap.mostrarGradeHoraria(usuarioLogado);
+                        reservas += mocap.exibirReservas(usuarioLogado, reservas);
+                        reservasV[13] = reservas;
+                        JOptionPane.showMessageDialog(null,"Sua(s) reserva(s)" + "\n" + reservas);
                         break;
                 }
 
@@ -213,5 +215,15 @@ public class mostrarEspacos {
                 null,
                 opcoesLab,
                 opcoesLab[0]);
+    }
+    public static String montaReservas(Usuarios usuarioLogado){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Reservas de ").append(usuarioLogado.getNomeCompleto()).append(": \n");
+        for(String reserva : reservasV){
+            if(reserva!=null){
+                sb.append(reserva);
+            }
+        }
+        return sb.toString();
     }
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import Entidades.Usuarios;
 import Execoes.DiasExcedidosException;
 import Entidades.Alunos;
+import Execoes.JaReservouException;
 
 public abstract class EspacosFisicos {
     private final int capacidade;
@@ -17,7 +18,7 @@ public abstract class EspacosFisicos {
     protected static final Map<String, Map<String, String>> reservasPorEspaco = new HashMap<>();
 
     EspacosFisicos(String nome, int capacidade, String localizacao, String equipamentosDisponiveis,
-        String disponibilidades) {
+                   String disponibilidades) {
         this.capacidade = capacidade;
         this.localizacao = localizacao;
         this.equipamentosDisponiveis = equipamentosDisponiveis;
@@ -47,8 +48,8 @@ public abstract class EspacosFisicos {
     }
 
     public void mostrarGradeHoraria(Usuarios usuarioLogado) {
-        String[] dias = { "Segunda", "Terça", "Quarta", "Quinta", "Sexta" };
-        String[] horas = { "08h", "10h", "12h", "14h", "16h" };
+        String[] dias = {"Segunda", "Terça", "Quarta", "Quinta", "Sexta"};
+        String[] horas = {"08h", "10h", "12h", "14h", "16h"};
 
         if (!reservasPorEspaco.containsKey(this.nome)) {
             reservasPorEspaco.put(this.nome, new HashMap<>());
@@ -114,17 +115,18 @@ public abstract class EspacosFisicos {
             if (botao.getText().equals("Livre")) {
                 botao.setText("Minha Reserva");
                 botao.setBackground(new Color(180, 220, 180));
-                reservasPorEspaco.get(this.nome).put(horarioKey, usuarioLogado.getMatricula());
-                JOptionPane.showMessageDialog(null,
-                        "Você foi alocado para " + dia + " às " + hora,
-                        "Confirmação", JOptionPane.INFORMATION_MESSAGE);
 
                 if (!reservasPorUsuario.containsKey(usuarioLogado.getMatricula())) {
                     reservasPorUsuario.put(usuarioLogado.getMatricula(), new ArrayList<>());
                 }
                 boolean condicao = podeReservarHorario(dia, usuarioLogado);
-                if (condicao) {
+                boolean condicao2 = podeReservarHorario(dia, hora, usuarioLogado);
+                if (condicao && condicao2) {
+                    reservasPorEspaco.get(this.nome).put(horarioKey, usuarioLogado.getMatricula());
                     reservasPorUsuario.get(usuarioLogado.getMatricula()).add(horarioKey);
+                    JOptionPane.showMessageDialog(null,
+                            "Você foi alocado para " + dia + " às " + hora,
+                            "Confirmação", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     botao.setText("Livre");
                     botao.setBackground(new Color(200, 230, 250));
@@ -167,17 +169,52 @@ public abstract class EspacosFisicos {
         return true;
     }
 
+    protected boolean podeReservarHorario(String dia, String hora, Usuarios usuarioLogado) {
+        if (usuarioLogado instanceof Alunos) {
+            List<String> reservas = reservasPorUsuario.get(usuarioLogado.getMatricula());
+
+            if (reservas != null && !reservas.isEmpty()) {
+                List<String> diasSemana = Arrays.asList("Segunda", "Terça", "Quarta", "Quinta", "Sexta");
+                List<String> horarios = Arrays.asList("08h", "10h", "12h", "14h", "16h");
+                int diaAtualIndex = diasSemana.indexOf(dia);
+                int horaAtualIndex = horarios.indexOf(hora);
+                for (String reserva : reservas) {
+                    for (String diaReservado : diasSemana) {
+                        if (reserva.contains(diaReservado)) {
+                            int indexReservado = diasSemana.indexOf(diaReservado);
+                            if (Math.abs(diaAtualIndex - indexReservado) == 0) {
+                                for (String horaReservada : horarios) {
+                                    if (reserva.contains(horaReservada)) {
+                                        int indexReservadoHorario = horarios.indexOf(horaReservada);
+                                        if (Math.abs(horaAtualIndex - indexReservadoHorario) == 0) {
+                                            try {
+                                                throw new JaReservouException("Você já tem uma reserva para esse horário.");
+                                            } catch (JaReservouException erro) {
+                                                JOptionPane.showMessageDialog(null, erro.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                                                return false;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
     public String exibirReservas(Usuarios usuarioLogado, String reservas) {
         StringBuilder sb = new StringBuilder();
-        if (!reservas.contains("Reservas de") || !reservas.contains(usuarioLogado.getMatricula())) {
-            sb.append("Reservas de: \n").append(usuarioLogado.getNomeCompleto()).append("\n\n");
-        }
+
         // Verifica se o usuário tem reservas no sistema
         if (reservasPorUsuario.containsKey(usuarioLogado.getMatricula())) {
             ArrayList<String> reservasDoUsuario = reservasPorUsuario.get(usuarioLogado.getMatricula());
-            int contador = 0;
             if (reservasPorEspaco.containsKey(this.nome)) {
-                sb.append(this.nome).append("\n");
+                if (!reservas.contains(this.nome)) {
+                    sb.append("\n").append(this.nome).append("\n");
+                }
             }
             // Filtra apenas as reservas deste espaço físico
             for (String horario : reservasDoUsuario) {
@@ -185,19 +222,11 @@ public abstract class EspacosFisicos {
                 if (reservasPorEspaco.containsKey(this.nome) &&
                         reservasPorEspaco.get(this.nome).containsKey(horario) &&
                         reservasPorEspaco.get(this.nome).get(horario).equals(usuarioLogado.getMatricula())) {
-
                     sb.append(horario).append("\n");
-                    contador++;
                 }
             }
-
-            if (contador == 0) {
-                sb.append("Nenhuma reserva encontrada neste espaço.\n");
-            }
-        } else {
-            sb.append("Nenhuma reserva encontrada para esta matrícula.\n");
+            reservas = sb.toString();
         }
-        reservas = sb.toString();
         return reservas;
     }
 }
