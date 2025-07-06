@@ -7,9 +7,23 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import Entidades.Usuarios;
 
+import static Servicos.mostrarEspacos.*;
+import static Servicos.mostrarEspacos.auditorio;
+import static Servicos.mostrarEspacos.mocap;
+import static Servicos.mostrarEspacos.salaI2;
+import static Servicos.mostrarEspacos.salaI3;
+import static Servicos.mostrarEspacos.salaI4;
+import static Servicos.mostrarEspacos.salaI5;
+import static Servicos.mostrarEspacos.salaS1;
+import static Servicos.mostrarEspacos.salaS2;
+import static Servicos.mostrarEspacos.salaS3;
+import static Servicos.mostrarEspacos.salaS4;
+import static Servicos.mostrarEspacos.salaS5;
+
 public class loginCadastro {
     static int sair;
-
+    public static int aux;
+    public static ArrayList<EspacosFisicos> listaEspacos = new ArrayList<>();
     // LOGIN OU CADASTRO
     public static void loginCadastroUsuario(ArrayList<Usuarios> listaUsuarios) {
         Object[] opcoes001 = { "LOGIN", "CADASTRO", "CANCELAR" };
@@ -31,6 +45,23 @@ public class loginCadastro {
                 switch (opcao02) {
                     case 0:
                     Usuarios usuarioLogado = login.loginCadastro(listaUsuarios);
+                    if(aux!=1){
+                        listaEspacos.add(lab1);
+                        listaEspacos.add(lab2);
+                        listaEspacos.add(salaI1);
+                        listaEspacos.add(salaI2);
+                        listaEspacos.add(salaI3);
+                        listaEspacos.add(salaI4);
+                        listaEspacos.add(salaI5);
+                        listaEspacos.add(salaS1);
+                        listaEspacos.add(salaS2);
+                        listaEspacos.add(salaS3);
+                        listaEspacos.add(salaS4);
+                        listaEspacos.add(salaS5);
+                        listaEspacos.add(mocap);
+                        listaEspacos.add(auditorio);
+                        aux++;
+                    }
                     if(usuarioLogado!=null){
                         do {
                             mostrarEspacos.mostrarEspacosFisicos(usuarioLogado);
@@ -61,7 +92,7 @@ public class loginCadastro {
         switch (escolher){
             case 0:
                 montaRelatorioUsuarios(usuarioLogado);
-                //montaRelatorioEspacosFisicos
+                montaRelatorioEspacos();
                 System.exit(0);
                 break;
             case 1:
@@ -77,7 +108,20 @@ public class loginCadastro {
             FileWriter arquivo = new FileWriter("relatorioUsuario.txt");
             arquivo.write(mostrarEspacos.montaReservas(usuarioLogado));
             arquivo.close();
-            JOptionPane.showMessageDialog(null,"Suas reservas foram gravadas no arquivo relatorioUsuario.txt");
+        }catch (IOException e) {
+            JOptionPane.showMessageDialog(null,"Ocorreu um erro ao salvar o arquivo.");
+            e.printStackTrace();
+        }
+    }
+
+    private static void montaRelatorioEspacos(){
+        try{
+            for(EspacosFisicos espacofisico : listaEspacos){
+                FileWriter arquivo = new FileWriter("relatorio"+ espacofisico.getNome() + ".txt");
+                arquivo.write(espacofisico.exibirReservas(espacofisico));
+                arquivo.close();
+            }
+            JOptionPane.showMessageDialog(null,"Suas reservas foram gravadas em arquivos .txt");
         }catch (IOException e) {
             JOptionPane.showMessageDialog(null,"Ocorreu um erro ao salvar o arquivo.");
             e.printStackTrace();

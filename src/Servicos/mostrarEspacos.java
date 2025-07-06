@@ -1,13 +1,9 @@
 package Servicos;
 
 import javax.swing.JOptionPane;
-
 import Entidades.Alunos;
 import Entidades.Usuarios;
 
-import java.util.Map;
-
-import static Servicos.EspacosFisicos.reservasPorEspaco;
 
 public class mostrarEspacos {
     public static String reservas = "";

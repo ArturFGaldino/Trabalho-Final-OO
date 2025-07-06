@@ -10,14 +10,14 @@ import Entidades.Alunos;
 import Execoes.JaReservouException;
 
 public abstract class EspacosFisicos {
-    private final int capacidade;
-    private final String localizacao, equipamentosDisponiveis, disponibilidades;
+    protected final int capacidade;
+    protected final String localizacao, equipamentosDisponiveis, disponibilidades;
     protected final String nome;
     protected final static Map<String, String> reservasPorHorario = new HashMap<>();
     protected final static Map<String, ArrayList<String>> reservasPorUsuario = new HashMap<>();
     protected static final Map<String, Map<String, String>> reservasPorEspaco = new HashMap<>();
 
-    EspacosFisicos(String nome, int capacidade, String localizacao, String equipamentosDisponiveis,
+    protected EspacosFisicos(String nome, int capacidade, String localizacao, String equipamentosDisponiveis,
                    String disponibilidades) {
         this.capacidade = capacidade;
         this.localizacao = localizacao;
@@ -218,7 +218,6 @@ public abstract class EspacosFisicos {
             }
             // Filtra apenas as reservas deste espaço físico
             for (String horario : reservasDoUsuario) {
-                // Verifica se a reserva pertence a este espaço
                 if (reservasPorEspaco.containsKey(this.nome) &&
                         reservasPorEspaco.get(this.nome).containsKey(horario) &&
                         reservasPorEspaco.get(this.nome).get(horario).equals(usuarioLogado.getMatricula())) {
@@ -230,7 +229,45 @@ public abstract class EspacosFisicos {
         return reservas;
     }
 
-    public String montaReservas() {
-        return null;
+
+public String exibirReservas(EspacosFisicos espacosFisicos) {
+    StringBuilder sb = new StringBuilder();
+
+    if (!reservasPorEspaco.containsKey(this.nome) || reservasPorEspaco.get(this.nome).isEmpty()) {
+        return sb.append(this.nome).append(": \nSem reservas\n").toString();
     }
+
+    // Mapa temporário para agrupar horários por matrícula
+    Map<String, List<String>> reservasPorMatricula = new HashMap<>();
+
+    // Agrupa os horários por matrícula
+    for (Map.Entry<String, String> entry : reservasPorEspaco.get(this.nome).entrySet()) {
+        String horario = entry.getKey();
+        String matricula = entry.getValue();
+
+        if (!reservasPorMatricula.containsKey(matricula)) {
+            reservasPorMatricula.put(matricula, new ArrayList<>());
+        }
+        reservasPorMatricula.get(matricula).add(horario);
+    }
+
+    sb.append(this.nome).append(":\n").append("Capacidade - ").append(this.capacidade).append("\n");
+
+    if ((espacosFisicos instanceof SalaDeAula)||(espacosFisicos instanceof Laboratorio)){
+        sb.append(espacosFisicos.getEquipamentosDisponiveis()).append("\n");
+    }
+    // Para cada matrícula, mostra os horários reservados
+    for (Map.Entry<String, List<String>> entry : reservasPorMatricula.entrySet()) {
+        sb.append("Usuário: ").append(entry.getKey()).append("\n");
+        sb.append("Horários reservados:\n");
+
+        for (String horario : entry.getValue()) {
+            sb.append("- ").append(horario).append("\n");
+        }
+        sb.append("\n");
+    }
+
+    return sb.toString();
+}
+
 }
