@@ -150,11 +150,13 @@ public class LoginCadastro {
 
     private static void montaRelatorio() {
         try {
+            StringBuilder sb = new StringBuilder();
             for (EspacosFisicos espacofisico : listaEspacos) {
-                FileWriter arquivo = new FileWriter("relatorio" + espacofisico.getNome() + ".txt");
-                arquivo.write(espacofisico.exibirReservas(espacofisico));
-                arquivo.close();
+                sb.append(espacofisico.exibirReservas(espacofisico)).append("\n");
             }
+            FileWriter arquivo = new FileWriter("relatorioEspacos.txt");
+            arquivo.write(sb.toString());
+            arquivo.close();
             JOptionPane.showMessageDialog(null, "Suas reservas foram gravadas em arquivos .txt");
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro ao salvar o arquivo.");
