@@ -190,7 +190,7 @@ public class MostrarEspacos {
                             reservas += salaS4.exibirReservas(usuarioLogado, reservas);
                             reservasV[10] = reservas;
                             JOptionPane.showMessageDialog(null, "Sua(s) reserva(s) " + "\n" + reservas);
-                            if(reservas.length()>salaS4.getNome().length()){
+                            if(reservas.length() > salaS4.getNome().length()){
                                 salaS4.quantidadeEquipamentos();
                             }
                             break;

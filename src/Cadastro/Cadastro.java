@@ -1,5 +1,4 @@
 package Cadastro;
-
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import Entidades.*;
@@ -171,14 +170,15 @@ public class Cadastro {
                             }
                         } while (!emailValido);
                         JOptionPane.showMessageDialog(null, "Cadastro Concluído!");
-                        break;
-                    default:
+                        
+                        default:
                         JOptionPane.showMessageDialog(null, "OPÇÃO INVÁLIDA");
                         parar = 1;
                         break;
+                    }
                 }
-            }
-        } while (parar == 1);
-    }
+            } while (parar == 1);
+            LoginCadastro.loginCadastroUsuario(listaUsuarios);
+        }
 
 }
