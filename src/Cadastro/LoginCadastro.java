@@ -1,4 +1,5 @@
 package Cadastro;
+import Entidades.Alunos;
 import Servicos.*;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,12 +9,20 @@ import Entidades.Usuarios;
 import static Servicos.MostrarEspacos.*;
 
 public abstract class LoginCadastro {
+    private static ArrayList<Usuarios> listaUsuarios = new ArrayList<>();
+    private static Usuarios artur = new Alunos("Artur Fernandes Galdino", "241010923@aluno.unb.br", "61998658594", "1",
+            "241010923", "Engenharia de Software");
+    private static Usuarios pedro = new Alunos("Pedro Augusto Macedo Del Castilo", "241025354@aluno.unb.br",
+            "61082859745", "1", "241025354", "Engenharia de Software");
+
     static int sair;
     public static int aux;
     public static ArrayList<EspacosFisicos> listaEspacos = new ArrayList<>();
 
     // LOGIN OU CADASTRO
-    public static void loginCadastroUsuario(ArrayList<Usuarios> listaUsuarios) {
+    public static void loginCadastroUsuario() {
+        listaUsuarios.add(artur);
+        listaUsuarios.add(pedro);
         // Cria a janela de opções
         Object[] opcoes001 = { "LOGIN", "CADASTRO", "CANCELAR" };
         int opcao02 = JOptionPane.showOptionDialog(null,
@@ -139,7 +148,7 @@ public abstract class LoginCadastro {
                         sair = 0;
                         break;
                     case 2:
-                        LoginCadastro.loginCadastroUsuario(listaUsuarios);
+                        LoginCadastro.loginCadastroUsuario();
                         sair = 1;
                         break;
                 }

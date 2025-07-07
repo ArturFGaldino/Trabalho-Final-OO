@@ -178,7 +178,7 @@ public abstract class Cadastro {
                     }
                 }
             } while (parar == 1);
-            LoginCadastro.loginCadastroUsuario(listaUsuarios);
+            LoginCadastro.loginCadastroUsuario();
         }
 
 }
