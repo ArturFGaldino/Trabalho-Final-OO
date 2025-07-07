@@ -38,7 +38,7 @@ public class mostrarEspacos {
 
         switch (escolhaEspacoFisico) {
             case 0:
-                Object[] opcoesLab = { "Lab1", "Lab2" };
+                Object[] opcoesLab = { "Laboratório Física", "Lababoratório Química" };
                 int escolherLaboratorio = JOptionPane.showOptionDialog(
                         null,
                         "Escolha um laboratório",

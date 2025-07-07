@@ -91,8 +91,8 @@ public class loginCadastro {
                 opcoes[0]);
         switch (escolher){
             case 0:
-                montaRelatorioUsuarios(usuarioLogado);
-                montaRelatorioEspacos();
+                montaRelatorio(usuarioLogado);
+                montaRelatorio();
                 System.exit(0);
                 break;
             case 1:
@@ -103,7 +103,7 @@ public class loginCadastro {
                 break;
         }
     }
-    private static void montaRelatorioUsuarios(Usuarios usuarioLogado){
+    private static void montaRelatorio(Usuarios usuarioLogado){
         try{
             FileWriter arquivo = new FileWriter("relatorioUsuario.txt");
             arquivo.write(mostrarEspacos.montaReservas(usuarioLogado));
@@ -114,7 +114,7 @@ public class loginCadastro {
         }
     }
 
-    private static void montaRelatorioEspacos(){
+    private static void montaRelatorio(){
         try{
             for(EspacosFisicos espacofisico : listaEspacos){
                 FileWriter arquivo = new FileWriter("relatorio"+ espacofisico.getNome() + ".txt");
