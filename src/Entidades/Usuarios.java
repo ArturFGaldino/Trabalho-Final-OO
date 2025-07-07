@@ -1,7 +1,7 @@
 package Entidades;
 import java.time.LocalDate;
 
-public class Usuarios {
+public abstract class Usuarios {
     protected final String nomeCompleto;
     protected final String email;
     protected final String telefone;

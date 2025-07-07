@@ -117,7 +117,7 @@ public class MostrarEspacos {
                             reservas += salaI1.exibirReservas(usuarioLogado, reservas);
                             reservasV[3] = reservas;
                             JOptionPane.showMessageDialog(null, "Sua(s) reserva(s)" + "\n" + reservas);
-                            if(reservas.length()>salaI1.getNome().length()){
+                            if(reservas.length()>(salaI1.getNome().length()+2)){
                                 // Chama o metodo onde mostra todos equipamentos disponiveis
                                 salaI1.quantidadeEquipamentos();
                             }
@@ -127,7 +127,7 @@ public class MostrarEspacos {
                             reservas += salaI2.exibirReservas(usuarioLogado, reservas);
                             reservasV[4] = reservas;
                             JOptionPane.showMessageDialog(null, "Sua(s) reserva(s) " + "\n" + reservas);
-                            if(reservas.length()>salaI2.getNome().length()){
+                            if(reservas.length()>(salaI2.getNome().length()+2)){
                                 salaI2.quantidadeEquipamentos();
                             }
                             break;
@@ -136,7 +136,7 @@ public class MostrarEspacos {
                             reservas += salaI3.exibirReservas(usuarioLogado, reservas);
                             reservasV[5] = reservas;
                             JOptionPane.showMessageDialog(null, "Sua(s) reserva(s) " + "\n" + reservas);
-                            if(reservas.length()>salaI3.getNome().length()){
+                            if(reservas.length()>(salaI3.getNome().length()+2)){
                                 salaI3.quantidadeEquipamentos();
                             }
                             break;
@@ -145,7 +145,7 @@ public class MostrarEspacos {
                             reservas += salaI4.exibirReservas(usuarioLogado, reservas);
                             reservasV[6] = reservas;
                             JOptionPane.showMessageDialog(null, "Sua(s) reserva(s):\n" + reservas);
-                            if(reservas.length()>salaI4.getNome().length()){
+                            if(reservas.length()>(salaI4.getNome().length()+2)){
                                 salaI4.quantidadeEquipamentos(); // Só exibe se tiver reservas
                             }
                             break;
@@ -154,7 +154,7 @@ public class MostrarEspacos {
                             reservas += salaI5.exibirReservas(usuarioLogado, reservas);
                             reservasV[7] = reservas;
                             JOptionPane.showMessageDialog(null, "Sua(s) reserva(s) " + "\n" + reservas);
-                            if(reservas.length()>salaI5.getNome().length()){
+                            if(reservas.length()>(salaI5.getNome().length()+2)){
                                 salaI5.quantidadeEquipamentos();
                             }
                             break;
@@ -163,7 +163,7 @@ public class MostrarEspacos {
                             reservas += salaS1.exibirReservas(usuarioLogado, reservas);
                             reservasV[8] = reservas;
                             JOptionPane.showMessageDialog(null, "Sua(s) reserva(s) " + "\n" + reservas);
-                            if(reservas.length()>salaS1.getNome().length()){
+                            if(reservas.length()>(salaS1.getNome().length()+2)){
                                 salaS1.quantidadeEquipamentos();
                             }
                             break;
@@ -172,7 +172,7 @@ public class MostrarEspacos {
                             reservas += salaS2.exibirReservas(usuarioLogado, reservas);
                             reservasV[9] = reservas;
                             JOptionPane.showMessageDialog(null, "Sua(s) reserva(s) " + "\n" + reservas);
-                            if(reservas.length()>salaS2.getNome().length()){
+                            if(reservas.length()>(salaS2.getNome().length()+2)){
                                 salaS2.quantidadeEquipamentos();
                             }
                             break;
@@ -181,7 +181,7 @@ public class MostrarEspacos {
                             reservas += salaS3.exibirReservas(usuarioLogado, reservas);
                             reservasV[9] = reservas;
                             JOptionPane.showMessageDialog(null, "Sua(s) reserva(s) " + "\n" + reservas);
-                            if(reservas.length()>salaS3.getNome().length()){
+                            if(reservas.length()>(salaS3.getNome().length()+2)){
                                 salaS3.quantidadeEquipamentos();
                             }
                             break;
@@ -190,7 +190,7 @@ public class MostrarEspacos {
                             reservas += salaS4.exibirReservas(usuarioLogado, reservas);
                             reservasV[10] = reservas;
                             JOptionPane.showMessageDialog(null, "Sua(s) reserva(s) " + "\n" + reservas);
-                            if(reservas.length()>salaS4.getNome().length()){
+                            if(reservas.length() > (salaS4.getNome().length()+2)){
                                 salaS4.quantidadeEquipamentos();
                             }
                             break;
@@ -199,7 +199,7 @@ public class MostrarEspacos {
                             reservas += salaS5.exibirReservas(usuarioLogado, reservas);
                             reservasV[11] = reservas;
                             JOptionPane.showMessageDialog(null, "Sua(s) reserva(s) " + "\n" + reservas);
-                            if(reservas.length()>salaS5.getNome().length()){
+                            if(reservas.length()>(salaS5.getNome().length()+2)){
                                 salaS5.quantidadeEquipamentos();
                             }
                             break;
