@@ -161,7 +161,9 @@ public abstract class LoginCadastro {
         try {
             StringBuilder sb = new StringBuilder();
             for (EspacosFisicos espacofisico : listaEspacos) {
-                sb.append(espacofisico.exibirReservas(espacofisico)).append("\n");
+                if(!(espacofisico.exibirReservas(espacofisico).contains("Sem reservas"))){
+                    sb.append(espacofisico.exibirReservas(espacofisico)).append("\n");
+                }
             }
             FileWriter arquivo = new FileWriter("relatorioEspacos.txt");
             arquivo.write(sb.toString());
