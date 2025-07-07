@@ -8,17 +8,19 @@ public class SalaDeAula extends EspacosFisicos {
             String disponibilidades) {
         super(nome, capacidade, localizacao, equipamentosDisponiveis, disponibilidades);
     }
+
     private int giz = 100;
     private final int canetao = 5;
     private int computadores = 60;
-    private int aux=0;
+    private int aux = 0;
 
-    public void quantidadeEquipamentos(){
+    public void quantidadeEquipamentos() {
+        // Aleatoriedade da quantidade de computadores
         Random aleatorio = new Random();
-        if(aux != 1){
+        if (aux != 1) {
             int computadoresQuebrados = aleatorio.nextInt(16);
             computadores = computadores - computadoresQuebrados;
-            aux+=1;
+            aux += 1;
         }
         String strGiz = JOptionPane.showInputDialog(null, getEquipamentosDisponiveis() + "Quantos gizes vai precisar?");
         giz = giz - Integer.parseInt(strGiz);
@@ -28,7 +30,7 @@ public class SalaDeAula extends EspacosFisicos {
         StringBuilder equipamentos = new StringBuilder();
         equipamentos.append("Equipamentos Disponíveis:\n").append("Giz: ").append(giz).append("\n").append("Canetão: ")
                 .append(canetao).append("\n");
-        if(this.equipamentosDisponiveis.contains("Computador")){
+        if (this.equipamentosDisponiveis.contains("Computador")) {
             equipamentos.append("Computadores Funcionando: ").append(computadores).append("\n");
         }
         return equipamentos.toString();
