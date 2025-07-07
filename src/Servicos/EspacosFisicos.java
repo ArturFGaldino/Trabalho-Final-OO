@@ -10,12 +10,12 @@ import Entidades.Alunos;
 import Excecoes.JaReservouException;
 
 public abstract class EspacosFisicos {
-    protected final int capacidade;
+    private final int capacidade;
     protected final String localizacao, equipamentosDisponiveis, disponibilidades;
-    protected final String nome;
-    protected final static Map<String, String> reservasPorHorario = new HashMap<>();
-    protected final static Map<String, ArrayList<String>> reservasPorUsuario = new HashMap<>();
-    protected static final Map<String, Map<String, String>> reservasPorEspaco = new HashMap<>();
+    private final String nome;
+    private final static Map<String, String> reservasPorHorario = new HashMap<>();
+    private final static Map<String, ArrayList<String>> reservasPorUsuario = new HashMap<>();
+    private static final Map<String, Map<String, String>> reservasPorEspaco = new HashMap<>();
 
     protected EspacosFisicos(String nome, int capacidade, String localizacao, String equipamentosDisponiveis,
             String disponibilidades) {

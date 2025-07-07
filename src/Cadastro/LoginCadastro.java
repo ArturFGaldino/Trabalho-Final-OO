@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 import Entidades.Usuarios;
 import static Servicos.MostrarEspacos.*;
 
-public class LoginCadastro {
+public abstract class LoginCadastro {
     static int sair;
     public static int aux;
     public static ArrayList<EspacosFisicos> listaEspacos = new ArrayList<>();
@@ -71,7 +71,7 @@ public class LoginCadastro {
                                         // mostrarEspacos
                                         MostrarEspacos.mostrarEspacosFisicos(usuarioLogado);
                                         // chama o metedo onde pode ter acesso ao relatorio do proprio usuário
-                                        LoginCadastro.geraRelatorio(usuarioLogado);
+                                        LoginCadastro.geraRelatorio(usuarioLogado, listaUsuarios);
                                     } while (sair == 0);
                                 MostrarEspacos.historicoReserva = "";
                                 break;
@@ -108,7 +108,7 @@ public class LoginCadastro {
         }
     }
 
-    private static void geraRelatorio(Usuarios usuarioLogado) {
+    private static void geraRelatorio(Usuarios usuarioLogado, ArrayList<Usuarios> listaUsuarios) {
         // Cria janela de opções
         Object[] opcoes = { "Relatórios", "Continuar neste Usuário", "Sair deste Usuário" };
         int escolher = JOptionPane.showOptionDialog(
@@ -120,21 +120,30 @@ public class LoginCadastro {
                 null,
                 opcoes,
                 opcoes[0]);
-        switch (escolher) {
-            case 0:
-                // Chama o metodo onde cria o arquivo .txt
-                montaRelatorio(usuarioLogado);
-                // Chama o metodo que adiciona o espaço alocado
-                montaRelatorio();
-                System.exit(0);
-                break;
-            case 1:
-                sair = 0;
-                break;
-            case 2:
-                sair = 1;
-                break;
-        }
+
+            if (escolher == JOptionPane.CLOSED_OPTION) {
+            JOptionPane.showMessageDialog(null, "Operação cancelada pelo usuário.",
+                    " ",
+                    JOptionPane.INFORMATION_MESSAGE);
+                    System.exit(0);
+            }else{
+                switch (escolher) {
+                    case 0:
+                        // Chama o metodo onde cria o arquivo .txt
+                        montaRelatorio(usuarioLogado);
+                        // Chama o metodo que adiciona o espaço alocado
+                        montaRelatorio();
+                        System.exit(0);
+                        break;
+                    case 1:
+                        sair = 0;
+                        break;
+                    case 2:
+                        LoginCadastro.loginCadastroUsuario(listaUsuarios);
+                        sair = 1;
+                        break;
+                }
+            }
     }
 
     private static void montaRelatorio(Usuarios usuarioLogado) {
@@ -152,7 +161,9 @@ public class LoginCadastro {
         try {
             StringBuilder sb = new StringBuilder();
             for (EspacosFisicos espacofisico : listaEspacos) {
-                sb.append(espacofisico.exibirReservas(espacofisico)).append("\n");
+                if(!(espacofisico.exibirReservas(espacofisico).contains("Sem reservas"))){
+                    sb.append(espacofisico.exibirReservas(espacofisico)).append("\n");
+                }
             }
             FileWriter arquivo = new FileWriter("relatorioEspacos.txt");
             arquivo.write(sb.toString());

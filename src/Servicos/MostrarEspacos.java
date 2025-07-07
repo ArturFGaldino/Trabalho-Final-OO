@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 import Entidades.Alunos;
 import Entidades.Usuarios;
 
-public class MostrarEspacos {
+public abstract class MostrarEspacos {
     public static String reservas = "";
     public static String[] reservasV = new String[14];
     public static String historicoReserva = "";

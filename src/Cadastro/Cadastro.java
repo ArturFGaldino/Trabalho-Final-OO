@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import Entidades.*;
 
-public class Cadastro {
+public abstract class Cadastro {
 
     public static void cadastroUsuario(ArrayList<Usuarios> listaUsuarios) {
         String nome, telefone, matricula, senha, tempSenha, email;
