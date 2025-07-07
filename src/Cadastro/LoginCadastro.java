@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 import Entidades.Usuarios;
 import static Servicos.MostrarEspacos.*;
 
-public class loginCadastro {
+public class LoginCadastro {
     static int sair;
     public static int aux;
     public static ArrayList<EspacosFisicos> listaEspacos = new ArrayList<>();
@@ -34,8 +34,8 @@ public class loginCadastro {
         } else {
             switch (opcao02) {
                 case 0:
-                    Usuarios usuarioLogado = login.loginCadastro(listaUsuarios);
-                    // Chama o metodo LoginCasdastro da classe login criando um usuario
+                    Usuarios usuarioLogado = Login.loginCadastro(listaUsuarios);
+                    // Chama o metodo LoginCasdastro da classe Login criando um usuario
                     if (aux != 1) {
                         // adiciona todos espaços a ArrayList listaEspacos
                         listaEspacos.add(lab1);
@@ -71,7 +71,7 @@ public class loginCadastro {
                                         // mostrarEspacos
                                         MostrarEspacos.mostrarEspacosFisicos(usuarioLogado);
                                         // chama o metedo onde pode ter acesso ao relatorio do proprio usuário
-                                        loginCadastro.geraRelatorio(usuarioLogado);
+                                        LoginCadastro.geraRelatorio(usuarioLogado);
                                     } while (sair == 0);
                                 MostrarEspacos.historicoReserva = "";
                                 break;
@@ -101,8 +101,8 @@ public class loginCadastro {
                     }
                     break;
                 case 1:
-                    // chama o metodo cadastroUsuario da classe cadastro
-                    cadastro.cadastroUsuario(listaUsuarios);
+                    // chama o metodo cadastroUsuario da classe Cadastro
+                    Cadastro.cadastroUsuario(listaUsuarios);
                     break;
             }
         }

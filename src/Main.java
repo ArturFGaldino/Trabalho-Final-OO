@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import Entidades.Usuarios;
-import Cadastro.loginCadastro;
+import Cadastro.LoginCadastro;
 import Entidades.Alunos;
 
 public class Main {
@@ -16,7 +16,7 @@ public class Main {
         listaUsuarios.add(pedro);
         do {
             // Chama o metdo para logar ou cadastrar na classe LoginCadastro
-            loginCadastro.loginCadastroUsuario(listaUsuarios);
+            LoginCadastro.loginCadastroUsuario(listaUsuarios);
             System.exit(0);
         } while (continuar == 1);
     }

@@ -5,9 +5,9 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 import Entidades.Usuarios;
-import Execoes.DiasExcedidosException;
+import Excecoes.DiasExcedidosException;
 import Entidades.Alunos;
-import Execoes.JaReservouException;
+import Excecoes.JaReservouException;
 
 public abstract class EspacosFisicos {
     protected final int capacidade;
