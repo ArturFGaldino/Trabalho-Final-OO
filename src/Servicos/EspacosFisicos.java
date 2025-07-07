@@ -133,13 +133,24 @@ public abstract class EspacosFisicos {
                     botao.setText("Livre");
                     botao.setBackground(new Color(200, 230, 250));
                 }
-                // Se apertar no botao que esta selecionado, ele volta ao normal
+                
             } else if (botao.getText().equals("Minha Reserva")) {
-                botao.setText("Livre");
-                botao.setBackground(new Color(200, 230, 250));
-                reservasPorUsuario.get(usuarioLogado.getMatricula()).remove(horarioKey);
-                reservasPorHorario.remove(horarioKey);
-                reservasPorEspaco.get(this.nome).remove(horarioKey);
+                Object[] opcoes = { "Sim", "Não" };
+                int opcao = JOptionPane.showOptionDialog(null,
+                        "Deseja cancelar sua reserva?",
+                        "Cancelar Reserva",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        opcoes,
+                        opcoes[0]);
+                if (opcao == 0) {
+                    botao.setText("Livre");
+                    botao.setBackground(new Color(200, 230, 250));
+                    reservasPorUsuario.get(usuarioLogado.getMatricula()).remove(horarioKey);
+                    reservasPorHorario.remove(horarioKey);
+                    reservasPorEspaco.get(this.nome).remove(horarioKey);
+                }
             }
         });
         return botao;
@@ -274,5 +285,6 @@ public abstract class EspacosFisicos {
 
         return sb.toString();
     }
+
 
 }

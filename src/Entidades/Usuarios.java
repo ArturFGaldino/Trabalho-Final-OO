@@ -8,7 +8,7 @@ public class Usuarios {
     protected String senha;
     protected final String matricula;
 
-    public Usuarios(String nomeCompleto, String email, String telefone, String senha, String matricula) {
+    protected Usuarios(String nomeCompleto, String email, String telefone, String senha, String matricula) {
         this.nomeCompleto = nomeCompleto;
         this.email = email;
         this.telefone = telefone;

@@ -1,25 +1,11 @@
 package Cadastro;
-
 import Servicos.*;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import Entidades.Usuarios;
-
-import static Servicos.mostrarEspacos.*;
-import static Servicos.mostrarEspacos.auditorio;
-import static Servicos.mostrarEspacos.mocap;
-import static Servicos.mostrarEspacos.salaI2;
-import static Servicos.mostrarEspacos.salaI3;
-import static Servicos.mostrarEspacos.salaI4;
-import static Servicos.mostrarEspacos.salaI5;
-import static Servicos.mostrarEspacos.salaS1;
-import static Servicos.mostrarEspacos.salaS2;
-import static Servicos.mostrarEspacos.salaS3;
-import static Servicos.mostrarEspacos.salaS4;
-import static Servicos.mostrarEspacos.salaS5;
+import static Servicos.MostrarEspacos.*;
 
 public class loginCadastro {
     static int sair;
@@ -83,11 +69,11 @@ public class loginCadastro {
                                     do {
                                         // chama o metedo para mostrar as opcões de espacos fisicos na clase
                                         // mostrarEspacos
-                                        mostrarEspacos.mostrarEspacosFisicos(usuarioLogado);
+                                        MostrarEspacos.mostrarEspacosFisicos(usuarioLogado);
                                         // chama o metedo onde pode ter acesso ao relatorio do proprio usuário
                                         loginCadastro.geraRelatorio(usuarioLogado);
                                     } while (sair == 0);
-                                mostrarEspacos.historicoReserva = "";
+                                MostrarEspacos.historicoReserva = "";
                                 break;
                             case 1:
                                 String senha = JOptionPane.showInputDialog(usuarioLogado + "DIGITE A NOVA SENHA");
@@ -154,7 +140,7 @@ public class loginCadastro {
     private static void montaRelatorio(Usuarios usuarioLogado) {
         try {
             FileWriter arquivo = new FileWriter("relatorioUsuario.txt");
-            arquivo.write(mostrarEspacos.montaReservas(usuarioLogado));
+            arquivo.write(MostrarEspacos.montaReservas(usuarioLogado));
             arquivo.close();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro ao salvar o arquivo.");

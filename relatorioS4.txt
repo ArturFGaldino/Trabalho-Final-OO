@@ -1,0 +1,10 @@
+S4:
+Capacidade - 130
+Equipamentos Disponíveis:
+Giz: 88
+Canetão: 5
+
+Usuário: 241010923
+Horários reservados:
+- Terça às 12h
+
