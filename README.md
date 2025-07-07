@@ -57,7 +57,7 @@ Cadastro: Contém as classes relacionadas ao login e cadastro de usuários
 
 Entidades: Contém as classes que representam os usuários e suas características
 
-Execoes: Contém as classes de exceções personalizadas
+Excecoes: Contém as classes de exceções personalizadas
 
 Servicos: Contém as classes relacionadas aos espaços físicos e suas funcionalidades
 

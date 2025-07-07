@@ -1,4 +1,4 @@
-package Execoes;
+package Excecoes;
 
 public class DiasExcedidosException extends Exception {
     public DiasExcedidosException(String mensagem) {
