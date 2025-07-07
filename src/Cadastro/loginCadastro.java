@@ -113,6 +113,7 @@ public class loginCadastro {
                         usuarioLogado = null;
                         break;
                     }
+                    break;
                 case 1:
                     // chama o metodo cadastroUsuario da classe cadastro
                     cadastro.cadastroUsuario(listaUsuarios);
