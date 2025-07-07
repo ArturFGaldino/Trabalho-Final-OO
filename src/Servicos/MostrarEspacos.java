@@ -57,43 +57,12 @@ public abstract class MostrarEspacos {
                             opcoesLab[0]);
                     switch (escolherLaboratorio) {
                         case 0:
-                            // Mostra a grade horaria do espaço selecionado
-                            lab1.mostrarGradeHoraria(usuarioLogado);
-                            reservas += lab1.exibirReservas(usuarioLogado, reservas);
-                            // Adiciona a reserva feita ao vetor de reservas
-                            reservasV[0] = reservas;
-                            JOptionPane.showMessageDialog(null, "Sua(s) reserva(s) " + "\n" + reservas);
-                            // verfica se o usuario logado é do tipo aluno
-                            if (!(usuarioLogado instanceof Alunos)) {
-                                // Caixa de pergunta para perguntar se vai adicionar ou remover algum
-                                // equipamento
-                                int escolha = opcaoAdicionaRemove();
-                                switch (escolha) {
-                                    case 0:
-                                        lab1.adicionarEquipamento();
-                                        break;
-                                    case 1:
-                                        lab1.removerEquipamento();
-                                        break;
-                                }
-                            }
+                            interfaceEspacos(lab1,usuarioLogado);
+                            reservasV[1] = reservas;
                             break;
                         case 1:
-                            lab2.mostrarGradeHoraria(usuarioLogado);
-                            reservas += lab2.exibirReservas(usuarioLogado, reservas);
-                            reservasV[1] = reservas;
-                            JOptionPane.showMessageDialog(null, "Sua(s) reserva(s)" + "\n" + reservas);
-                            if (!(usuarioLogado instanceof Alunos)) {
-                                int escolha = opcaoAdicionaRemove();
-                                switch (escolha) {
-                                    case 0:
-                                        lab2.adicionarEquipamento();
-                                        break;
-                                    case 1:
-                                        lab2.removerEquipamento();
-                                        break;
-                                }
-                            }
+                            interfaceEspacos(lab2,usuarioLogado);
+                            reservasV[2] = reservas;
                             break;
                         default:
                             break;
@@ -113,95 +82,44 @@ public abstract class MostrarEspacos {
                             opcoesSala[0]);
                     switch (escolherSala) {
                         case 0:
-                            salaI1.mostrarGradeHoraria(usuarioLogado);
-                            reservas += salaI1.exibirReservas(usuarioLogado, reservas);
+                            interfaceEspacos(salaI1,usuarioLogado);
                             reservasV[3] = reservas;
-                            JOptionPane.showMessageDialog(null, "Sua(s) reserva(s)" + "\n" + reservas);
-                            if(reservas.length()>(salaI1.getNome().length()+2)){
-                                // Chama o metodo onde mostra todos equipamentos disponiveis
-                                salaI1.quantidadeEquipamentos();
-                            }
                             break;
                         case 1:
-                            salaI2.mostrarGradeHoraria(usuarioLogado);
-                            reservas += salaI2.exibirReservas(usuarioLogado, reservas);
+                            interfaceEspacos(salaI2,usuarioLogado);
                             reservasV[4] = reservas;
-                            JOptionPane.showMessageDialog(null, "Sua(s) reserva(s) " + "\n" + reservas);
-                            if(reservas.length()>(salaI2.getNome().length()+2)){
-                                salaI2.quantidadeEquipamentos();
-                            }
                             break;
                         case 2:
-                            salaI3.mostrarGradeHoraria(usuarioLogado);
-                            reservas += salaI3.exibirReservas(usuarioLogado, reservas);
+                            interfaceEspacos(salaI3,usuarioLogado);
                             reservasV[5] = reservas;
-                            JOptionPane.showMessageDialog(null, "Sua(s) reserva(s) " + "\n" + reservas);
-                            if(reservas.length()>(salaI3.getNome().length()+2)){
-                                salaI3.quantidadeEquipamentos();
-                            }
                             break;
                         case 3:
-                            salaI4.mostrarGradeHoraria(usuarioLogado);
-                            reservas += salaI4.exibirReservas(usuarioLogado, reservas);
+                            interfaceEspacos(salaI4,usuarioLogado);
                             reservasV[6] = reservas;
-                            JOptionPane.showMessageDialog(null, "Sua(s) reserva(s):\n" + reservas);
-                            if(reservas.length()>(salaI4.getNome().length()+2)){
-                                salaI4.quantidadeEquipamentos(); // Só exibe se tiver reservas
-                            }
                             break;
                         case 4:
-                            salaI5.mostrarGradeHoraria(usuarioLogado);
-                            reservas += salaI5.exibirReservas(usuarioLogado, reservas);
+                            interfaceEspacos(salaI5,usuarioLogado);
                             reservasV[7] = reservas;
-                            JOptionPane.showMessageDialog(null, "Sua(s) reserva(s) " + "\n" + reservas);
-                            if(reservas.length()>(salaI5.getNome().length()+2)){
-                                salaI5.quantidadeEquipamentos();
-                            }
                             break;
                         case 5:
-                            salaS1.mostrarGradeHoraria(usuarioLogado);
-                            reservas += salaS1.exibirReservas(usuarioLogado, reservas);
+                            interfaceEspacos(salaS1,usuarioLogado);
                             reservasV[8] = reservas;
-                            JOptionPane.showMessageDialog(null, "Sua(s) reserva(s) " + "\n" + reservas);
-                            if(reservas.length()>(salaS1.getNome().length()+2)){
-                                salaS1.quantidadeEquipamentos();
-                            }
                             break;
                         case 6:
-                            salaS2.mostrarGradeHoraria(usuarioLogado);
-                            reservas += salaS2.exibirReservas(usuarioLogado, reservas);
+                            interfaceEspacos(salaS2,usuarioLogado);
                             reservasV[9] = reservas;
-                            JOptionPane.showMessageDialog(null, "Sua(s) reserva(s) " + "\n" + reservas);
-                            if(reservas.length()>(salaS2.getNome().length()+2)){
-                                salaS2.quantidadeEquipamentos();
-                            }
                             break;
                         case 7:
-                            salaS3.mostrarGradeHoraria(usuarioLogado);
-                            reservas += salaS3.exibirReservas(usuarioLogado, reservas);
-                            reservasV[9] = reservas;
-                            JOptionPane.showMessageDialog(null, "Sua(s) reserva(s) " + "\n" + reservas);
-                            if(reservas.length()>(salaS3.getNome().length()+2)){
-                                salaS3.quantidadeEquipamentos();
-                            }
+                            interfaceEspacos(salaS3,usuarioLogado);
+                            reservasV[10] = reservas;
                             break;
                         case 8:
-                            salaS4.mostrarGradeHoraria(usuarioLogado);
-                            reservas += salaS4.exibirReservas(usuarioLogado, reservas);
-                            reservasV[10] = reservas;
-                            JOptionPane.showMessageDialog(null, "Sua(s) reserva(s) " + "\n" + reservas);
-                            if(reservas.length() > (salaS4.getNome().length()+2)){
-                                salaS4.quantidadeEquipamentos();
-                            }
+                            interfaceEspacos(salaS4,usuarioLogado);
+                            reservasV[11] = reservas;
                             break;
                         case 9:
-                            salaS5.mostrarGradeHoraria(usuarioLogado);
-                            reservas += salaS5.exibirReservas(usuarioLogado, reservas);
-                            reservasV[11] = reservas;
-                            JOptionPane.showMessageDialog(null, "Sua(s) reserva(s) " + "\n" + reservas);
-                            if(reservas.length()>(salaS5.getNome().length()+2)){
-                                salaS5.quantidadeEquipamentos();
-                            }
+                            interfaceEspacos(salaS5,usuarioLogado);
+                            reservasV[12] = reservas;
                             break;
                         default:
                             break;
@@ -221,16 +139,12 @@ public abstract class MostrarEspacos {
                             opcoesAudi[0]);
                     switch (escolherAudi) {
                         case 0:
-                            auditorio.mostrarGradeHoraria(usuarioLogado);
-                            reservas += auditorio.exibirReservas(usuarioLogado, reservas);
-                            reservasV[12] = reservas;
-                            JOptionPane.showMessageDialog(null, "Sua(s) reserva(s) " + "\n" + reservas);
+                            interfaceEspacos(auditorio,usuarioLogado);
+                            reservasV[13] = reservas;
                             break;
                         case 1:
-                            mocap.mostrarGradeHoraria(usuarioLogado);
-                            reservas += mocap.exibirReservas(usuarioLogado, reservas);
-                            reservasV[13] = reservas;
-                            JOptionPane.showMessageDialog(null, "Sua(s) reserva(s)" + "\n" + reservas);
+                            interfaceEspacos(mocap,usuarioLogado);
+                            reservasV[14] = reservas;
                             break;
                     }
     
@@ -262,5 +176,32 @@ public abstract class MostrarEspacos {
         }
         return sb.toString();
     }
-
+    private static void interfaceEspacos(EspacosFisicos espacosFisicos, Usuarios usuarioLogado){
+        // Mostra a grade horaria do espaço selecionado
+        espacosFisicos.mostrarGradeHoraria(usuarioLogado);
+        // Adiciona a reserva feita ao vetor de reservas
+        reservas += espacosFisicos.exibirReservas(usuarioLogado, reservas);
+        JOptionPane.showMessageDialog(null, "Sua(s) reserva(s)" + "\n" + reservas);
+        if(espacosFisicos instanceof Laboratorio laboratorio){
+            // verfica se o usuario logado é do tipo aluno
+            if (!(usuarioLogado instanceof Alunos)) {
+                // Caixa de pergunta para perguntar se vai adicionar ou remover algum
+                // equipamento
+                int escolha = opcaoAdicionaRemove();
+                switch (escolha) {
+                    case 0:
+                        laboratorio.adicionarEquipamento();
+                        break;
+                    case 1:
+                        laboratorio.removerEquipamento();
+                        break;
+                }
+            }
+        } else if (espacosFisicos instanceof SalaDeAula salaDeAula) {
+            if(reservas.length()>(espacosFisicos.getNome().length()+2)){
+                // Chama o metodo onde mostra todos os equipamentos disponiveis
+                salaDeAula.quantidadeEquipamentos();
+            }
+        }
+    }
 }
