@@ -6,20 +6,6 @@ import Entidades.*;
 
 public class cadastro {
 
-    public static int loginCadastro() {
-
-        Object[] opcoes001 = { "LOGIN", "CADASTRO", "CANCELAR" };
-        return JOptionPane.showOptionDialog(null,
-                "",
-                "LOGIN",
-                JOptionPane.YES_NO_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                opcoes001,
-                opcoes001[0]);
-
-    }
-
     public static void cadastroUsuario(ArrayList<Usuarios> listaUsuarios) {
         String nome, telefone, matricula, senha, tempSenha, email;
 

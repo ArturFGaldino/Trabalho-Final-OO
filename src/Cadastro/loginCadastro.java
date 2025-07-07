@@ -68,18 +68,51 @@ public class loginCadastro {
                         listaEspacos.add(auditorio);
                         aux++;
                     }
-                    if (usuarioLogado != null) {
-                        do {
-                            // chama o metedo para mostrar as opcões de espacos fisicos na clase
-                            // mostrarEspacos
-                            mostrarEspacos.mostrarEspacosFisicos(usuarioLogado);
-                            // chama o metedo onde pode ter acesso ao relatorio do proprio usuário
-                            loginCadastro.geraRelatorio(usuarioLogado);
-                        } while (sair == 0);
+                    if(usuarioLogado!=null){
+                        Object[] opcoes = { "RESERVAR ESPAÇO", "ALTERAR SENHA" };
+                        int opcao = JOptionPane.showOptionDialog(null,
+                                "",
+                                "RESERVAS",
+                                JOptionPane.YES_NO_CANCEL_OPTION,
+                                JOptionPane.QUESTION_MESSAGE,
+                                null,
+                                opcoes,
+                                opcoes[0]);
+                        switch (opcao){
+                            case 0:
+                                    do {
+                                        // chama o metedo para mostrar as opcões de espacos fisicos na clase
+                                        // mostrarEspacos
+                                        mostrarEspacos.mostrarEspacosFisicos(usuarioLogado);
+                                        // chama o metedo onde pode ter acesso ao relatorio do proprio usuário
+                                        loginCadastro.geraRelatorio(usuarioLogado);
+                                    } while (sair == 0);
+                                mostrarEspacos.historicoReserva = "";
+                                break;
+                            case 1:
+                                String senha = JOptionPane.showInputDialog(usuarioLogado + "DIGITE A NOVA SENHA");
+                                if (senha == null) {
+                                    return;
+                                }
+                                String tempSenha = JOptionPane.showInputDialog(usuarioLogado + "CONFIRME A NOVA SENHA");
+                                if (tempSenha == null) {
+                                    return;
+                                }
+                                while (!senha.equals(tempSenha) || senha.isEmpty()) {
+                                    senha = JOptionPane.showInputDialog(usuarioLogado + "DIGITE NOVAMENTE A NOVA SENHA");
+                                    if (senha == null) {
+                                        return;
+                                    }
+                                    tempSenha = JOptionPane.showInputDialog(usuarioLogado + "CONFIRME A NOVA SENHA");
+                                    if (tempSenha == null) {
+                                        return;
+                                    }
+                                }
+                                usuarioLogado.setSenha(senha);
+                        }
+                        usuarioLogado = null;
+                        break;
                     }
-                    mostrarEspacos.historicoReserva = "";
-                    usuarioLogado = null;
-                    break;
                 case 1:
                     // chama o metodo cadastroUsuario da classe cadastro
                     cadastro.cadastroUsuario(listaUsuarios);
