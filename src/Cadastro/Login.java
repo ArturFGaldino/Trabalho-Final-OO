@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import Entidades.Usuarios;
 
-public class Login {
+public abstract class Login {
     public static Usuarios loginCadastro(ArrayList<Usuarios> listaUsuarios) {
 
         boolean logado = false;

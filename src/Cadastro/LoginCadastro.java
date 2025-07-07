@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 import Entidades.Usuarios;
 import static Servicos.MostrarEspacos.*;
 
-public class LoginCadastro {
+public abstract class LoginCadastro {
     static int sair;
     public static int aux;
     public static ArrayList<EspacosFisicos> listaEspacos = new ArrayList<>();
