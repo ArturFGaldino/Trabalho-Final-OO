@@ -136,6 +136,7 @@ public abstract class Cadastro {
                             }
                         } while (!emailValido);
                         JOptionPane.showMessageDialog(null, "Cadastro Concluído!");
+                        LoginCadastro.loginCadastroUsuario();
                         break;
                     case 2:
                         String cargoExercido = JOptionPane.showInputDialog("CARGO EXERCIDO: ");
@@ -170,11 +171,12 @@ public abstract class Cadastro {
                             }
                         } while (!emailValido);
                         JOptionPane.showMessageDialog(null, "Cadastro Concluído!");
-                        
+                        LoginCadastro.loginCadastroUsuario();
                         default:
-                        JOptionPane.showMessageDialog(null, "OPÇÃO INVÁLIDA");
-                        parar = 1;
+                            JOptionPane.showMessageDialog(null, "OPÇÃO INVÁLIDA");
+                            parar = 1;
                         break;
+
                     }
                 }
             } while (parar == 1);

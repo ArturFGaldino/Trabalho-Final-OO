@@ -26,7 +26,8 @@ public abstract class LoginCadastro {
         // Cria a janela de opções
         Object[] opcoes001 = { "LOGIN", "CADASTRO", "CANCELAR" };
         int opcao02 = JOptionPane.showOptionDialog(null,
-                "",
+                "Bem-vindo ao sistema de reservas de espaços físicos da UnB!\n\n"
+                        + "Selecione uma opção:\n\n",
                 "LOGIN",
                 JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
@@ -66,7 +67,7 @@ public abstract class LoginCadastro {
                     if(usuarioLogado!=null){
                         Object[] opcoes = { "RESERVAR ESPAÇO", "ALTERAR SENHA" };
                         int opcao = JOptionPane.showOptionDialog(null,
-                                "",
+                                "Selecione uma opção:\n\n",
                                 "RESERVAS",
                                 JOptionPane.YES_NO_CANCEL_OPTION,
                                 JOptionPane.QUESTION_MESSAGE,
